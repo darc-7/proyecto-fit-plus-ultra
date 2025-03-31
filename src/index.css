@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "tailwindcss/preflight";
+
+@tailwind utilities;
+
+@layer components{
+  .title{
+    @apply text-7xl font-bold underline
+  }
+}
