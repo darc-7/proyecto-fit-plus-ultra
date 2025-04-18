@@ -1,18 +1,13 @@
-import { useState } from 'react';
-// import { InstallButton } from './InstallButton';
-import { GoogleSignIn } from "./components/GoogleSignIn";
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar"; // Opcional
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div className='title'>
-        Hello World!
-      </div>
-      <GoogleSignIn />
-    </>
-  )
+    <div className="app">
+      <Navbar /> {/* Menú de navegación (opcional) */}
+      <Outlet /> {/* ¡Aquí se renderizarán Auth, Exercises, etc.! */}
+    </div>
+  );
 }
 
 if ('serviceWorker' in navigator) {
@@ -27,5 +22,3 @@ if ('serviceWorker' in navigator) {
     );
   });
 }
-
-export default App
