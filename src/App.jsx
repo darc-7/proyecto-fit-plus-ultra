@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { InstallButton } from './InstallButton';
+import { useState } from 'react';
+// import { InstallButton } from './InstallButton';
+import { GoogleSignIn } from "./components/GoogleSignIn";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -9,7 +10,7 @@ function App() {
       <div className='title'>
         Hello World!
       </div>
-      <InstallButton />
+      <GoogleSignIn />
     </>
   )
 }
