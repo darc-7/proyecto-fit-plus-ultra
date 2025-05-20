@@ -1,0 +1,36 @@
+{
+  "exercises": {
+    "doc1": { "name": "Press de banca", "category": "Pecho", "level": 1, "description": "Ejercicio básico para desarrollar fuerza en el pecho" },
+    "doc2": { "name": "Press de banca inclinado", "category": "Pecho", "level": 1, "description": "Variación del press de banca que trabaja la parte superior del pecho" },
+    "doc3": { "name": "Flexiones", "category": "Pecho", "level": 1, "description": "Ejercicio de peso corporal para fortalecer el pecho" },
+    "doc4": { "name": "Aperturas con mancuernas", "category": "Pecho", "level": 1, "description": "Ejercicio de aislamiento para el pecho" },
+    "doc5": { "name": "Press de banca declinado", "category": "Pecho", "level": 1, "description": "Variación que enfatiza la parte inferior del pecho" },
+    "doc6": { "name": "Press de banca con agarre cerrado", "category": "Pecho", "level": 2, "description": "Variación que trabaja más los tríceps y el pecho" },
+    "doc7": { "name": "Fondos en paralelas", "category": "Pecho", "level": 2, "description": "Ejercicio avanzado para pecho y tríceps" },
+    "doc8": { "name": "Press con cable cruzado", "category": "Pecho", "level": 2, "description": "Ejercicio con máquina para trabajar el pecho" },
+    "doc9": { "name": "Press de banca con banda elástica", "category": "Pecho", "level": 2, "description": "Variación con resistencia variable" },
+    "doc10": { "name": "Flexiones con palmada", "category": "Pecho", "level": 2, "description": "Variación pliométrica de las flexiones" },
+    
+    "doc11": { "name": "Sentadillas", "category": "Piernas", "level": 1, "description": "Ejercicio fundamental para piernas y glúteos" },
+    "doc12": { "name": "Prensa de piernas", "category": "Piernas", "level": 1, "description": "Ejercicio con máquina para trabajar piernas" },
+    "doc13": { "name": "Zancadas", "category": "Piernas", "level": 1, "description": "Ejercicio unilateral para piernas" },
+    "doc14": { "name": "Extensiones de cuádriceps", "category": "Piernas", "level": 1, "description": "Ejercicio de aislamiento para los cuádriceps" },
+    "doc15": { "name": "Curl de femoral", "category": "Piernas", "level": 1, "description": "Ejercicio de aislamiento para los femorales" },
+    "doc16": { "name": "Sentadillas búlgaras", "category": "Piernas", "level": 2, "description": "Variación avanzada de sentadilla unilateral" },
+    "doc17": { "name": "Peso muerto rumano", "category": "Piernas", "level": 2, "description": "Ejercicio para femorales y glúteos" },
+    "doc18": { "name": "Sentadillas frontales", "category": "Piernas", "level": 2, "description": "Variación que enfatiza los cuádriceps" },
+    "doc19": { "name": "Step-ups con peso", "category": "Piernas", "level": 2, "description": "Ejercicio funcional para piernas" },
+    "doc20": { "name": "Sentadillas overhead", "category": "Piernas", "level": 2, "description": "Variación avanzada que trabaja movilidad y fuerza" },
+    
+    "doc21": { "name": "Dominadas", "category": "Espalda", "level": 1, "description": "Ejercicio básico para la espalda superior" },
+    "doc22": { "name": "Remo con barra", "category": "Espalda", "level": 1, "description": "Ejercicio fundamental para la espalda media" },
+    "doc23": { "name": "Jalón al pecho", "category": "Espalda", "level": 1, "description": "Ejercicio con máquina para espalda ancha" },
+    "doc24": { "name": "Remo con mancuerna", "category": "Espalda", "level": 1, "description": "Ejercicio unilateral para la espalda" },
+    "doc25": { "name": "Peso muerto convencional", "category": "Espalda", "level": 1, "description": "Ejercicio completo para espalda baja y piernas" },
+    "doc26": { "name": "Remo invertido", "category": "Espalda", "level": 2, "description": "Variación avanzada para espalda media" },
+    "doc27": { "name": "Pull-ups", "category": "Espalda", "level": 2, "description": "Variación avanzada de dominadas" },
+    "doc28": { "name": "Remo T-bar", "category": "Espalda", "level": 2, "description": "Variación de remo con barra especial" },
+    "doc29": { "name": "Jalón polea alta", "category": "Espalda", "level": 2, "description": "Ejercicio avanzado para espalda ancha" },
+    "doc30": { "name": "Hiperextensiones", "category": "Espalda", "level": 2, "description": "Ejercicio para fortalecer la espalda baja" }
+  }
+}
