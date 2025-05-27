@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../services/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
@@ -11,9 +11,9 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     try {
       await signOut(auth);
-      setUser(null); // Actualiza el estado al cerrar sesión
+      setUser(null);
       if (window.location.pathname !== "/auth") {
-        window.location.href = "/auth"; // Redirección básica
+        window.location.href = "/auth";
       }
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
@@ -33,4 +33,8 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
 }

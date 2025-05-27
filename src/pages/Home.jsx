@@ -1,3 +1,7 @@
 export default function Home() {
-  return <h1>Bienvenido a GymApp</h1>;
+  return (
+  <div className="p-4">
+    <h1 className="text-2xl font-bold mb-4">Bienvenido a Fit PLUS Ultra</h1>
+  </div>
+  )
 }

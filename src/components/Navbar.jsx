@@ -12,6 +12,9 @@ export default function Navbar() {
       <Link to="/exercises" className="hover:text-blue-500" viewTransition>
         Ejercicios
       </Link>
+      <Link to="/routine" className="hover:text-blue-500" viewTransition>
+        Rutina
+      </Link>
       <Link to="/profile" className="hover:text-blue-500" viewTransition>
         Perfil
       </Link>

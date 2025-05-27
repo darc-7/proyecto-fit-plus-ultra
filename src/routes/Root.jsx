@@ -4,8 +4,7 @@ import App from "../App";
 import Home from "../pages/Home";
 import Auth from "../pages/Auth";
 import Exercises from "../pages/Exercises";
-import Chest from "../pages/Chest";
-import Legs from "../pages/Legs";
+import Routine from "../pages/Routine";
 import Profile from "../pages/Profile";
 import ErrorPage from "../pages/ErrorPage";
 import ProtectedRoute from "../components/ProtectedRoute"; // Importa el componente
@@ -26,21 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: "exercises",
-        element: <ProtectedRoute><Outlet /></ProtectedRoute>,
-        children: [
-          {
-            index: true,
-            element:<Exercises />
-          },
-          {
-            path: "chest",
-            element: <Chest />
-          },
-          {
-            path: "legs",
-            element: <Legs />
-          },
-        ]
+        element: <ProtectedRoute><Exercises /></ProtectedRoute>,
+      },
+      {
+        path: "routine",
+        element: <ProtectedRoute><Routine /></ProtectedRoute>,
       },
       {
         path: "profile",

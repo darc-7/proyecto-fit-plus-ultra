@@ -1,28 +1,36 @@
 import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../services/firebase";
+import { auth, googleProvider, db } from "../services/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export function GoogleSignIn() {
   const handleSignIn = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
-      console.log("Usuario autenticado con Google");
+      // 1. Iniciar sesión con Google
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+
+      // 2. Crear documento del usuario en Firestore
+      const userRef = doc(db, "users", user.uid);
+      await setDoc(userRef, {
+        email: user.email,         // Correo para identificación
+        totalPoints: 0,            // Puntos iniciales
+        currentRoutine: [],        // Rutina vacía
+        createdAt: new Date()      // Fecha de registro
+      });
+
+      console.log("Usuario registrado en Firestore:", user.email);
     } catch (error) {
-      console.error("Error al autenticar con Google:", error.message);
+      console.error("Error en inicio de sesión:", error);
     }
   };
 
   return (
-    <div >
-      <button className="bg-[#DB4437] hover:bg-[#C1351A] text-white px-4 py-2 rounded-lg flex items-center gap-2" 
-        onClick={handleSignIn}  
-      >
-        <img 
-          src="https://www.google.com/favicon.ico" 
-          alt="Google Logo" 
-          className="w-5 h-5"
-        />
-        Continuar con Google
-      </button>
-    </div>
+    <button 
+      onClick={handleSignIn}
+      className="bg-[#DB4437] hover:bg-[#C1351A] text-white px-4 py-2 rounded-lg flex items-center gap-2"
+    >
+      <img src="https://www.google.com/favicon.ico" alt="Google Logo" className="w-5 h-5" />
+      Continuar con Google
+    </button>
   );
 }
