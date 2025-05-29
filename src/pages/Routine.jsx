@@ -1,42 +1,116 @@
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
-import { useEffect, useState } from "react";
+import ExerciseCard from "../components/ExerciseCard";
+// import { GiSandsOfTime } from "react-icons/gi";
 
-export default function RoutinePage() {
+// Utilidad para obtener la fecha de hoy
+const getTodayDate = () => new Date().toISOString().split("T")[0];
+
+const Routine = () => {
   const { user } = useAuth();
-  const [routineExercises, setRoutineExercises] = useState([]);
+  const [exercises, setExercises] = useState([]);
+  const [routineIds, setRoutineIds] = useState([]);
+  const [routineFinished, setRoutineFinished] = useState(false);
+  const [timer, setTimer] = useState({ running: false, seconds: 0 });
 
+  // Cargar ejercicios y rutina del usuario
   useEffect(() => {
-    const fetchRoutine = async () => {
-      if (!user) return;
-      
-      const userRef = doc(db, "users", user.uid);
-      const userDoc = await getDoc(userRef);
-      const exerciseIds = userDoc.data()?.currentRoutine || [];
-      
-      // Obtener detalles de cada ejercicio
-      const exercises = await Promise.all(
-        exerciseIds.map(async (id) => {
-          const exerciseDoc = await getDoc(doc(db, "exercises", id));
-          return { id, ...exerciseDoc.data() };
-        })
-      );
-      setRoutineExercises(exercises);
-    };
+    if (!user) return;
 
-    fetchRoutine();
+    const unsubscribe = onSnapshot(collection(db, "exercises"), async (snapshot) => {
+      const allExercises = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setExercises(allExercises);
+
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      const { currentRoutine = [], lastRoutineCompleted = "" } = userDoc.data();
+      const today = getTodayDate();
+
+      if (lastRoutineCompleted === today) setRoutineFinished(true);
+      else setRoutineIds(currentRoutine);
+    });
+
+    return () => unsubscribe();
   }, [user]);
+
+  // Cronómetro
+  useEffect(() => {
+    const interval = timer.running
+      ? setInterval(() => setTimer(t => ({ ...t, seconds: t.seconds + 1 })), 1000)
+      : null;
+    return () => clearInterval(interval);
+  }, [timer.running]);
+
+ const handleStop = async () => {
+  if (!window.confirm("¿Deseas finalizar la rutina de hoy?") || !user) return;
+
+  const userRef = doc(db, "users", user.uid);
+  const userSnap = await getDoc(userRef);
+  const userData = userSnap.data();
+  const today = getTodayDate();
+
+  // Obtener ejercicios seleccionados
+  const completedExercises = exercises.filter(e => routineIds.includes(e.id));
+  const totalPoints = completedExercises.reduce((sum, e) => sum + (e.points || 0), 0);
+
+  // Sumar a puntos actuales (por defecto 0)
+  const updatedPoints = (userData.totalPoints || 0) + totalPoints;
+
+  await updateDoc(userRef, {
+    currentRoutine: [],
+    lastRoutineCompleted: today,
+    totalPoints: updatedPoints,
+  });
+
+  setRoutineIds([]);
+  setRoutineFinished(true);
+  setTimer({ running: false, seconds: 0 });
+};
+
+  const formattedTime = `${Math.floor(timer.seconds / 60)}:${String(timer.seconds % 60).padStart(2, "0")}`;
+  const routineExercises = exercises.filter(e => routineIds.includes(e.id));
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Tu Rutina</h1>
-      {routineExercises.map((exercise) => (
-        <div key={exercise.id} className="p-3 bg-gray-50 rounded-lg mb-2">
-          <h3>{exercise.name}</h3>
-          <p>Puntos: {exercise.points}</p>
+      <h1 className="text-3xl font-bold text-center mb-4">Tu rutina</h1>
+
+      {routineFinished && (
+        <p className="text-center text-green-600 font-semibold mb-4">
+          ✅ ¡Felicidades! Has completado tu rutina del día.
+        </p>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {routineExercises.map(e => (
+          <ExerciseCard key={e.id} exercise={e} selected disabled />
+        ))}
+      </div>
+
+      {routineExercises.length > 0 && !routineFinished && (
+        <div className="flex flex-col items-center gap-4 mt-6">
+          <div className="text-2xl font-mono flex items-center gap-2">
+            {/* <GiSandsOfTime /> */}
+            {formattedTime}
+          </div>
+          <div className="flex gap-4">
+            <button
+              onClick={() => setTimer(t => ({ ...t, running: !t.running }))}
+              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+            >
+              {timer.running ? "Pausar" : "Reanudar"}
+            </button>
+            <button
+              onClick={handleStop}
+              className="px-4 py-2 bg-red-500 text-white rounded-md"
+            >
+              Detener
+            </button>
+          </div>
         </div>
-      ))}
+      )}
     </div>
   );
-}
+};
+
+export default Routine;

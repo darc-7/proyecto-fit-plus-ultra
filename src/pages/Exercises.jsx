@@ -21,7 +21,7 @@ export default function ExercisesPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 space-x-2">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">Catálogo de Ejercicios</h1>
+      <h1 className="text-3xl font-bold text-center mb-4">Catálogo de Ejercicios</h1>
       
       {/* Filtro por categoría */}
       <select
