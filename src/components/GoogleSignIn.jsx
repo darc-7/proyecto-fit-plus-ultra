@@ -1,24 +1,32 @@
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider, db } from "../services/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 export function GoogleSignIn() {
   const handleSignIn = async () => {
     try {
+      googleProvider.setCustomParameters({
+        prompt: "select_account"
+      });
       // 1. Iniciar sesión con Google
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
-      // 2. Crear documento del usuario en Firestore
+      // 2. Verificar si el usuario ya tiene documento en Firestore
       const userRef = doc(db, "users", user.uid);
-      await setDoc(userRef, {
-        email: user.email,         // Correo para identificación
-        totalPoints: 0,            // Puntos iniciales
-        currentRoutine: [],        // Rutina vacía
-        createdAt: new Date()      // Fecha de registro
-      });
+      const userSnap = await getDoc(userRef);
 
-      console.log("Usuario registrado en Firestore:", user.email);
+      // 2. Crear documento del usuario en Firestore
+      if(!userSnap.exists()){
+        const userRef = doc(db, "users", user.uid);
+        await setDoc(userRef, {
+          email: user.email,         // Correo para identificación
+          totalPoints: 0,            // Puntos iniciales
+          currentRoutine: [],        // Rutina vacía
+          createdAt: new Date()      // Fecha de registro
+        });
+        console.log("Usuario registrado en Firestore:", user.email);
+      }
     } catch (error) {
       console.error("Error en inicio de sesión:", error);
     }
