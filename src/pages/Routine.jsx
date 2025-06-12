@@ -3,10 +3,11 @@ import { useAuth } from "../context/AuthContext";
 import { collection, doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import ExerciseCard from "../components/ExerciseCard";
+import { upStreak } from "../utils/streakUtils";
 // import { GiSandsOfTime } from "react-icons/gi";
 
 // Utilidad para obtener la fecha de hoy
-const getTodayDate = () => new Date().toISOString().split("T")[0];
+const getTodayDate = () => new Date().toLocaleDateString("sv-SE");
 
 const Routine = () => {
   const { user } = useAuth();
@@ -42,31 +43,33 @@ const Routine = () => {
     return () => clearInterval(interval);
   }, [timer.running]);
 
- const handleStop = async () => {
-  if (!window.confirm("¿Deseas finalizar la rutina de hoy?") || !user) return;
+  const handleStop = async () => {
+    if (!window.confirm("¿Deseas finalizar la rutina de hoy?") || !user) return;
 
-  const userRef = doc(db, "users", user.uid);
-  const userSnap = await getDoc(userRef);
-  const userData = userSnap.data();
-  const today = getTodayDate();
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+    const userData = userSnap.data();
 
-  // Obtener ejercicios seleccionados
-  const completedExercises = exercises.filter(e => routineIds.includes(e.id));
-  const totalPoints = completedExercises.reduce((sum, e) => sum + (e.points || 0), 0);
+    const today = new Date().toISOString().split("T")[0];
 
-  // Sumar a puntos actuales (por defecto 0)
-  const updatedPoints = (userData.totalPoints || 0) + totalPoints;
+    // Sumar puntos (opcional)
+    const completedExercises = exercises.filter(e => routineIds.includes(e.id));
+    const points = completedExercises.reduce((sum, e) => sum + (e.points || 0), 0);
 
-  await updateDoc(userRef, {
-    currentRoutine: [],
-    lastRoutineCompleted: today,
-    totalPoints: updatedPoints,
-  });
+    // Actualizar racha antes de guardar rutina
+    const updatedStreakData = upStreak(userData, today);
 
-  setRoutineIds([]);
-  setRoutineFinished(true);
-  setTimer({ running: false, seconds: 0 });
-};
+    await updateDoc(userRef, {
+      ...updatedStreakData,
+      currentRoutine: [],
+      totalPoints: (userData.totalPoints || 0) + points
+    });
+
+    // Actualizar estado local
+    setRoutineIds([]);
+    setRoutineFinished(true);
+    setTimer({ running: false, seconds: 0 });
+  };
 
   const formattedTime = `${Math.floor(timer.seconds / 60)}:${String(timer.seconds % 60).padStart(2, "0")}`;
   const routineExercises = exercises.filter(e => routineIds.includes(e.id));
