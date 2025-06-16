@@ -2,11 +2,7 @@ import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import fs from 'fs';
 
-// 1. Cargar el JSON (que replica la estructura de Firestore)
-const data = JSON.parse(fs.readFileSync('./exercises.json', 'utf-8'));
-const exercises = data.exercises; // Objeto con { doc1: { ... }, doc2: { ... } }
-
-// 2. Configuración Firebase
+// ✅ Cargar credenciales
 const serviceAccount = JSON.parse(fs.readFileSync('./src/firebase/serviceAccount.json', 'utf-8'));
 
 initializeApp({
@@ -18,16 +14,40 @@ const db = getFirestore();
 
 async function importData() {
   const batch = db.batch();
-  const collectionRef = db.collection('exercises');
 
-  // Iterar sobre las claves del objeto (doc1, doc2...)
+  // === Cargar ejercicios ===
+  const exerciseData = JSON.parse(fs.readFileSync('./exercises.json', 'utf-8'));
+  const exercises = exerciseData.exercises;
+  const exercisesRef = db.collection('exercises');
+
   Object.keys(exercises).forEach((docId) => {
-    const docRef = collectionRef.doc(docId); // Usar el ID original (doc1, doc2...)
-    batch.set(docRef, exercises[docId]); // Subir el documento completo
+    const docRef = exercisesRef.doc(docId);
+    batch.set(docRef, exercises[docId]);
   });
 
+  console.log(`🗂️ Preparados ${Object.keys(exercises).length} ejercicios para importación.`);
+
+  // === Cargar recompensas ===
+  const rewardData = JSON.parse(fs.readFileSync('./rewards.json', 'utf-8'));
+  const rewards = rewardData.rewards;
+  const rewardsRef = db.collection('rewards');
+
+  let rewardCount = 0;
+
+  ['visuales', 'fisicas'].forEach((categoria) => {
+    const grupo = rewards[categoria];
+    Object.keys(grupo).forEach((docId) => {
+      const docRef = rewardsRef.doc(docId);
+      batch.set(docRef, grupo[docId]);
+      rewardCount++;
+    });
+  });
+
+  console.log(`🛍️ Preparadas ${rewardCount} recompensas para importación.`);
+
+  // === Ejecutar importación ===
   await batch.commit();
-  console.log(`¡${Object.keys(exercises).length} ejercicios importados con sus IDs originales!`);
+  console.log('✅ Importación completada con éxito.');
 }
 
 importData().catch(console.error);
