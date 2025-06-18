@@ -18,7 +18,7 @@ export default function AuthRedirect() {
   if (loading) return null; // No renderices nada mientras se carga
 
   if (user) {
-    return <Navigate to="/exercises" replace />; // Redirige si hay sesión
+    return <Navigate to="/profile" replace />; // Redirige si hay sesión
   }
 
   return null; // No hace nada si no hay usuario

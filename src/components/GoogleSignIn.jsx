@@ -8,15 +8,15 @@ export function GoogleSignIn() {
       googleProvider.setCustomParameters({
         prompt: "select_account"
       });
-      // 1. Iniciar sesión con Google
+      //Iniciar sesión con Google
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
-      // 2. Verificar si el usuario ya tiene documento en Firestore
+      //Verificar si el usuario ya tiene documento en Firestore
       const userRef = doc(db, "users", user.uid);
       const userSnap = await getDoc(userRef);
 
-      // 2. Crear documento del usuario en Firestore
+      //Crear documento del usuario en Firestore
       if(!userSnap.exists()){
         const userRef = doc(db, "users", user.uid);
         await setDoc(userRef, {

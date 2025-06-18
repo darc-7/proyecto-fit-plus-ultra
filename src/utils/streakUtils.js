@@ -51,6 +51,25 @@ export function upStreak(userData, today) {
   };
 }
 
+export function verifyStreak(userData) {
+  const today = new Date().toLocaleDateString("sv-SE");
+  const lastDate = userData.lastRoutineCompleted;
+  const protectedDates = userData.protectedDates || [];
+
+  if (!lastDate) return null;
+
+  const dayDiff = getDayDiff(lastDate, today);
+
+  if (dayDiff > 1 && !protectedDates.includes(today)) {
+    return {
+      streak: 0,
+      protectedDates: [],
+    };
+  }
+
+  return null;
+}
+
 function getDayDiff(date1, date2) {
   const d1 = new Date(date1);
   const d2 = new Date(date2);

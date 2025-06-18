@@ -4,7 +4,7 @@ import { collection, doc, getDoc, onSnapshot, updateDoc } from "firebase/firesto
 import { db } from "../services/firebase";
 import ExerciseCard from "../components/ExerciseCard";
 import { upStreak } from "../utils/streakUtils";
-// import { GiSandsOfTime } from "react-icons/gi";
+import toast from "react-hot-toast";
 
 // Utilidad para obtener la fecha de hoy
 const getTodayDate = () => new Date().toLocaleDateString("sv-SE");
@@ -44,19 +44,30 @@ const Routine = () => {
   }, [timer.running]);
 
   const handleStop = async () => {
-    if (!window.confirm("¿Deseas finalizar la rutina de hoy?") || !user) return;
+    if (!user || routineIds.length === 0) return;
+
+    const tiempoMinimo = routineIds.length * 5 * 60; // segundos
+
+    if (timer.seconds < tiempoMinimo) {
+      toast("Aún no es momento de finalizar tu rutina. Sigue entrenando para obtener tus puntos 💪", {
+        icon: "⏳",
+        duration: 5000
+      });
+      return;
+    }
+
+    const confirm = window.confirm("¿Deseas finalizar la rutina de hoy?");
+    if (!confirm) return;
 
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
     const userData = userSnap.data();
 
-    const today = new Date().toISOString().split("T")[0];
+    const today = new Date().toLocaleDateString("sv-SE");
 
-    // Sumar puntos (opcional)
     const completedExercises = exercises.filter(e => routineIds.includes(e.id));
     const points = completedExercises.reduce((sum, e) => sum + (e.points || 0), 0);
 
-    // Actualizar racha antes de guardar rutina
     const updatedStreakData = upStreak(userData, today);
 
     await updateDoc(userRef, {
@@ -65,11 +76,12 @@ const Routine = () => {
       totalPoints: (userData.totalPoints || 0) + points
     });
 
-    // Actualizar estado local
     setRoutineIds([]);
     setRoutineFinished(true);
     setTimer({ running: false, seconds: 0 });
+    toast.success("¡Rutina completada con éxito!");
   };
+
 
   const formattedTime = `${Math.floor(timer.seconds / 60)}:${String(timer.seconds % 60).padStart(2, "0")}`;
   const routineExercises = exercises.filter(e => routineIds.includes(e.id));

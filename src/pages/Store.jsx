@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 export default function Store() {
   const { user } = useAuth();
@@ -44,7 +45,8 @@ export default function Store() {
       unlockedRewards: [...(userData.unlockedRewards || []), reward.id],
     });
 
-    alert("¡Recompensa canjeada!");
+    toast.success('¡Recompensa canjeada!')
+    //alert("¡Recompensa canjeada!");
     setUserData((prev) => ({
       ...prev,
       totalPoints: prev.totalPoints - reward.cost,
