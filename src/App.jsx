@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar"; // Opcional
+import FloatingTimer from "./components/FloatingTimer";
 import { Toaster } from "react-hot-toast";
 
 export default function App() {
@@ -8,6 +9,7 @@ export default function App() {
       <Toaster position="top-right" />
       <Navbar /> {/* Menú de navegación (opcional) */}
       <Outlet /> {/* ¡Aquí se renderizarán Auth, Exercises, etc.! */}
+      <FloatingTimer />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { verifyStreak } from "../utils/streakUtils";
+import toast from "react-hot-toast";
 
 export default function Profile() {
   const { user } = useAuth();
