@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { collection, doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
+import { collection, doc, getDoc, onSnapshot, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../services/firebase";
 import ExerciseCard from "../components/ExerciseCard";
 import { upStreak } from "../utils/streakUtils";
+import { checkAchieve } from "../utils/achievements";
 import toast from "react-hot-toast";
 import { useTimer } from "../context/TimerContext";
 
-// Utilidad para obtener la fecha de hoy
 const getTodayDate = () => new Date().toLocaleDateString("sv-SE");
 
 const Routine = () => {
@@ -15,7 +15,6 @@ const Routine = () => {
   const [exercises, setExercises] = useState([]);
   const [routineIds, setRoutineIds] = useState([]);
   const [routineFinished, setRoutineFinished] = useState(false);
-
   const { elapsed, running, start, pause, reset } = useTimer();
 
   useEffect(() => {
@@ -36,11 +35,11 @@ const Routine = () => {
     return () => unsubscribe();
   }, [user]);
 
-  //Manejo de fin de rutina
+  //Temporizador y finalizacion de rutina
   const handleStop = async () => {
     if (!user || routineIds.length === 0) return;
 
-    const tiempoMinimo = routineIds.length * 3 * 60; // segundos
+    const tiempoMinimo = routineIds.length * 0.5 * 60;
 
     if (elapsed < tiempoMinimo) {
       toast("Aún no es momento de finalizar tu rutina. Sigue entrenando para obtener tus puntos 💪", {
@@ -52,21 +51,34 @@ const Routine = () => {
 
     const confirm = window.confirm("¿Deseas finalizar la rutina de hoy?");
     if (!confirm) return;
-
+    
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
     const userData = userSnap.data();
-
+    //Actualizar puntos
     const today = getTodayDate();
     const completedExercises = exercises.filter(e => routineIds.includes(e.id));
     const points = completedExercises.reduce((sum, e) => sum + (e.points || 0), 0);
-
+    
     const updatedStreakData = upStreak(userData, today);
-
+    const updatedTotalPoints = (userData.totalPoints || 0) + points;
+    const updatedCompleted = (userData.completedRoutines || 0) + 1;
+    
+    const newBadges = checkAchieve({
+      ...userData,
+      totalPoints: updatedTotalPoints,
+      streak: updatedStreakData.streak,
+      completedRoutines: updatedCompleted,
+      unlockedRewards: userData.unlockedRewards || [],
+      badges: userData.badges || []
+    });
+    //Actualizar racha y logros
     await updateDoc(userRef, {
       ...updatedStreakData,
       currentRoutine: [],
-      totalPoints: (userData.totalPoints || 0) + points
+      totalPoints: updatedTotalPoints,
+      completedRoutines: updatedCompleted,
+      ...(newBadges.length > 0 && { badges: arrayUnion(...newBadges) })
     });
 
     setRoutineIds([]);

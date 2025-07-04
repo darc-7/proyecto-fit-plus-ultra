@@ -96,6 +96,19 @@ export default function Profile() {
         <p><strong>Protectores:</strong> 🧊 {userData.streakProtectors || 0}</p>
         <p><strong>Fecha de registro:</strong> 📅 {creationDate}</p>
       </div>
+
+      <div className="mt-6">
+        <h2 className="text-lg font-bold">Logros Desbloqueados 🏅</h2>
+        {userData.badges?.length > 0 ? (
+          <ul className="mt-2 list-disc list-inside text-sm text-gray-700">
+            {userData.badges.map((badge, index) => (
+              <li key={index}>🎖 {badge}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-500 text-sm mt-2">Aún no has desbloqueado logros.</p>
+        )}
+      </div>
     </div>
   );
 }
