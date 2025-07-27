@@ -21,21 +21,27 @@ export default function Store() {
       // Obtener datos del usuario
       const userRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userRef);
+
+      // Si no existe la propiedad claimedPhysicalRewards, inicializarla
+      if (!userDoc.data().claimedPhysicalRewards) {
+        await updateDoc(userRef, { claimedPhysicalRewards: {} });
+      }
+
       setUserData(userDoc.data());
     };
 
     fetchData();
   }, [user]);
 
-  const canjearRecompensa = async (reward) => {
+  const canjearRecompensaVisual = async (reward) => {
     if (!userData || !user) return;
 
     if (userData.unlockedRewards?.includes(reward.id)) {
-      return alert("Ya tienes esta recompensa.");
+      return toast("Ya tienes esta recompensa.");
     }
 
     if (userData.totalPoints < reward.cost) {
-      return alert("No tienes puntos suficientes.");
+      return toast("No tienes puntos suficientes.");
     }
 
     const userRef = doc(db, "users", user.uid);
@@ -45,8 +51,8 @@ export default function Store() {
       unlockedRewards: [...(userData.unlockedRewards || []), reward.id],
     });
 
-    toast.success('¡Recompensa canjeada!')
-    //alert("¡Recompensa canjeada!");
+    toast.success("¡Recompensa visual canjeada!");
+
     setUserData((prev) => ({
       ...prev,
       totalPoints: prev.totalPoints - reward.cost,
@@ -54,10 +60,44 @@ export default function Store() {
     }));
   };
 
+  const canjearRecompensaFisica = async (reward) => {
+    if (!userData || !user) return;
+
+    const today = new Date().toLocaleDateString("sv-SE");
+    const claimed = userData.claimedPhysicalRewards || {};
+
+    if (claimed[reward.id] === today) {
+      return toast.error("Ya has canjeado esta recompensa hoy.");
+    }
+
+    if (userData.totalPoints < reward.cost) {
+      return toast.error("No tienes puntos suficientes.");
+    }
+
+    const userRef = doc(db, "users", user.uid);
+
+    await updateDoc(userRef, {
+      totalPoints: userData.totalPoints - reward.cost,
+      [`claimedPhysicalRewards.${reward.id}`]: today
+    });
+
+    toast.success("¡Recompensa física canjeada!");
+
+    setUserData((prev) => ({
+      ...prev,
+      totalPoints: prev.totalPoints - reward.cost,
+      claimedPhysicalRewards: {
+        ...(prev.claimedPhysicalRewards || {}),
+        [reward.id]: today
+      }
+    }));
+  };
+
   if (!userData) return <p className="p-4">Cargando tienda...</p>;
 
   const visuales = rewards.filter((r) => r.type === "visual");
   const fisicas = rewards.filter((r) => r.type === "fisico");
+  const today = new Date().toLocaleDateString("sv-SE");
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -75,7 +115,7 @@ export default function Store() {
               <p className="text-sm text-gray-600 mb-2">{reward.description}</p>
               <p className="text-yellow-600 font-bold">Costo: {reward.cost} puntos</p>
               <button
-                onClick={() => canjearRecompensa(reward)}
+                onClick={() => canjearRecompensaVisual(reward)}
                 disabled={userData.unlockedRewards?.includes(reward.id)}
                 className="mt-2 px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-400"
               >
@@ -95,11 +135,13 @@ export default function Store() {
               <p className="text-sm text-gray-600 mb-2">{reward.description}</p>
               <p className="text-yellow-600 font-bold">Costo: {reward.cost} puntos</p>
               <button
-                onClick={() => canjearRecompensa(reward)}
-                disabled={userData.unlockedRewards?.includes(reward.id)}
+                onClick={() => canjearRecompensaFisica(reward)}
+                disabled={userData.claimedPhysicalRewards?.[reward.id] === today}
                 className="mt-2 px-3 py-1 bg-green-500 text-white rounded disabled:bg-gray-400"
               >
-                {userData.unlockedRewards?.includes(reward.id) ? "Canjeado" : "Canjear"}
+                {userData.claimedPhysicalRewards?.[reward.id] === today
+                  ? "Ya canjeada hoy"
+                  : "Canjear"}
               </button>
             </div>
           ))}

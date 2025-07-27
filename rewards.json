@@ -2,60 +2,18 @@
   "rewards": {
     "visuales": {
       "reward1": {
-        "name": "Tema Oscuro",
-        "description": "Activa el modo oscuro para una experiencia visual más cómoda.",
-        "cost": 150,
-        "type": "visual"
-      },
-      "reward2": {
-        "name": "Protector de Racha Extra",
-        "description": "Añade un protector adicional para tu racha diaria.",
-        "cost": 200,
-        "type": "visual"
-      },
-      "reward3": {
         "name": "Marco Dorado de Perfil",
         "description": "Un marco dorado exclusivo para destacar tu perfil.",
         "cost": 180,
         "type": "visual"
       },
-      "reward4": {
-        "name": "Sticker: ¡Modo Bestia!",
-        "description": "Sticker para mostrar tu intensidad en el perfil.",
-        "cost": 120,
-        "type": "visual"
-      },
-      "reward5": {
-        "name": "Fondo de Entrenamiento Futurista",
-        "description": "Cambia el fondo visual de tu aplicación por uno de estilo sci-fi.",
-        "cost": 150,
-        "type": "visual"
-      },
-      "reward6": {
+      "reward2": {
         "name": "Frase Motivadora Personalizada",
         "description": "Muestra una frase de motivación elegida en tu perfil.",
         "cost": 130,
         "type": "visual"
       },
-      "reward7": {
-        "name": "Animación de Inicio Especial",
-        "description": "Una animación exclusiva al abrir la aplicación.",
-        "cost": 160,
-        "type": "visual"
-      },
-      "reward8": {
-        "name": "Sonido de Logro",
-        "description": "Un sonido especial al completar una rutina.",
-        "cost": 110,
-        "type": "visual"
-      },
-      "reward9": {
-        "name": "Tema de Colores Cálidos",
-        "description": "Cambia los colores de la app a tonos cálidos y suaves.",
-        "cost": 140,
-        "type": "visual"
-      },
-      "reward10": {
+      "reward3": {
         "name": "Avatar Exclusivo: Guerrero Fitness",
         "description": "Desbloquea un avatar con estilo épico para tu perfil.",
         "cost": 200,
@@ -63,31 +21,25 @@
       }
     },
     "fisicas": {
-      "reward11": {
+      "reward4": {
         "name": "Descuento 10% en la Membresía",
         "description": "Presenta en recepción y obtén 10% de descuento en tu mensualidad.",
         "cost": 300,
         "type": "fisico"
       },
-      "reward12": {
+      "reward5": {
         "name": "Bebida Hidratante Gratis",
         "description": "Reclama una bebida deportiva gratis en el gimnasio.",
         "cost": 250,
         "type": "fisico"
       },
-      "reward13": {
+      "reward6": {
         "name": "Proteína en Polvo (1 porción)",
         "description": "Canjeable por una dosis de proteína post-entreno.",
         "cost": 350,
         "type": "fisico"
       },
-      "reward14": {
-        "name": "Muñequera Fitness",
-        "description": "Accesorio útil para tus entrenamientos, limitado por disponibilidad.",
-        "cost": 400,
-        "type": "fisico"
-      },
-      "reward15": {
+      "reward7": {
         "name": "Pase de Invitado",
         "description": "Permite que un amigo entrene contigo un día.",
         "cost": 380,

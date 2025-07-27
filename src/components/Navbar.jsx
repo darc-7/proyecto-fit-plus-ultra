@@ -15,11 +15,11 @@ export default function Navbar() {
       <Link to="/routine" className="hover:text-blue-500" viewTransition>
         Rutina
       </Link>
-      <Link to="/profile" className="hover:text-blue-500" viewTransition>
-        Perfil
-      </Link>
       <Link to="/store" className="hover:text-blue-500" viewTransition>
         Tienda
+      </Link>
+      <Link to="/profile" className="hover:text-blue-500" viewTransition>
+        Perfil
       </Link>
       {user && ( // Solo muestra el botón si hay usuario logueado
         <button

@@ -32,6 +32,12 @@ async function importData() {
   const rewards = rewardData.rewards;
   const rewardsRef = db.collection('rewards');
 
+  // === Eliminar recompensas existentes
+  const snapshot = await rewardsRef.get();
+  const deleteBatch = db.batch();
+  snapshot.forEach((doc) => deleteBatch.delete(doc.ref));
+  await deleteBatch.commit();
+
   let rewardCount = 0;
 
   ['visuales', 'fisicas'].forEach((categoria) => {
