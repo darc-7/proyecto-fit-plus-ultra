@@ -26,13 +26,14 @@ export default function Profile() {
       const reset = verifyStreak(data);
       if (reset) {
         // Mostrar toast solo una vez al día
-        const today = new Date().toISOString().split("T")[0]; // 'YYYY-MM-DD'
-        const lastToastDate = localStorage.getItem("lastLostStreakToast");
+        const today = new Date().toLocaleDateString("sv-SE"); 
+        const key = `streakToastShown_${user.uid}`;
+        const lastShown = localStorage.getItem(key);
 
-        if (lastToastDate !== today) {
-          toast.error("¡Has perdido tu racha diaria! 😢");
+        if (lastShown !== today) {
+          toast.error("¡Has perdido tu racha diaria! 😢", { duration: 8000 });
           console.log("⏱️ Racha reiniciada automáticamente por inactividad.");
-          localStorage.setItem("lastLostStreakToast", today);
+          localStorage.setItem(key, today);
         }
 
         await updateDoc(userRef, reset);
