@@ -25,9 +25,17 @@ export default function Profile() {
       // Verificar racha expirada
       const reset = verifyStreak(data);
       if (reset) {
+        // Mostrar toast solo una vez al día
+        const today = new Date().toISOString().split("T")[0]; // 'YYYY-MM-DD'
+        const lastToastDate = localStorage.getItem("lastLostStreakToast");
+
+        if (lastToastDate !== today) {
+          toast.error("¡Has perdido tu racha diaria! 😢");
+          console.log("⏱️ Racha reiniciada automáticamente por inactividad.");
+          localStorage.setItem("lastLostStreakToast", today);
+        }
+
         await updateDoc(userRef, reset);
-        console.log("⏱️ Racha reiniciada automáticamente por inactividad.");
-        toast.error("¡Has perdido tu racha diaria! 😢");
         setUserData(prev => ({ ...prev, ...reset }));
       }
     });
