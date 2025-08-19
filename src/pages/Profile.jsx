@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useAuth } from "../context/AuthContext";
 import { doc, updateDoc, onSnapshot, getDocs, collection } from "firebase/firestore";
 import { db } from "../services/firebase";
@@ -11,6 +11,7 @@ export default function Profile() {
   const [editingName, setEditingName] = useState(false);
   const [newName, setNewName] = useState("");
   const [visualRewards, setVisualRewards] = useState([]);
+  const streakToastShownRef = useRef(false);
 
   useEffect(() => {
     if (!user) return;
@@ -22,52 +23,44 @@ export default function Profile() {
       setUserData(data);
       setNewName(data.displayName || user.displayName || "Usuario");
 
-      // Verificar racha expirada
+      // Racha expirada (función antigua, aún válida si no cambiaste sistema)
       const reset = verifyStreak(data);
       if (reset) {
-        // Mostrar toast solo una vez al día
-        const today = new Date().toLocaleDateString("sv-SE"); 
         const key = `streakToastShown_${user.uid}`;
-        const lastShown = localStorage.getItem(key);
-
-        if (lastShown !== today) {
+        const today = new Date().toLocaleDateString("sv-SE");
+        if (localStorage.getItem(key) !== today && !streakToastShownRef.current) {
           toast.error("¡Has perdido tu racha diaria! 😢", { duration: 8000 });
-          console.log("⏱️ Racha reiniciada automáticamente por inactividad.");
           localStorage.setItem(key, today);
+          streakToastShownRef.current = true;
         }
-
         await updateDoc(userRef, reset);
-        setUserData(prev => ({ ...prev, ...reset }));
+        setUserData((prev) => ({ ...prev, ...reset }));
       }
     });
 
     return () => unsubscribe();
   }, [user]);
 
+  // cargar recompensas visuales desbloqueadas
   useEffect(() => {
     const fetchRewards = async () => {
       const snap = await getDocs(collection(db, "rewards"));
-      const allRewards = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      const visuales = allRewards.filter((r) =>
-        r.type === "visual" && userData?.unlockedRewards?.includes(r.id)
-      );
-      setVisualRewards(visuales);
+      const all = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      const vis = all.filter((r) => r.type === "visual" && userData?.unlockedRewards?.includes(r.id));
+      setVisualRewards(vis);
     };
-
     if (userData?.unlockedRewards) fetchRewards();
   }, [userData]);
 
-  const handleToggleVisual = async (rewardId) => {
+  const toggleVisual = async (rewardId) => {
     if (!user) return;
-
     const userRef = doc(db, "users", user.uid);
     const current = userData.activeVisuals || [];
-    const updated = current.includes(rewardId)
-      ? current.filter((r) => r !== rewardId)
+    const newList = current.includes(rewardId)
+      ? current.filter((id) => id !== rewardId)
       : [...current, rewardId];
-
-    await updateDoc(userRef, { activeVisuals: updated });
-    setUserData(prev => ({ ...prev, activeVisuals: updated }));
+    await updateDoc(userRef, { activeVisuals: newList });
+    setUserData((prev) => ({ ...prev, activeVisuals: newList }));
   };
 
   const handleNameSave = async () => {
@@ -78,27 +71,38 @@ export default function Profile() {
 
   if (!userData) return <p className="p-4">Cargando perfil...</p>;
 
-  const marcoDoradoActivo = userData.activeVisuals?.includes("reward1");
+  // Chequear recompensas activas
+  const marcoActivo = userData.activeVisuals?.includes("reward1"); // marco dorado
+  const avatarExclusivo = userData.activeVisuals?.includes("reward3"); // avatar guerrero
 
   const creationDate = userData.createdAt?.toDate?.()
     ? userData.createdAt.toDate().toLocaleDateString("es-VE")
     : new Date(userData.createdAt).toLocaleDateString("es-VE");
 
+  // --- Avatar especial ---
+  const imgSrc = avatarExclusivo
+    ? "/guerrero_fit.png"
+    : userData.photoURL || user.photoURL || "/default-avatar.png";
+
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-4 text-center">Perfil de Usuario</h1>
 
-      <div className="flex flex-col items-center mb-4">
+      {/* Avatar con marco dorado y efecto especial si aplica */}
+      <div className="flex flex-col items-center mb-4 relative">
+        {avatarExclusivo && (
+          <div className="absolute w-28 h-28 rounded-full bg-blue-400 opacity-40 blur-lg -z-10" />
+        )}
         <img
-          src={userData.photoURL || user.photoURL || "/default-avatar.png"}
-          alt="Foto de perfil"
+          src={imgSrc}
+          alt="Avatar"
           className={`w-24 h-24 rounded-full object-cover mb-2 border-4 ${
-            marcoDoradoActivo ? "border-yellow-400 border-4 shadow-yellow-500 shadow-md ring-2 ring-yellow-300" : "border-transparent"
+            marcoActivo ? "border-yellow-400 shadow-md" : "border-transparent"
           }`}
-          onError={(e) => (e.currentTarget.src = "/default-avatar.png")}
         />
       </div>
 
+      {/* Nombre y edición */}
       <div className="text-center mb-4">
         {editingName ? (
           <div className="flex flex-col items-center gap-2">
@@ -128,6 +132,7 @@ export default function Profile() {
         )}
       </div>
 
+      {/* Datos */}
       <div className="text-sm space-y-2 text-center">
         <p><strong>Correo:</strong> {userData.email}</p>
         <p><strong>Racha actual:</strong> 🔥 {userData.streak || 0} días</p>
@@ -136,13 +141,15 @@ export default function Profile() {
         <p><strong>Fecha de registro:</strong> 📅 {creationDate}</p>
       </div>
 
+      {/* Logros + Personalización */}
       <div className="mt-6 grid md:grid-cols-2 gap-6">
+        {/* Logros */}
         <div>
           <h2 className="text-lg font-bold">Logros Desbloqueados 🏅</h2>
-          {userData.badges?.length > 0 ? (
+          {userData.badges?.length ? (
             <ul className="mt-2 list-disc list-inside text-sm text-gray-700">
-              {userData.badges.map((badge, index) => (
-                <li key={index}>🎖 {badge}</li>
+              {userData.badges.map((b, i) => (
+                <li key={i}>🎖 {b}</li>
               ))}
             </ul>
           ) : (
@@ -150,18 +157,19 @@ export default function Profile() {
           )}
         </div>
 
+        {/* Visual rewards checklist */}
         <div>
           <h2 className="text-lg font-bold">Personalización Visual 🎨</h2>
           {visualRewards.length > 0 ? (
             <ul className="mt-2 text-sm text-gray-700 space-y-2">
-              {visualRewards.map((reward) => (
-                <li key={reward.id} className="flex items-center gap-2">
+              {visualRewards.map((r) => (
+                <li key={r.id} className="flex items-center gap-2">
                   <input
                     type="checkbox"
-                    checked={userData.activeVisuals?.includes(reward.id)}
-                    onChange={() => handleToggleVisual(reward.id)}
+                    checked={userData.activeVisuals?.includes(r.id)}
+                    onChange={() => toggleVisual(r.id)}
                   />
-                  <label>{reward.name}</label>
+                  <label>{r.name}</label>
                 </li>
               ))}
             </ul>
