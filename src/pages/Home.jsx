@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
+import { GoogleSignIn } from "../components/GoogleSignIn";
 
 export default function Home() {
   const { user } = useAuth();
@@ -20,15 +21,20 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 px-6 text-center">
+      <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 px-6 text-center p-2">
         <h1 className="text-4xl font-bold mb-4">Fit Plus Ultra</h1>
         <p className="text-lg max-w-2xl mx-auto">
           Convierte tu entrenamiento en una experiencia divertida y motivadora. 
           Gana puntos, desbloquea recompensas y mantén tu racha activa 🔥
         </p>
+        <p className="text-lg max-w-2xl mx-auto mt-6">
+          Puedes unirte utilizando el siguiente boton.
+          Si ya tienes una cuenta inicia sesion
+        </p>
         {!user && (
           <div className="mt-6 flex gap-4 justify-center">
-            <Link
+            <GoogleSignIn />
+            {/* <Link
               to="/auth"
               className="bg-white text-blue-600 font-semibold px-6 py-2 rounded-lg shadow hover:bg-gray-100"
             >
@@ -39,7 +45,7 @@ export default function Home() {
               className="bg-yellow-400 text-gray-900 font-semibold px-6 py-2 rounded-lg shadow hover:bg-yellow-500"
             >
               Registrarse
-            </Link>
+            </Link> */}
           </div>
         )}
       </div>
