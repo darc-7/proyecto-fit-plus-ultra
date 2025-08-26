@@ -93,12 +93,19 @@ const Routine = () => {
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold text-center mb-4">Tu rutina</h1>
+      
+      {routineExercises.length == 0 && !routineFinished && (
+        <p className="text-center text-gray-600 block mt-10">
+          Parece que no has armado tu rutina. Comienza a agregar ejercicios desde la sección de Ejercicios.
+        </p>
+      )}
 
       {routineFinished && (
         <p className="text-center text-green-600 font-semibold mb-4">
           ✅ ¡Felicidades! Has completado tu rutina del día.
         </p>
       )}
+
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {routineExercises.map(e => (
