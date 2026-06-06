@@ -26,20 +26,29 @@ const router = createBrowserRouter([
       },
       {
         path: "exercises",
-        element: <ProtectedRoute><Exercises /></ProtectedRoute>,
+        element: <ProtectedRoute allowedRoles={["cliente"]}><Exercises /></ProtectedRoute>,
       },
       {
         path: "routine",
-        element: <ProtectedRoute><Routine /></ProtectedRoute>,
-      },
-      {
-        path: "profile",
-        element: <ProtectedRoute><Profile /></ProtectedRoute>
+        element: <ProtectedRoute allowedRoles={["cliente"]}><Routine /></ProtectedRoute>,
       },
       {
         path: "store",
-        element: <ProtectedRoute><Store /></ProtectedRoute>
+        element: <ProtectedRoute allowedRoles={["cliente"]}><Store /></ProtectedRoute>
       },
+      {
+        path: "profile",
+        element: <ProtectedRoute allowedRoles={["cliente", "entrenador", "administrador"]}><Profile /></ProtectedRoute>
+      },
+      /* {
+        path: "clientes",
+        element: (
+          <ProtectedRoute allowedRoles={["entrenador"]}>
+            <ClientesCatalogView />
+          </ProtectedRoute>
+        )
+      },
+      */
     ],
   },
 ]);

@@ -51,6 +51,20 @@ async function importData() {
 
   console.log(`🛍️ Preparadas ${rewardCount} recompensas para importación.`);
 
+  // Añade este bloque dentro de tu función importData() en importData.js
+
+  // === Cargar Usuarios (RBAC) ===
+  const usersData = JSON.parse(fs.readFileSync('./users.json', 'utf-8'));
+  const users = usersData.users;
+  const usersRef = db.collection('users');
+
+  Object.keys(users).forEach((docId) => {
+    const docRef = usersRef.doc(docId);
+    batch.set(docRef, users[docId]);
+  });
+
+  console.log(`👥 Preparados ${Object.keys(users).length} usuarios base para importación.`);
+
   // === Ejecutar importación ===
   await batch.commit();
   console.log('✅ Importación completada con éxito.');

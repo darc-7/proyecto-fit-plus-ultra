@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
+import { LoginButton } from "./LoginButton";
 
 export default function Navbar() {
   const { user, logout, motivationalQuote } = useContext(AuthContext);
@@ -12,7 +13,10 @@ export default function Navbar() {
         <Link to="/exercises" className="hover:text-blue-500" viewTransition>Ejercicios</Link>
         <Link to="/routine" className="hover:text-blue-500" viewTransition>Rutina</Link>
         <Link to="/store" className="hover:text-blue-500" viewTransition>Tienda</Link>
-        <Link to="/profile" className="hover:text-blue-500" viewTransition>Perfil</Link>
+        {user && (
+          <Link to="/profile" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Perfil</Link>
+        )}
+        {/* <Link to="/profile" className="hover:text-blue-500" viewTransition>Perfil</Link> */}
       </div>
 
       <div className="flex items-center gap-4">
@@ -22,14 +26,17 @@ export default function Navbar() {
           </span>
         )}
 
-        {user && (
+        {user ? (
           <button
             onClick={logout}
             className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
           >
             Cerrar Sesión
           </button>
+        ): (
+          <LoginButton /> // 👈 Aquí inyectamos el botón genérico de login si no hay sesión
         )}
+        
       </div>
     </nav>
   );

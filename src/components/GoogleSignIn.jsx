@@ -18,12 +18,19 @@ export function GoogleSignIn() {
 
       //Crear documento del usuario en Firestore
       if(!userSnap.exists()){
-        const userRef = doc(db, "users", user.uid);
-        await setDoc(userRef, {
-          email: user.email,         // Correo para identificación
-          totalPoints: 0,            // Puntos iniciales
-          currentRoutine: [],        // Rutina vacía
-          createdAt: new Date()      // Fecha de registro
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          role: "cliente",          // <--- Asignación estricta y automática
+          trainerId: null,          // <--- Queda en null hasta que un admin/entrenador lo asigne
+          createdAt: new Date().toISOString(),
+          streak: 0,
+          totalPoints: 0,
+          completedRoutines: 0,
+          activeVisuals: [],
+          badges: [],
+          unlockedRewards: []
         });
         console.log("Usuario registrado en Firestore:", user.email);
       }
