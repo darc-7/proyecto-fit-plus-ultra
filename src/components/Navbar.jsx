@@ -4,19 +4,25 @@ import { useContext } from "react";
 import { LoginButton } from "./LoginButton";
 
 export default function Navbar() {
-  const { user, logout, motivationalQuote } = useContext(AuthContext);
+  const { user, role, logout, motivationalQuote } = useContext(AuthContext);
 
   return (
     <nav className="flex items-center justify-between p-4 bg-gray-100">
       <div className="flex gap-4">
         <Link to="/" className="hover:text-blue-500" viewTransition>Inicio</Link>
-        <Link to="/exercises" className="hover:text-blue-500" viewTransition>Ejercicios</Link>
-        <Link to="/routine" className="hover:text-blue-500" viewTransition>Rutina</Link>
-        <Link to="/store" className="hover:text-blue-500" viewTransition>Tienda</Link>
         {user && (
           <Link to="/profile" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Perfil</Link>
         )}
-        {/* <Link to="/profile" className="hover:text-blue-500" viewTransition>Perfil</Link> */}
+        {user && role === "cliente" && (
+          <>
+            <Link to="/exercises" className="hover:text-blue-500" viewTransition>Ejercicios</Link>
+            <Link to="/routine" className="hover:text-blue-500" viewTransition>Rutina</Link>
+            <Link to="/store" className="hover:text-blue-500" viewTransition>Tienda</Link>
+          </>
+        )}
+        {user && role === "administrador" && (
+          <Link to="/admin/usuarios" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Usuarios</Link>
+        )}
       </div>
 
       <div className="flex items-center gap-4">
