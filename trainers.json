@@ -1,0 +1,18 @@
+{
+  "users": {
+    "TRAINER_001": {
+      "uid": "TRAINER_001",
+      "email": "entrenador@fitplusultra.com",
+      "displayName": "Prof. Alejandro",
+      "role": "entrenador",
+      "createdAt": "2026-05-30T12:00:00Z"
+    },
+    "TRAINER_002": {
+      "uid": "TRAINER_002",
+      "email": "entrenador2@fitplusultra.com",
+      "displayName": "Prof. María",
+      "role": "entrenador",
+      "createdAt": "2026-05-30T12:00:00Z"
+    }
+  }
+}

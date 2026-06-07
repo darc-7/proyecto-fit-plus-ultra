@@ -9,6 +9,8 @@ import Profile from "../pages/Profile";
 import Store from "../pages/Store";
 import ErrorPage from "../pages/ErrorPage";
 import ProtectedRoute from "../components/ProtectedRoute"; // Importa el componente
+//import Clients from "../pages/Clients";
+import AdminDashboard from "../pages/AdminDashboard";
 
 const router = createBrowserRouter([
   {
@@ -40,15 +42,14 @@ const router = createBrowserRouter([
         path: "profile",
         element: <ProtectedRoute allowedRoles={["cliente", "entrenador", "administrador"]}><Profile /></ProtectedRoute>
       },
-      /* {
+      /*{
         path: "clientes",
-        element: (
-          <ProtectedRoute allowedRoles={["entrenador"]}>
-            <ClientesCatalogView />
-          </ProtectedRoute>
-        )
+        element: <ProtectedRoute allowedRoles={["entrenador"]}><Clients /></ProtectedRoute>
+      },*/
+      {
+        path: "admin/usuarios",
+        element:<ProtectedRoute allowedRoles={["administrador"]}><AdminDashboard /></ProtectedRoute>
       },
-      */
     ],
   },
 ]);
