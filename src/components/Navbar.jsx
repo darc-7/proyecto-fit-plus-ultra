@@ -23,6 +23,9 @@ export default function Navbar() {
         {user && role === "administrador" && (
           <Link to="/admin/usuarios" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Usuarios</Link>
         )}
+        {user && role === "entrenador" && (
+          <Link to="/clients" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Clientes</Link>
+        )}
       </div>
 
       <div className="flex items-center gap-4">

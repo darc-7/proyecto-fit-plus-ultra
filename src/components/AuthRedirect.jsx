@@ -18,7 +18,7 @@ export default function AuthRedirect() {
           break;
         case "entrenador":
           // Redirige al catálogo para monitorear a los clientes asignados
-          navigate("/clientes", { replace: true });
+          navigate("/clients", { replace: true });
           break;
         case "cliente":
         default:

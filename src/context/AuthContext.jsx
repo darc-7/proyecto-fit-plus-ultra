@@ -3,6 +3,7 @@ import { auth, db } from "../services/firebase"; // Asegúrate de que las rutas 
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import quotes from "../data/quotes.json";
+import { usePresence } from "../hooks/usePresence"
 
 export const AuthContext = createContext();
 
@@ -12,6 +13,8 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [motivationalQuote, setMotivationalQuote] = useState("");
   const [userData, setUserData] = useState(null);
+  
+  usePresence(user?.uid);
 
   const logout = async () => {
     try {
