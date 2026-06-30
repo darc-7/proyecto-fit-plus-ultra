@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendEmailVerification, signOut } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../services/firebase";
 import { toast } from "react-hot-toast";
@@ -10,6 +10,7 @@ export function EmailAuthForm() {
   const [fullName, setFullName] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [verificationSent, setVerificationSent] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,23 +29,20 @@ export function EmailAuthForm() {
     }
 
     setLoading(true);
+    setVerificationSent(false);
 
     try {
       if (isRegistering) {
-        // Dentro de tu bloque if (isRegistering) en EmailAuthForm.jsx ...
-
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-
         await updateProfile(user, { displayName: fullName });
 
-        // Creación del perfil en Firestore asegurando el rol de "cliente"
         await setDoc(doc(db, "users", user.uid), {
           uid: user.uid,
           displayName: fullName,
           email: email,
-          role: "cliente",          // <--- Asignación estricta y automática
-          trainerId: null,          // <--- Queda en null hasta que un admin/entrenador lo asigne
+          role: "cliente",
+          trainerId: null,
           createdAt: new Date().toISOString(),
           streak: 0,
           totalPoints: 0,
@@ -54,9 +52,20 @@ export function EmailAuthForm() {
           unlockedRewards: []
         });
 
-        toast.success("¡Cuenta creada con éxito! Bienvenido a Fit Plus Ultra.");
+        await sendEmailVerification(user);
+        await signOut(auth);
+        setVerificationSent(true);
+        toast.success("¡Cuenta creada! Revisa tu correo para verificar tu dirección de email.");
       } else {
-        await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        if (!user.emailVerified) {
+          await signOut(auth);
+          toast.error("Debes verificar tu email antes de iniciar sesión. Revisa tu bandeja de entrada.");
+          return;
+        }
+
         toast.success("¡Inicio de sesión exitoso!");
       }
     } catch (error) {
@@ -76,19 +85,31 @@ export function EmailAuthForm() {
     }
   };
 
+  const handleResendVerification = async () => {
+    if (!email || !password) {
+      toast.error("Ingresa tu correo y contraseña para reenviar la verificación.");
+      return;
+    }
+    setLoading(true);
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      await sendEmailVerification(userCredential.user);
+      await signOut(auth);
+      toast.success("Correo de verificación reenviado. Revisa tu bandeja de entrada.");
+    } catch (error) {
+      toast.error("Error al reenviar: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-xl border border-gray-100 transition-all duration-300">
       <h2 className="text-2xl font-bold text-gray-800 text-center mb-6 transition-all">
         {isRegistering ? "Crear una Cuenta" : "Iniciar Sesión"}
       </h2>
 
-      {/* Cambiamos space-y-4 por flex-col para tener control total de los márgenes */}
       <form onSubmit={handleSubmit} className="flex flex-col">
-        
-        {/* Contenedor Animado: 
-          Si está registrando, se expande a max-h-[100px], se hace visible (opacity-100) y añade margen.
-          Si no, colapsa a 0, se vuelve invisible y quita el margen.
-        */}
         <div
           className={`transition-all duration-500 ease-in-out overflow-hidden ${
             isRegistering ? "max-h-[100px] opacity-100 mb-4" : "max-h-0 opacity-0 mb-0"
@@ -107,7 +128,6 @@ export function EmailAuthForm() {
           />
         </div>
 
-        {/* Campo de Correo */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Correo Electrónico
@@ -122,7 +142,6 @@ export function EmailAuthForm() {
           />
         </div>
 
-        {/* Campo de Contraseña */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Contraseña
@@ -144,14 +163,33 @@ export function EmailAuthForm() {
         >
           {loading ? "Procesando..." : isRegistering ? "Registrarse" : "Ingresar"}
         </button>
+
+        {!isRegistering && (
+          <button
+            type="button"
+            onClick={handleResendVerification}
+            disabled={loading}
+            className="text-xs text-blue-600 hover:underline mt-3 text-center w-full disabled:opacity-50"
+          >
+            ¿No recibiste el correo? Reenviar verificación
+          </button>
+        )}
       </form>
+
+      {verificationSent && (
+        <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800 text-center">
+          Te enviamos un correo de verificación a <strong>{email}</strong>.
+          Haz clic en el enlace y luego inicia sesión.
+        </div>
+      )}
 
       <div className="mt-4 text-center">
         <button
           type="button"
           onClick={() => {
             setIsRegistering(!isRegistering);
-            if (isRegistering) setFullName(""); // Limpia el nombre si se arrepiente y vuelve a Iniciar Sesión
+            if (isRegistering) setFullName("");
+            setVerificationSent(false);
           }}
           className="text-sm text-blue-600 hover:underline transition-all"
           disabled={loading}
