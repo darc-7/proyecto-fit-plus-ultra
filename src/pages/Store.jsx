@@ -13,21 +13,18 @@ export default function Store() {
     if (!user) return;
 
     const fetchData = async () => {
-      // Obtener recompensas desde Firestore
       const rewardSnap = await getDocs(collection(db, "rewards"));
       const rewardsData = rewardSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setRewards(rewardsData);
 
-      // Obtener datos del usuario
       const userRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userRef);
+      const data = userDoc.data();
 
-      // Si no existe la propiedad claimedPhysicalRewards, inicializarla
-      if (!userDoc.data().claimedPhysicalRewards) {
-        await updateDoc(userRef, { claimedPhysicalRewards: {} });
-      }
-
-      setUserData(userDoc.data());
+      setUserData({
+        ...data,
+        claimedPhysicalRewards: data.claimedPhysicalRewards || {}
+      });
     };
 
     fetchData();

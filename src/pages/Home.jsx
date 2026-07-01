@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 px-6 text-center p-2">
+      <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 px-6 text-center">
         <h1 className="text-4xl font-bold mb-4">Fit Plus Ultra</h1>
         <p className="text-lg max-w-2xl mx-auto">
           Convierte tu entrenamiento en una experiencia divertida y motivadora. 
@@ -34,18 +34,6 @@ export default function Home() {
         {!user && (
           <div className="mt-6 flex gap-4 justify-center">
             <GoogleSignIn />
-            {/* <Link
-              to="/auth"
-              className="bg-white text-blue-600 font-semibold px-6 py-2 rounded-lg shadow hover:bg-gray-100"
-            >
-              Iniciar Sesión
-            </Link>
-            <Link
-              to="/auth"
-              className="bg-yellow-400 text-gray-900 font-semibold px-6 py-2 rounded-lg shadow hover:bg-yellow-500"
-            >
-              Registrarse
-            </Link> */}
           </div>
         )}
       </div>
@@ -71,6 +59,15 @@ export default function Home() {
               Canjea premios físicos y personaliza tu experiencia visual.
             </p>
           </div>
+        </div>
+      )}
+
+      {/* Spinner mientras carga userData */}
+      {user && !userData && (
+        <div className="py-12 text-center">
+          <p className="text-gray-500 animate-pulse font-medium">
+            Cargando tu información...
+          </p>
         </div>
       )}
 

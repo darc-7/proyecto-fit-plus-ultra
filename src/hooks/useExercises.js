@@ -5,6 +5,7 @@ import { db } from "../services/firebase.js";
 export function useExercises() {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -15,8 +16,9 @@ export function useExercises() {
           ...doc.data(),
         }));
         setExercises(exercisesData);
-      } catch (error) {
-        console.error("Error fetching exercises:", error);
+      } catch (err) {
+        console.error("Error fetching exercises:", err);
+        setError(err);
       } finally {
         setLoading(false);
       }
@@ -25,5 +27,5 @@ export function useExercises() {
     fetchExercises();
   }, []);
 
-  return { exercises, loading };
+  return { exercises, loading, error };
 }

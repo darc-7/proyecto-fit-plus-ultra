@@ -2,60 +2,60 @@ import { useState, useEffect } from "react";
 import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useAuth } from "../context/AuthContext";
+import { toast } from "react-hot-toast";
 
-export default function ExerciseCard({ exercise }) {
+export default function ExerciseCard({ exercise, selected: controlledSelected, disabled = false }) {
   const { user } = useAuth();
-  const [isSelected, setIsSelected] = useState(false);
+  const isControlled = controlledSelected !== undefined;
+  const [internalSelected, setInternalSelected] = useState(false);
+  const isSelected = isControlled ? controlledSelected : internalSelected;
 
   useEffect(() => {
+    if (isControlled || !user) return;
     const checkIfSelected = async () => {
-      if (!user) return;
-      
       const userRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userRef);
       const currentRoutine = userDoc.data()?.currentRoutine || [];
-      setIsSelected(currentRoutine.includes(exercise.id));
+      setInternalSelected(currentRoutine.includes(exercise.id));
     };
-
     checkIfSelected();
-  }, [user, exercise.id]);
+  }, [user, exercise.id, isControlled]);
 
   const toggleSelection = async () => {
-    if (!user) {
-      console.error("Usuario no autenticado");
-      return;
-    }
+    if (!user || disabled) return;
 
     const userRef = doc(db, "users", user.uid);
     try {
       if (!isSelected) {
         const userDoc = await getDoc(userRef);
         const currentRoutine = userDoc.data()?.currentRoutine || [];
-        if (currentRoutine.length >= 8) {
-          alert("¡Máximo 8 ejercicios por rutina!");
+        if (currentRoutine.length > 7) {
+          toast.error("¡Máximo 7 ejercicios por rutina!");
           return;
         }
       }
 
       await updateDoc(userRef, {
-        currentRoutine: isSelected 
-          ? arrayRemove(exercise.id) 
+        currentRoutine: isSelected
+          ? arrayRemove(exercise.id)
           : arrayUnion(exercise.id)
       });
 
-      setIsSelected(!isSelected);
+      if (!isControlled) setInternalSelected(!isSelected);
     } catch (error) {
       console.error("Error al actualizar la rutina:", error);
     }
   };
 
   return (
-    <div 
-      onClick={toggleSelection}
+    <div
+      onClick={disabled ? undefined : toggleSelection}
       className={`p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 border-2 ${
-        isSelected 
-          ? "border-blue-500 bg-blue-50" // Estilo cuando está seleccionado
-          : "border-transparent bg-white hover:bg-gray-50" // Estilo normal
+        disabled ? "opacity-80 cursor-not-allowed" : ""
+      } ${
+        isSelected
+          ? "border-blue-500 bg-blue-50"
+          : "border-transparent bg-white hover:bg-gray-50"
       }`}
     >
       <h3 className="text-xl font-bold text-gray-800">{exercise.name}</h3>
@@ -76,7 +76,6 @@ export default function ExerciseCard({ exercise }) {
         </span>
       </div>
       <p className="mt-3 text-gray-600">{exercise.description || 'Sin descripción'}</p>
-      {/* Indicador visual adicional */}
       <div className={`mt-2 h-1 rounded-full ${
         isSelected ? 'bg-blue-500' : 'bg-transparent'
       }`}></div>

@@ -11,31 +11,35 @@ import { useTimer } from "../context/TimerContext";
 const getTodayDate = () => new Date().toLocaleDateString("sv-SE");
 
 const Routine = () => {
-  const { user } = useAuth();
+  const { user, userData } = useAuth();
   const [exercises, setExercises] = useState([]);
   const [routineIds, setRoutineIds] = useState([]);
   const [routineFinished, setRoutineFinished] = useState(false);
+  const [confirmingStop, setConfirmingStop] = useState(false);
   const { elapsed, running, start, pause, reset } = useTimer();
 
   useEffect(() => {
     if (!user) return;
-
-    const unsubscribe = onSnapshot(collection(db, "exercises"), async (snapshot) => {
+    const unsubscribe = onSnapshot(collection(db, "exercises"), (snapshot) => {
       const allExercises = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setExercises(allExercises);
-
-      const userDoc = await getDoc(doc(db, "users", user.uid));
-      const { currentRoutine = [], lastRoutineCompleted = "" } = userDoc.data();
-      const today = getTodayDate();
-
-      if (lastRoutineCompleted === today) setRoutineFinished(true);
-      else setRoutineIds(currentRoutine);
     });
-
     return () => unsubscribe();
   }, [user]);
 
-  //Temporizador y finalizacion de rutina
+  useEffect(() => {
+    if (!userData) return;
+    const { currentRoutine = [], lastRoutineCompleted = "" } = userData;
+    const today = getTodayDate();
+    if (lastRoutineCompleted === today) {
+      setRoutineFinished(true);
+    } else {
+      setRoutineIds(currentRoutine);
+      setRoutineFinished(false);
+      setConfirmingStop(false);
+    }
+  }, [userData]);
+
   const handleStop = async () => {
     if (!user || routineIds.length === 0) return;
 
@@ -49,30 +53,36 @@ const Routine = () => {
       return;
     }
 
-    const confirm = window.confirm("¿Deseas finalizar la rutina de hoy?");
-    if (!confirm) return;
-    
+    if (exercises.length === 0) {
+      toast.error("Los ejercicios aún no han cargado. Intenta de nuevo en un momento.");
+      return;
+    }
+
+    if (!confirmingStop) {
+      setConfirmingStop(true);
+      return;
+    }
+
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
-    const userData = userSnap.data();
-    //Actualizar puntos
+    const data = userSnap.data();
     const today = getTodayDate();
     const completedExercises = exercises.filter(e => routineIds.includes(e.id));
     const points = completedExercises.reduce((sum, e) => sum + (e.points || 0), 0);
-    
-    const updatedStreakData = upStreak(userData, today);
-    const updatedTotalPoints = (userData.totalPoints || 0) + points;
-    const updatedCompleted = (userData.completedRoutines || 0) + 1;
-    
+
+    const updatedStreakData = upStreak(data, today);
+    const updatedTotalPoints = (data.totalPoints || 0) + points;
+    const updatedCompleted = (data.completedRoutines || 0) + 1;
+
     const newBadges = checkAchieve({
-      ...userData,
+      ...data,
       totalPoints: updatedTotalPoints,
       streak: updatedStreakData.streak,
       completedRoutines: updatedCompleted,
-      unlockedRewards: userData.unlockedRewards || [],
-      badges: userData.badges || []
+      unlockedRewards: data.unlockedRewards || [],
+      badges: data.badges || []
     });
-    //Actualizar racha y logros
+
     await updateDoc(userRef, {
       ...updatedStreakData,
       currentRoutine: [],
@@ -83,8 +93,16 @@ const Routine = () => {
 
     setRoutineIds([]);
     setRoutineFinished(true);
+    setConfirmingStop(false);
     reset();
+
     toast.success("¡Rutina completada con éxito!");
+
+    if (newBadges.length > 0) {
+      newBadges.forEach(badge => {
+        toast.success(`🏅 Nuevo logro: ${badge}!`, { duration: 6000 });
+      });
+    }
   };
 
   const formattedTime = `${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, "0")}`;
@@ -93,8 +111,8 @@ const Routine = () => {
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold text-center mb-4">Tu rutina</h1>
-      
-      {routineExercises.length == 0 && !routineFinished && (
+
+      {routineExercises.length === 0 && !routineFinished && (
         <p className="text-center text-gray-600 block mt-10">
           Parece que no has armado tu rutina. Comienza a agregar ejercicios desde la sección de Ejercicios.
         </p>
@@ -105,7 +123,6 @@ const Routine = () => {
           ✅ ¡Felicidades! Has completado tu rutina del día.
         </p>
       )}
-
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {routineExercises.map(e => (
@@ -123,12 +140,31 @@ const Routine = () => {
             >
               {running ? "Pausar" : "Reanudar"}
             </button>
-            <button
-              onClick={handleStop}
-              className="px-4 py-2 bg-red-500 text-white rounded-md"
-            >
-              Detener
-            </button>
+
+            {!confirmingStop ? (
+              <button
+                onClick={handleStop}
+                className="px-4 py-2 bg-red-500 text-white rounded-md"
+              >
+                Detener
+              </button>
+            ) : (
+              <div className="flex gap-2 items-center">
+                <span className="text-sm text-gray-600">¿Finalizar?</span>
+                <button
+                  onClick={handleStop}
+                  className="px-3 py-2 bg-red-600 text-white rounded-md text-sm font-bold"
+                >
+                  Sí, finalizar
+                </button>
+                <button
+                  onClick={() => setConfirmingStop(false)}
+                  className="px-3 py-2 bg-gray-300 text-gray-700 rounded-md text-sm"
+                >
+                  Cancelar
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

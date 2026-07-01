@@ -10,38 +10,24 @@ export function upStreak(userData, today) {
   let newProtectors = protectors;
   let newProtected = [...protectedDates];
 
-  // Día siguiente → +1 racha
   if (dayDiff === 1) {
     newStreak++;
-  }
-
-  // Mismo día → nada
-  else if (dayDiff === 0) {
+  } else if (dayDiff === 0) {
     return {
       lastRoutineCompleted: today,
     };
-  }
-
-  // Faltó 1 día → usar protector
-  else if (dayDiff === 2 && protectors > 0) {
+  } else if (dayDiff === 2 && protectors > 0) {
     newProtectors--;
     newProtected.push(today);
-    newStreak++; // mantener racha
-  }
-
-  // Faltó más de 1 día → reiniciar racha
-  else {
+    newStreak++;
+  } else {
     newStreak = 1;
     newProtected = [];
   }
 
-  // Día 6 → descanso automático mañana
   if (newStreak === 6) {
-    newProtected.push(sumarDias(today, 1)); // proteger mañana automáticamente
+    newProtected.push(sumarDias(today, 1));
   }
-
-  // Día 5 → permitir descanso manual (puedes mostrar UI aparte)
-  // Si implementas UI, añade la lógica aquí también
 
   return {
     lastRoutineCompleted: today,
@@ -71,14 +57,20 @@ export function verifyStreak(userData) {
 }
 
 function getDayDiff(date1, date2) {
-  const d1 = new Date(date1);
-  const d2 = new Date(date2);
-  const diff = (d2 - d1) / (1000 * 60 * 60 * 24);
-  return Math.floor(diff);
+  const [y1, m1, d1] = date1.split("-").map(Number);
+  const [y2, m2, d2] = date2.split("-").map(Number);
+  const d1Obj = new Date(y1, m1 - 1, d1);
+  const d2Obj = new Date(y2, m2 - 1, d2);
+  const diff = (d2Obj - d1Obj) / (1000 * 60 * 60 * 24);
+  return Math.round(diff);
 }
 
 function sumarDias(fecha, dias) {
-  const d = new Date(fecha);
-  d.setDate(d.getDate() + dias);
-  return d.toLocaleDateString("sv-SE")
+  const [y, m, d] = fecha.split("-").map(Number);
+  const fechaObj = new Date(y, m - 1, d);
+  fechaObj.setDate(fechaObj.getDate() + dias);
+  const año = fechaObj.getFullYear();
+  const mes = String(fechaObj.getMonth() + 1).padStart(2, "0");
+  const dia = String(fechaObj.getDate()).padStart(2, "0");
+  return `${año}-${mes}-${dia}`;
 }
