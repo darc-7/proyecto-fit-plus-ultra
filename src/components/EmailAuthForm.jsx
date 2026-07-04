@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendEmailVerification, signOut } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db } from "../services/firebase";
 import { toast } from "react-hot-toast";
 
@@ -61,9 +61,15 @@ export function EmailAuthForm() {
         const user = userCredential.user;
 
         if (!user.emailVerified) {
-          await signOut(auth);
-          toast.error("Debes verificar tu email antes de iniciar sesión. Revisa tu bandeja de entrada.");
-          return;
+          const userRef = doc(db, "users", user.uid);
+          const userSnap = await getDoc(userRef);
+          const userRole = userSnap.data()?.role;
+
+          if (userRole === "cliente") {
+            await signOut(auth);
+            toast.error("Debes verificar tu email antes de iniciar sesión. Revisa tu bandeja de entrada.");
+            return;
+          }
         }
 
         toast.success("¡Inicio de sesión exitoso!");
@@ -74,9 +80,33 @@ export function EmailAuthForm() {
         case "auth/invalid-credential":
           toast.error("Credenciales incorrectas. Verifica tu correo o contraseña.");
           break;
+
         case "auth/email-already-in-use":
-          toast.error("Este correo ya está registrado en la plataforma.");
+          try {
+            const cred = await signInWithEmailAndPassword(auth, email, password);
+            const user = cred.user;
+
+            await setDoc(doc(db, "users", user.uid), {
+              uid: user.uid,
+              displayName: fullName,
+              email: email,
+              role: "cliente",
+              trainerId: null,
+              createdAt: new Date().toISOString(),
+              streak: 0,
+              totalPoints: 0,
+              completedRoutines: 0,
+              activeVisuals: [],
+              badges: [],
+              unlockedRewards: []
+            });
+
+            toast.success("¡Cuenta recuperada! Bienvenido de nuevo a Fit Plus Ultra.");
+          } catch {
+            toast.error("Este correo ya está registrado con otra contraseña. Intenta con otro correo o inicia sesión.");
+          }
           break;
+
         default:
           toast.error("Ocurrió un error inesperado. Inténtalo de nuevo.");
       }

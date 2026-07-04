@@ -85,10 +85,19 @@ export default function AdminDashboard() {
   }
 
   const handleDelete = async (user) => {
-    if (!window.confirm(`¿Estás seguro de eliminar a ${user.displayName}?`)) return;
+    if (!window.confirm(
+      `¿Estás seguro de eliminar a ${user.displayName}?\n\nSe borrará su perfil de la base de datos y su cuenta de acceso.`
+    )) return;
+
     try {
+      // 1. Borrar el documento de Firestore
+      //    → Esto dispara automáticamente la Cloud Function
+      //      que elimina la cuenta de Firebase Auth
       await deleteDoc(doc(db, "users", user.id));
-      toast.success("Usuario eliminado de la base de datos");
+      toast.success(
+        `${user.displayName || "Usuario"} eliminado. La cuenta de acceso se ha dado de baja automáticamente.`,
+        { duration: 5000 }
+      );
     } catch (error) {
       toast.error("Error al eliminar: " + error.message);
     }
