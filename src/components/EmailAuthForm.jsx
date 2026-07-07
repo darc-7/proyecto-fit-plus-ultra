@@ -3,8 +3,10 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfi
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db } from "../services/firebase";
 import { toast } from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
 
 export function EmailAuthForm() {
+  const { setTransientAuth, setSuppressAuth } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
@@ -14,7 +16,7 @@ export function EmailAuthForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (isRegistering && !fullName) {
       toast.error("Por favor, ingresa tu nombre completo.");
       return;
@@ -31,10 +33,14 @@ export function EmailAuthForm() {
     setLoading(true);
     setVerificationSent(false);
 
+    setTransientAuth(true);
+    setSuppressAuth(true);
+
     try {
       if (isRegistering) {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+
         await updateProfile(user, { displayName: fullName });
 
         await setDoc(doc(db, "users", user.uid), {
@@ -76,41 +82,63 @@ export function EmailAuthForm() {
       }
     } catch (error) {
       console.error("Error en autenticación:", error.code);
+
+      if (error.code === "auth/email-already-in-use") {
+        setTransientAuth(false);
+        setSuppressAuth(false);
+
+        try {
+          setTransientAuth(true);
+          setSuppressAuth(true);
+
+          const cred = await signInWithEmailAndPassword(auth, email, password);
+          const user = cred.user;
+
+          if (!user.emailVerified) {
+            await signOut(auth);
+            toast.error(
+              "Este correo está pendiente de verificación. Revisa tu bandeja de entrada y haz clic en el enlace.",
+              { duration: 6000 }
+            );
+            return;
+          }
+
+          await setDoc(doc(db, "users", user.uid), {
+            uid: user.uid,
+            displayName: fullName,
+            email: email,
+            role: "cliente",
+            trainerId: null,
+            createdAt: new Date().toISOString(),
+            streak: 0,
+            totalPoints: 0,
+            completedRoutines: 0,
+            activeVisuals: [],
+            badges: [],
+            unlockedRewards: []
+          });
+
+          toast.success("¡Cuenta recuperada! Bienvenido de nuevo a Fit Plus Ultra.");
+        } catch {
+          try { await signOut(auth); } catch {}
+          toast.error("Este correo ya está registrado con otra contraseña. Intenta con otro correo o inicia sesión.");
+        } finally {
+          setTransientAuth(false);
+          setSuppressAuth(false);
+        }
+        return;
+      }
+
       switch (error.code) {
         case "auth/invalid-credential":
           toast.error("Credenciales incorrectas. Verifica tu correo o contraseña.");
           break;
-
-        case "auth/email-already-in-use":
-          try {
-            const cred = await signInWithEmailAndPassword(auth, email, password);
-            const user = cred.user;
-
-            await setDoc(doc(db, "users", user.uid), {
-              uid: user.uid,
-              displayName: fullName,
-              email: email,
-              role: "cliente",
-              trainerId: null,
-              createdAt: new Date().toISOString(),
-              streak: 0,
-              totalPoints: 0,
-              completedRoutines: 0,
-              activeVisuals: [],
-              badges: [],
-              unlockedRewards: []
-            });
-
-            toast.success("¡Cuenta recuperada! Bienvenido de nuevo a Fit Plus Ultra.");
-          } catch {
-            toast.error("Este correo ya está registrado con otra contraseña. Intenta con otro correo o inicia sesión.");
-          }
-          break;
-
         default:
           toast.error("Ocurrió un error inesperado. Inténtalo de nuevo.");
       }
     } finally {
+      setTransientAuth(false);
+      setSuppressAuth(false);
       setLoading(false);
     }
   };
@@ -121,6 +149,9 @@ export function EmailAuthForm() {
       return;
     }
     setLoading(true);
+    setTransientAuth(true);
+    setSuppressAuth(true);
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(userCredential.user);
@@ -129,6 +160,8 @@ export function EmailAuthForm() {
     } catch (error) {
       toast.error("Error al reenviar: " + error.message);
     } finally {
+      setTransientAuth(false);
+      setSuppressAuth(false);
       setLoading(false);
     }
   };
