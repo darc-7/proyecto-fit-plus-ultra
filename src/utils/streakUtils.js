@@ -4,6 +4,15 @@ export function upStreak(userData, today) {
   const protectedDates = userData.protectedDates || [];
   const streak = userData.streak || 0;
 
+  if (!lastDate) {
+    return {
+      lastRoutineCompleted: today,
+      streak: 1,
+      streakProtectors: protectors,
+      protectedDates,
+    };
+  }
+
   const dayDiff = getDayDiff(lastDate, today);
 
   let newStreak = streak;

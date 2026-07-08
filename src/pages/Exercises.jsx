@@ -9,6 +9,10 @@ export default function ExercisesPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedLevel, setSelectedLevel] = useState('all');
 
+  const selectedCount = !loading && exercises.length > 0
+    ? (userData?.currentRoutine || []).filter(id => exercises.some(e => e.id === id)).length
+    : (userData?.currentRoutine || []).length;
+
   const filteredExercises = exercises.filter((exercise) => {
     const matchesCategory = 
       selectedCategory === 'all' || exercise.category?.toLowerCase() === selectedCategory.toLowerCase();
@@ -29,9 +33,14 @@ export default function ExercisesPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-4">Catálogo de Ejercicios</h1>
+      <h1 className="text-3xl font-bold text-center mb-2">Catálogo de Ejercicios</h1>
 
-      <div className="flex flex-wrap items-center gap-3 mb-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-6 text-sm text-blue-800 text-center">
+        💡 Haz clic en las tarjetas para agregar o quitar ejercicios de tu rutina.
+        Selecciona hasta <strong>7 ejercicios</strong> y luego ve a <strong>Rutina</strong> para entrenar.
+      </div>
+
+      <div className="flex flex-wrap items-center gap-3 mb-4">
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
@@ -62,6 +71,10 @@ export default function ExercisesPage() {
             Limpiar filtros ✕
           </button>
         )}
+
+        <span className="ml-auto text-sm text-gray-500 font-medium">
+          {selectedCount}/7 ejercicios seleccionados
+        </span>
       </div>
 
       {filteredExercises.length === 0 && !loading ? (

@@ -1,12 +1,13 @@
 import { useLocation } from "react-router-dom";
 import { useTimer } from "../context/TimerContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function FloatingTimer() {
+  const { user } = useAuth();
   const { elapsed, active } = useTimer();
   const location = useLocation();
 
-  // No mostrar si estamos en la página de rutina
-  if (!active || location.pathname === "/routine") return null;
+  if (!user || !active || location.pathname === "/routine") return null;
 
   const format = (s) => {
     const m = Math.floor(s / 60).toString().padStart(2, "0");
