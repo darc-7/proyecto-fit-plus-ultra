@@ -107,12 +107,7 @@ const Routine = () => {
       return;
     }
 
-    await updateDoc(doc(db, "users", user.uid), {
-      currentRoutine: [],
-    });
-
     reset();
-    setRoutineIds([]);
     setRoutineFinished(false);
     setConfirmingStop(false);
     setCurrentStep(0);

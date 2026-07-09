@@ -10,11 +10,9 @@ export default function Navbar() {
     <nav className="flex items-center justify-between p-4 bg-gray-100">
       <div className="flex gap-4">
         <Link to="/" className="hover:text-blue-500" viewTransition>Inicio</Link>
-        {user && (
-          <Link to="/profile" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Perfil</Link>
-        )}
         {user && role === "cliente" && (
           <>
+            <Link to="/profile" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Perfil</Link>
             <Link to="/exercises" className="hover:text-blue-500" viewTransition>Ejercicios</Link>
             <Link to="/routine" className="hover:text-blue-500" viewTransition>Rutina</Link>
             <Link to="/store" className="hover:text-blue-500" viewTransition>Tienda</Link>
