@@ -76,9 +76,19 @@ const Routine = () => {
 
   const routineExercises = exercises.filter(e => routineIds.includes(e.id));
   const totalPoints = routineExercises.reduce((sum, e) => sum + (e.points || 0), 0);
+  const minimumTime = 45 * 60;
+  const hasTrainer = !!userData?.trainerId;
 
   const skipRest = () => {
     setResting(false);
+  };
+
+  const handleStart = () => {
+    if (routineExercises.length < 3) {
+      toast.error("Selecciona al menos 3 ejercicios para comenzar la rutina.");
+      return;
+    }
+    start();
   };
 
   const completeCurrentExercise = () => {
@@ -121,7 +131,37 @@ const Routine = () => {
   const completeRoutine = async () => {
     if (!user || routineExercises.length === 0 || !active) return;
 
+    if (!hasTrainer && elapsed < minimumTime) {
+      toast("Aún no ha pasado el tiempo mínimo necesario. Entrena al menos 45 minutos para obtener tus recompensas.", {
+        icon: "⏳",
+        duration: 5000
+      });
+      return;
+    }
+
     const userRef = doc(db, "users", user.uid);
+
+    if (hasTrainer) {
+      await updateDoc(userRef, {
+        pendingVerification: {
+          routineIds,
+          exerciseNames: routineExercises.map(e => e.name),
+          completedSteps: completedSteps.length,
+          totalPoints,
+          elapsed,
+          timestamp: new Date().toISOString(),
+        }
+      });
+      reset();
+      setConfirmingStop(false);
+      setCurrentStep(0);
+      setCompletedSteps([]);
+      setResting(false);
+      localStorage.removeItem(`routine-progress-${user?.uid}`);
+      toast.success("Rutina enviada para verificación. Espera la confirmación de tu entrenador.");
+      return;
+    }
+
     const userSnap = await getDoc(userRef);
     const data = userSnap.data();
     const today = getTodayDate();
@@ -175,7 +215,7 @@ const Routine = () => {
     <div className="p-4 max-w-2xl mx-auto">
       <h1 className="text-3xl font-bold text-center mb-2">Tu rutina</h1>
 
-      {routineExercises.length === 0 && !routineFinished && (
+      {routineExercises.length === 0 && !routineFinished && !userData?.pendingVerification && (
         <div className="text-center mt-10 space-y-4">
           <p className="text-gray-600">
             Parece que no has armado tu rutina. Comienza a agregar ejercicios desde la sección de Ejercicios.
@@ -191,7 +231,16 @@ const Routine = () => {
         </div>
       )}
 
-      {routineExercises.length > 0 && !routineFinished && (
+      {userData?.pendingVerification && !routineFinished && (
+        <div className="text-center py-10 space-y-4">
+          <p className="text-lg font-semibold text-yellow-600">⏳ En espera de verificación</p>
+          <p className="text-gray-600">
+            Tu entrenador está revisando tu rutina. Recibirás los puntos una vez que sea aprobada.
+          </p>
+        </div>
+      )}
+
+      {routineExercises.length > 0 && !routineFinished && !userData?.pendingVerification && (
         <>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-sm text-blue-800">
             💡 Completa cada ejercicio uno por uno. El cronómetro registra tu tiempo total.
@@ -270,7 +319,7 @@ const Routine = () => {
                     : 'bg-green-600 hover:bg-green-700 text-white'
                 }`}
               >
-                🏆 Completar rutina ({totalPoints} pts)
+                {hasTrainer ? '📤 Enviar para verificación' : `🏆 Completar rutina (${totalPoints} pts)`}
               </button>
             </div>
           )}
@@ -280,7 +329,7 @@ const Routine = () => {
             <div className="flex gap-4">
               {!active ? (
                 <button
-                  onClick={start}
+                  onClick={handleStart}
                   className="px-4 py-2 bg-blue-500 text-white rounded-md"
                 >
                   ▶ Iniciar

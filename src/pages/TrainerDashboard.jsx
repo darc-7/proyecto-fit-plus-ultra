@@ -1,20 +1,24 @@
 import { useState } from "react";
 import { flushSync } from "react-dom";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, arrayUnion, deleteField } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useTrainerClients } from "../hooks/useTrainerClients";
 import { useAuth } from "../context/AuthContext";
+import { upStreak } from "../utils/streakUtils";
+import { checkAchieve } from "../utils/achievements";
 import { toast } from "react-hot-toast";
 import ClientDetailModal from "../components/ClientDetailModal";
 
 export default function TrainerDashboard() {
   const { user } = useAuth();
   const { clients, loading } = useTrainerClients(user?.uid);
+  const [verifyingId, setVerifyingId] = useState(null);
 
   const [selectedClient, setSelectedClient] = useState(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
 
   const MAX_CLIENTS = 5;
+  const pendingClients = clients.filter(c => c.pendingVerification);
 
   const handleOpenDetail = (client) => {
     setSelectedClient(client);
@@ -23,9 +27,7 @@ export default function TrainerDashboard() {
       return;
     }
     document.startViewTransition(() => {
-      flushSync(() => {
-        setShowDetailModal(true);
-      });
+      flushSync(() => { setShowDetailModal(true); });
     });
   };
 
@@ -36,10 +38,7 @@ export default function TrainerDashboard() {
       return;
     }
     document.startViewTransition(() => {
-      flushSync(() => {
-        setShowDetailModal(false);
-        setSelectedClient(null);
-      });
+      flushSync(() => { setShowDetailModal(false); setSelectedClient(null); });
     });
   };
 
@@ -51,6 +50,70 @@ export default function TrainerDashboard() {
     } catch (error) {
       toast.error("Error al desvincular: " + error.message);
     }
+  };
+
+  const handleApprove = async (client) => {
+    setVerifyingId(client.id);
+    try {
+      const today = new Date().toLocaleDateString("sv-SE");
+      const pv = client.pendingVerification;
+      const userRef = doc(db, "users", client.id);
+      const userSnap = await getDoc(userRef);
+      const data = userSnap.data();
+
+      const points = pv.totalPoints;
+      const updatedStreakData = upStreak(data, today);
+      const updatedTotalPoints = (data.totalPoints || 0) + points;
+      const updatedCompleted = (data.completedRoutines || 0) + 1;
+
+      const newBadges = checkAchieve({
+        ...data,
+        totalPoints: updatedTotalPoints,
+        streak: updatedStreakData.streak,
+        completedRoutines: updatedCompleted,
+        unlockedRewards: data.unlockedRewards || [],
+        badges: data.badges || []
+      });
+
+      await updateDoc(userRef, {
+        lastRoutineCompleted: today,
+        pendingVerification: deleteField(),
+        currentRoutine: [],
+        ...(updatedStreakData.streak !== undefined && { streak: updatedStreakData.streak }),
+        ...(updatedStreakData.streakProtectors !== undefined && { streakProtectors: updatedStreakData.streakProtectors }),
+        ...(updatedStreakData.protectedDates !== undefined && { protectedDates: updatedStreakData.protectedDates }),
+        totalPoints: updatedTotalPoints,
+        completedRoutines: updatedCompleted,
+        ...(newBadges.length > 0 && { badges: arrayUnion(...newBadges) })
+      });
+
+      toast.success(`Rutina de ${client.displayName || "cliente"} aprobada. ${points} puntos otorgados.`);
+    } catch (error) {
+      toast.error("Error al aprobar: " + error.message);
+    } finally {
+      setVerifyingId(null);
+    }
+  };
+
+  const handleReject = async (client) => {
+    if (!window.confirm(`¿Rechazar la solicitud de ${client.displayName || "este cliente"}? Los ejercicios se conservan para que pueda reintentar.`)) return;
+    setVerifyingId(client.id);
+    try {
+      await updateDoc(doc(db, "users", client.id), {
+        pendingVerification: deleteField(),
+      });
+      toast(`Solicitud de ${client.displayName || "cliente"} rechazada.`, { icon: "ℹ️" });
+    } catch (error) {
+      toast.error("Error al rechazar: " + error.message);
+    } finally {
+      setVerifyingId(null);
+    }
+  };
+
+  const formatTime = (s) => {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${String(sec).padStart(2, "0")}`;
   };
 
   if (loading) {
@@ -73,6 +136,57 @@ export default function TrainerDashboard() {
             Cupos utilizados: {clients.length} / {MAX_CLIENTS}
           </div>
         </div>
+
+        {pendingClients.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
+              ⏳ Verificaciones Pendientes ({pendingClients.length})
+            </h2>
+            <div className="space-y-3">
+              {pendingClients.map(client => {
+                const pv = client.pendingVerification;
+                return (
+                  <div key={client.id} className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                    <div className="flex-1">
+                      <p className="font-semibold text-gray-900">{client.displayName || "Sin nombre"}</p>
+                      <p className="text-sm text-gray-600">
+                        {pv.completedSteps} ejercicios · {pv.totalPoints} pts
+                        {pv.elapsed ? ` · Tiempo: ${formatTime(pv.elapsed)}` : ""}
+                        · {new Date(pv.timestamp).toLocaleString()}
+                      </p>
+                      {pv.exerciseNames && (
+                        <details className="mt-1">
+                          <summary className="text-xs text-blue-600 cursor-pointer hover:underline">
+                            Ver ejercicios
+                          </summary>
+                          <ul className="mt-1 text-sm text-gray-700 list-disc list-inside">
+                            {pv.exerciseNames.map((name, i) => <li key={i}>{name}</li>)}
+                          </ul>
+                        </details>
+                      )}
+                    </div>
+                    <div className="flex gap-2 shrink-0">
+                      <button
+                        onClick={() => handleApprove(client)}
+                        disabled={verifyingId === client.id}
+                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 text-sm font-medium"
+                      >
+                        {verifyingId === client.id ? "..." : "✓ Aprobar"}
+                      </button>
+                      <button
+                        onClick={() => handleReject(client)}
+                        disabled={verifyingId === client.id}
+                        className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:opacity-50 text-sm font-medium"
+                      >
+                        ✕ Rechazar
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="overflow-x-auto">
@@ -101,9 +215,9 @@ export default function TrainerDashboard() {
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide
-                          ${client.status === 'online' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}
+                          ${client.pendingVerification ? 'bg-yellow-100 text-yellow-700' : client.status === 'online' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}
                         >
-                          {client.status || 'offline'}
+                          {client.pendingVerification ? 'pendiente' : (client.status || 'offline')}
                         </span>
                       </td>
                       <td className="px-6 py-4 font-medium text-orange-500">
