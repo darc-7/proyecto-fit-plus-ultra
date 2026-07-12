@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { collection, doc, getDoc, onSnapshot, updateDoc, arrayUnion } from "firebase/firestore";
+import { collection, doc, getDoc, onSnapshot, updateDoc, arrayUnion, addDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import ExerciseCard from "../components/ExerciseCard";
 import { upStreak } from "../utils/streakUtils";
@@ -191,14 +191,22 @@ const Routine = () => {
 
     const userRef = doc(db, "users", user.uid);
 
+    // ── Cliente con entrenador: enviar para verificación ──
     if (hasTrainer) {
       await updateDoc(userRef, {
         pendingVerification: {
-          routineIds,
-          exerciseNames: routineExercises.map(e => e.name),
-          completedSteps: completedSteps.length,
+          exercises: routineExercises.map(e => ({
+            id: e.id,
+            name: e.name,
+            category: e.category,
+            level: e.level,
+            points: e.points || 0,
+            sets: routineConfig[e.id]?.sets || 3,
+            reps: routineConfig[e.id]?.reps || 10,
+          })),
           totalPoints,
           elapsed,
+          completedSteps: completedSteps.length,
           timestamp: new Date().toISOString(),
         }
       });
@@ -215,6 +223,7 @@ const Routine = () => {
       return;
     }
 
+    // ── Cliente sin entrenador: completar directamente ──
     const userSnap = await getDoc(userRef);
     const data = userSnap.data();
     const today = getTodayDate();
@@ -242,6 +251,27 @@ const Routine = () => {
       totalPoints: updatedTotalPoints,
       completedRoutines: updatedCompleted,
       ...(newBadges.length > 0 && { badges: arrayUnion(...newBadges) })
+    });
+
+    // ── Guardar historial ──
+    const historyExercises = routineExercises.map(e => ({
+      id: e.id,
+      name: e.name,
+      category: e.category,
+      level: e.level,
+      points: e.points || 0,
+      sets: routineConfig[e.id]?.sets || 3,
+      reps: routineConfig[e.id]?.reps || 10,
+    }));
+
+    await addDoc(collection(db, "users", user.uid, "workoutHistory"), {
+      date: today,
+      exercises: historyExercises,
+      totalPoints,
+      elapsed,
+      completedSteps: completedSteps.length || routineExercises.length,
+      approvedByTrainer: null,
+      createdAt: new Date().toISOString(),
     });
 
     reset();
@@ -377,7 +407,7 @@ const Routine = () => {
             />
           </div>
 
-          {/* ── Ejercicio actual (sin sidebar en el flujo) ── */}
+          {/* ── Ejercicio actual ── */}
           <div>
             {currentStep < routineExercises.length && (
               <div className="mb-4">
@@ -413,7 +443,7 @@ const Routine = () => {
             )}
           </div>
 
-          {/* ── Sidebar fija en escritorio (fuera del flujo) ── */}
+          {/* ── Sidebar fija en escritorio ── */}
           <div className="hidden md:block fixed right-4 top-24 w-52 z-10">
             <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 shadow-md">
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Tu rutina</p>

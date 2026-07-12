@@ -11,6 +11,7 @@ import ErrorPage from "../pages/ErrorPage";
 import ProtectedRoute from "../components/ProtectedRoute"; // Importa el componente
 import TrainerDashboard from "../pages/TrainerDashboard";
 import AdminDashboard from "../pages/AdminDashboard";
+import History from "../pages/History"; // Importa la página de historial
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,10 @@ const router = createBrowserRouter([
         path: "clients",
         element: <ProtectedRoute allowedRoles={["entrenador"]}><TrainerDashboard /></ProtectedRoute>
       },
-      
+      {
+        path: "history",
+        element: <ProtectedRoute allowedRoles={["cliente"]}><History /></ProtectedRoute>,
+      },
       {
         path: "admin/usuarios",
         element:<ProtectedRoute allowedRoles={["administrador"]}><AdminDashboard /></ProtectedRoute>

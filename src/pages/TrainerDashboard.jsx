@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { flushSync } from "react-dom";
-import { doc, getDoc, updateDoc, arrayUnion, deleteField } from "firebase/firestore";
+import { doc, getDoc, updateDoc, arrayUnion, deleteField, addDoc, collection } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useTrainerClients } from "../hooks/useTrainerClients";
 import { useAuth } from "../context/AuthContext";
@@ -86,7 +86,16 @@ export default function TrainerDashboard() {
         completedRoutines: updatedCompleted,
         ...(newBadges.length > 0 && { badges: arrayUnion(...newBadges) })
       });
-
+      // ── Guardar historial del cliente ──
+      await addDoc(collection(db, "users", client.id, "workoutHistory"), {
+        date: today,
+        exercises: pv.exercises || [],
+        totalPoints: points,
+        elapsed: pv.elapsed || 0,
+        completedSteps: pv.completedSteps || 0,
+        approvedByTrainer: true,
+        createdAt: new Date().toISOString(),
+      });
       toast.success(`Rutina de ${client.displayName || "cliente"} aprobada. ${points} puntos otorgados.`);
     } catch (error) {
       toast.error("Error al aprobar: " + error.message);

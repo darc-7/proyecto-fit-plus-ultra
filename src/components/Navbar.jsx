@@ -15,6 +15,7 @@ export default function Navbar() {
             <Link to="/profile" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Perfil</Link>
             <Link to="/exercises" className="hover:text-blue-500" viewTransition>Ejercicios</Link>
             <Link to="/routine" className="hover:text-blue-500" viewTransition>Rutina</Link>
+            <Link to="/history" className="hover:text-blue-500" viewTransition>Historial</Link>
             <Link to="/store" className="hover:text-blue-500" viewTransition>Tienda</Link>
           </>
         )}
