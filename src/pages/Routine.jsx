@@ -25,6 +25,8 @@ const Routine = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState([]);
   const [resting, setResting] = useState(false);
+  const [routineConfig, setRoutineConfig] = useState({});
+  const [configDone, setConfigDone] = useState(false);
   const { elapsed, active, start, reset } = useTimer();
 
   useEffect(() => {
@@ -43,6 +45,7 @@ const Routine = () => {
     if (lastRoutineCompleted === today) {
       setRoutineFinished(true);
       localStorage.removeItem(`routine-progress-${user?.uid}`);
+      localStorage.removeItem(`routine-config-${user?.uid}`);
       return;
     }
 
@@ -50,15 +53,24 @@ const Routine = () => {
     setRoutineFinished(false);
     setConfirmingStop(false);
 
-    const saved = JSON.parse(localStorage.getItem(`routine-progress-${user?.uid}`) || "{}");
-    if (saved.date === today && arraysEqual(saved.routineIds, currentRoutine)) {
-      setCurrentStep(saved.currentStep || 0);
-      setCompletedSteps(saved.completedSteps || []);
-      setResting(saved.resting || false);
+    const savedProgress = JSON.parse(localStorage.getItem(`routine-progress-${user?.uid}`) || "{}");
+    if (savedProgress.date === today && arraysEqual(savedProgress.routineIds, currentRoutine)) {
+      setCurrentStep(savedProgress.currentStep || 0);
+      setCompletedSteps(savedProgress.completedSteps || []);
+      setResting(savedProgress.resting || false);
     } else {
       setCurrentStep(0);
       setCompletedSteps([]);
       setResting(false);
+    }
+
+    const savedConfig = JSON.parse(localStorage.getItem(`routine-config-${user?.uid}`) || "{}");
+    if (savedConfig.date === today && arraysEqual(savedConfig.routineIds, currentRoutine)) {
+      setRoutineConfig(savedConfig.config || {});
+      setConfigDone(savedConfig.configDone || false);
+    } else {
+      setRoutineConfig({});
+      setConfigDone(false);
     }
   }, [userData, user?.uid]);
 
@@ -74,13 +86,44 @@ const Routine = () => {
     }
   }, [currentStep, completedSteps, resting, routineIds, user?.uid]);
 
+  useEffect(() => {
+    if (routineIds.length > 0) {
+      localStorage.setItem(`routine-config-${user?.uid}`, JSON.stringify({
+        date: getTodayDate(),
+        routineIds,
+        config: routineConfig,
+        configDone,
+      }));
+    }
+  }, [routineConfig, configDone, routineIds, user?.uid]);
+
   const routineExercises = exercises.filter(e => routineIds.includes(e.id));
   const totalPoints = routineExercises.reduce((sum, e) => sum + (e.points || 0), 0);
   const minimumTime = 45 * 60;
   const hasTrainer = !!userData?.trainerId;
 
-  const skipRest = () => {
-    setResting(false);
+  const getDefaults = () => {
+    const defaults = {};
+    routineExercises.forEach(e => {
+      defaults[e.id] = { sets: 3, reps: 10 };
+    });
+    return defaults;
+  };
+
+  const handleSetConfig = (id, field, value) => {
+    setRoutineConfig(prev => ({
+      ...prev,
+      [id]: { ...prev[id], [field]: value },
+    }));
+  };
+
+  const handleConfirmConfig = () => {
+    if (routineExercises.length < 3) {
+      toast.error("Selecciona al menos 3 ejercicios para comenzar la rutina.");
+      return;
+    }
+    if (!window.confirm("¿Estás seguro con la configuración de series y repeticiones?")) return;
+    setConfigDone(true);
   };
 
   const handleStart = () => {
@@ -89,6 +132,10 @@ const Routine = () => {
       return;
     }
     start();
+  };
+
+  const skipRest = () => {
+    setResting(false);
   };
 
   const completeCurrentExercise = () => {
@@ -123,7 +170,10 @@ const Routine = () => {
     setCurrentStep(0);
     setCompletedSteps([]);
     setResting(false);
+    setConfigDone(false);
+    setRoutineConfig({});
     localStorage.removeItem(`routine-progress-${user?.uid}`);
+    localStorage.removeItem(`routine-config-${user?.uid}`);
 
     toast("Rutina detenida. No se han otorgado puntos.", { icon: "⏹️" });
   };
@@ -157,7 +207,10 @@ const Routine = () => {
       setCurrentStep(0);
       setCompletedSteps([]);
       setResting(false);
+      setConfigDone(false);
+      setRoutineConfig({});
       localStorage.removeItem(`routine-progress-${user?.uid}`);
+      localStorage.removeItem(`routine-config-${user?.uid}`);
       toast.success("Rutina enviada para verificación. Espera la confirmación de tu entrenador.");
       return;
     }
@@ -198,7 +251,10 @@ const Routine = () => {
     setCurrentStep(0);
     setCompletedSteps([]);
     setResting(false);
+    setConfigDone(false);
+    setRoutineConfig({});
     localStorage.removeItem(`routine-progress-${user?.uid}`);
+    localStorage.removeItem(`routine-config-${user?.uid}`);
 
     toast.success(`¡Rutina completada! Ganaste ${points} puntos.`);
 
@@ -240,7 +296,65 @@ const Routine = () => {
         </div>
       )}
 
-      {routineExercises.length > 0 && !routineFinished && !userData?.pendingVerification && (
+      {routineExercises.length > 0 && !routineFinished && !userData?.pendingVerification && !configDone && (
+        <div className="transition-all duration-500">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-sm text-blue-800">
+            💡 Configura las series y repeticiones de cada ejercicio antes de comenzar.
+          </div>
+
+          <div className="space-y-4 mb-6">
+            {routineExercises.map((exercise) => {
+              const cfg = routineConfig[exercise.id] || getDefaults()[exercise.id] || { sets: 3, reps: 10 };
+              return (
+                <div key={exercise.id} className="bg-white rounded-lg shadow-md border border-gray-200 p-4">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-2xl">
+                      {exercise.category === 'Pecho' ? '💪' : exercise.category === 'Piernas' ? '🦵' : '🏋️'}
+                    </span>
+                    <div>
+                      <h3 className="font-bold text-gray-800">{exercise.name}</h3>
+                      <p className="text-sm text-gray-500">{exercise.description}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4 items-center">
+                    <div className="flex items-center gap-2">
+                      <label className="text-sm font-medium text-gray-700">Series:</label>
+                      <input
+                        type="number"
+                        min="1"
+                        max="5"
+                        value={cfg.sets}
+                        onChange={(e) => handleSetConfig(exercise.id, 'sets', Math.min(5, Math.max(1, Number(e.target.value))))}
+                        className="w-16 px-2 py-1 border border-gray-300 rounded-md text-center"
+                      />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <label className="text-sm font-medium text-gray-700">Reps:</label>
+                      <input
+                        type="number"
+                        min="1"
+                        max="20"
+                        value={cfg.reps}
+                        onChange={(e) => handleSetConfig(exercise.id, 'reps', Math.min(20, Math.max(1, Number(e.target.value))))}
+                        className="w-16 px-2 py-1 border border-gray-300 rounded-md text-center"
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <button
+            onClick={handleConfirmConfig}
+            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+          >
+            Continuar
+          </button>
+        </div>
+      )}
+
+      {routineExercises.length > 0 && !routineFinished && !userData?.pendingVerification && configDone && (
         <>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-sm text-blue-800">
             💡 Completa cada ejercicio uno por uno. El cronómetro registra tu tiempo total.
@@ -263,34 +377,68 @@ const Routine = () => {
             />
           </div>
 
-          {currentStep < routineExercises.length && (
-            <div className="mb-4">
-              <ExerciseCard
-                key={routineExercises[currentStep].id}
-                exercise={routineExercises[currentStep]}
-                selected
-                disabled
-              />
+          {/* ── Ejercicio actual (sin sidebar en el flujo) ── */}
+          <div>
+            {currentStep < routineExercises.length && (
+              <div className="mb-4">
+                <ExerciseCard
+                  key={routineExercises[currentStep].id}
+                  exercise={routineExercises[currentStep]}
+                  selected
+                  disabled
+                />
 
-              {!active && (
-                <p className="text-sm text-gray-400 text-center mt-2">
-                  Presiona ▶ Iniciar para habilitar los botones de ejercicio
-                </p>
-              )}
+                <div className="mt-2 text-center text-sm font-medium text-gray-600">
+                  {(routineConfig[routineExercises[currentStep].id]?.sets || 3)} × {(routineConfig[routineExercises[currentStep].id]?.reps || 10)} repeticiones
+                </div>
 
-              <button
-                onClick={completeCurrentExercise}
-                disabled={resting || !active}
-                className={`mt-3 w-full py-3 font-bold rounded-lg transition-colors ${
-                  resting || !active
-                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                    : 'bg-green-500 hover:bg-green-600 text-white'
-                }`}
-              >
-                ✅ Completar ejercicio
-              </button>
+                {!active && (
+                  <p className="text-sm text-gray-400 text-center mt-2">
+                    Presiona ▶ Iniciar para habilitar los botones de ejercicio
+                  </p>
+                )}
+
+                <button
+                  onClick={completeCurrentExercise}
+                  disabled={resting || !active}
+                  className={`mt-3 w-full py-3 font-bold rounded-lg transition-colors ${
+                    resting || !active
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-green-500 hover:bg-green-600 text-white'
+                  }`}
+                >
+                  ✅ Completar ejercicio
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* ── Sidebar fija en escritorio (fuera del flujo) ── */}
+          <div className="hidden md:block fixed right-4 top-24 w-52 z-10">
+            <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 shadow-md">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Tu rutina</p>
+              <ul className="space-y-1 max-h-[calc(100vh-12rem)] overflow-y-auto">
+                {routineExercises.map((e, i) => {
+                  const cfg = routineConfig[e.id] || { sets: 3, reps: 10 };
+                  const isCurrent = i === currentStep;
+                  const isDone = completedSteps.includes(i);
+                  return (
+                    <li
+                      key={e.id}
+                      className={`text-sm py-1 px-2 rounded ${
+                        isCurrent ? 'bg-blue-100 font-semibold text-blue-800' :
+                        isDone ? 'text-green-600 line-through' :
+                        'text-gray-600'
+                      }`}
+                    >
+                      <span className="block truncate">{isDone ? '✓' : isCurrent ? '▶' : '○'} {e.name}</span>
+                      <span className="text-xs opacity-75">{cfg.sets}×{cfg.reps}</span>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
-          )}
+          </div>
 
           {resting && (
             <div className="text-center py-4 bg-gray-50 rounded-lg mb-4">
