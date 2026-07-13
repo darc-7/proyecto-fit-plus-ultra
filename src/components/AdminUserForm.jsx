@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../services/firebase";
+import { signOut } from "firebase/auth";
+import { auth, secondaryAuth, db } from "../services/firebase";
 import { toast } from "react-hot-toast";
 
 export default function AdminUserForm({ onClose, userToEdit = null }) {
-  // Si userToEdit existe, precargamos sus datos
   const [email, setEmail] = useState(userToEdit?.email || "");
   const [displayName, setFullName] = useState(userToEdit?.displayName || "");
   const [role, setRole] = useState(userToEdit?.role || "cliente");
@@ -20,7 +20,6 @@ export default function AdminUserForm({ onClose, userToEdit = null }) {
 
     try {
       if (isEditing) {
-        // --- MODO EDICIÓN ---
         const userRef = doc(db, "users", userToEdit.id);
         await updateDoc(userRef, {
           displayName,
@@ -28,8 +27,7 @@ export default function AdminUserForm({ onClose, userToEdit = null }) {
         });
         toast.success("Usuario actualizado correctamente.");
       } else {
-        // --- MODO CREACIÓN ---
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(secondaryAuth, email, password);
         const newUser = userCredential.user;
         await updateProfile(newUser, { displayName });
 
@@ -42,9 +40,14 @@ export default function AdminUserForm({ onClose, userToEdit = null }) {
           createdAt: new Date().toISOString(),
           streak: 0,
           totalPoints: 0,
-          completedRoutines: 0
+          completedRoutines: 0,
         });
-        await signOut(auth);
+
+        if (role === "cliente") {
+          await sendEmailVerification(newUser);
+        }
+
+        await signOut(secondaryAuth);
         toast.success("Usuario creado exitosamente.");
       }
       onClose();
@@ -61,7 +64,7 @@ export default function AdminUserForm({ onClose, userToEdit = null }) {
         <h2 className="text-2xl font-bold text-gray-800 mb-4">
           {isEditing ? "Editar Usuario" : "Nuevo Usuario"}
         </h2>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Nombre Completo</label>

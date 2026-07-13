@@ -5,6 +5,9 @@ const TimerContext = createContext();
 
 const getStorageKey = (uid) => `routine-timer-${uid || "anonymous"}`;
 
+// Máximo 3 horas para una sesión; más que eso es una sesión abandonada
+const MAX_SESSION_SECONDS = 3 * 60 * 60;
+
 export const TimerProvider = ({ children }) => {
   const { user } = useAuth();
   const [running, setRunning] = useState(false);
@@ -25,6 +28,16 @@ export const TimerProvider = ({ children }) => {
     if (saved.running && saved.startTime) {
       const now = Date.now();
       const elapsedSeconds = Math.floor((now - saved.startTime) / 1000);
+
+      // Auto-reset si la sesión lleva más de 3 horas (abandonada)
+      if (elapsedSeconds > MAX_SESSION_SECONDS) {
+        localStorage.removeItem(getStorageKey(uid));
+        setElapsed(0);
+        setRunning(false);
+        setActive(false);
+        return;
+      }
+
       setElapsed(elapsedSeconds);
       setRunning(true);
       setActive(true);

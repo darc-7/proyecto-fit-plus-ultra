@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth, db } from "../services/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import quotes from "../data/quotes.json";
 import { usePresence } from "../hooks/usePresence";
+import { verifyStreak } from "../utils/streakUtils";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext();
 
@@ -75,6 +77,24 @@ export function AuthProvider({ children }) {
 
     return () => unsubscribeUser();
   }, [user, suppressAuth]);
+
+  // ── Efecto 3: verificar racha perdida UNA VEZ al iniciar sesión ──
+  useEffect(() => {
+    if (!user || !userData) return;
+
+    const today = new Date().toLocaleDateString("sv-SE");
+    const key = `streakToastShown_${user.uid}`;
+    if (localStorage.getItem(key) === today) return;
+
+    // Guard sincrónico: bloquea cualquier segunda ejecución concurrente
+    localStorage.setItem(key, today);
+
+    const reset = verifyStreak(userData);
+    if (reset) {
+      updateDoc(doc(db, "users", user.uid), reset).catch(() => {});
+      toast.error("¡Has perdido tu racha diaria! 😢", { duration: 8000 });
+    }
+  }, [user, userData]);
 
   return (
     <AuthContext.Provider value={{ user, userData, role, loading, logout, motivationalQuote, setTransientAuth, setSuppressAuth }}>

@@ -90,12 +90,11 @@ export default function Home() {
               <div className="p-6 bg-white rounded-xl shadow-md text-center">
                 <h3 className="text-xl font-semibold">Días registrado</h3>
                 <p className="text-3xl font-bold text-green-600">
-                  {userData.createdAt?.toDate
-                    ? Math.floor(
-                        (new Date() - userData.createdAt.toDate()) /
-                          (1000 * 60 * 60 * 24)
-                      )
-                    : 0}
+                  {(() => {
+                    const raw = userData.createdAt;
+                    const date = raw?.toDate ? raw.toDate() : raw ? new Date(raw) : null;
+                    return date ? Math.floor((new Date() - date) / (1000 * 60 * 60 * 24)) : 0;
+                  })()}
                 </p>
               </div>
             </div>

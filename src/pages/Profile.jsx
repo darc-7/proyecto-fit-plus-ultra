@@ -1,9 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { doc, updateDoc, onSnapshot, getDoc, getDocs, collection } from "firebase/firestore";
+import { doc, updateDoc, onSnapshot, getDocs, collection } from "firebase/firestore";
 import { db } from "../services/firebase";
-import { verifyStreak } from "../utils/streakUtils";
-import toast from "react-hot-toast";
 
 export default function Profile() {
   const { user } = useAuth();
@@ -13,32 +11,6 @@ export default function Profile() {
   const [visualRewards, setVisualRewards] = useState([]);
   const [allRewards, setAllRewards] = useState([]);
 
-  // Efecto 1: verificar racha UNA SOLA VEZ al montar
-  useEffect(() => {
-    if (!user) return;
-
-    const checkStreakOnce = async () => {
-      const userRef = doc(db, "users", user.uid);
-      const snap = await getDoc(userRef);
-      const data = snap.data();
-      if (!data) return;
-
-      const today = new Date().toLocaleDateString("sv-SE");
-      const key = `streakToastShown_${user.uid}`;
-      if (localStorage.getItem(key) === today) return;
-
-      const reset = verifyStreak(data);
-      if (reset) {
-        await updateDoc(userRef, reset).catch(() => {});
-        toast.error("¡Has perdido tu racha diaria! 😢", { duration: 8000 });
-        localStorage.setItem(key, today);
-      }
-    };
-
-    checkStreakOnce();
-  }, [user]);
-
-// Efecto 2: listener en tiempo real (SIN verifyStreak)
   useEffect(() => {
     if (!user) return;
 
@@ -52,7 +24,6 @@ export default function Profile() {
     return () => unsubscribe();
   }, [user]);
 
-  // Efecto 3: fetch de rewards UNA SOLA VEZ al montar
   useEffect(() => {
     const fetchAllRewards = async () => {
       const snap = await getDocs(collection(db, "rewards"));
@@ -61,7 +32,6 @@ export default function Profile() {
     fetchAllRewards();
   }, []);
 
-  // Efecto 4: filtro local cuando cambian unlockedRewards (SIN lecturas Firestore)
   useEffect(() => {
     const vis = allRewards.filter(
       (r) => r.type === "visual" && userData?.unlockedRewards?.includes(r.id)
@@ -91,9 +61,11 @@ export default function Profile() {
   const marcoActivo = userData.activeVisuals?.includes("reward1");
   const avatarExclusivo = userData.activeVisuals?.includes("reward3");
 
-  const creationDate = userData.createdAt?.toDate?.()
+  const creationDate = userData.createdAt?.toDate
     ? userData.createdAt.toDate().toLocaleDateString("es-VE")
-    : new Date(userData.createdAt).toLocaleDateString("es-VE");
+    : userData.createdAt
+      ? new Date(userData.createdAt).toLocaleDateString("es-VE")
+      : "—";
 
   const imgSrc = avatarExclusivo
     ? "/guerrero_fit.png"
