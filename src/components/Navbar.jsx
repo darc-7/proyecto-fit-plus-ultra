@@ -4,7 +4,8 @@ import { useContext } from "react";
 import { LoginButton } from "./LoginButton";
 
 export default function Navbar() {
-  const { user, role, logout, motivationalQuote } = useContext(AuthContext);
+  const { user, role, userData, logout, motivationalQuote } = useContext(AuthContext);
+  const hasTrainer = userData?.trainerId;
 
   return (
     <nav className="flex items-center justify-between p-4 bg-gray-100">
@@ -13,8 +14,12 @@ export default function Navbar() {
         {user && role === "cliente" && (
           <>
             <Link to="/profile" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Perfil</Link>
-            <Link to="/exercises" className="hover:text-blue-500" viewTransition>Ejercicios</Link>
-            <Link to="/routine" className="hover:text-blue-500" viewTransition>Rutina</Link>
+            {hasTrainer && (
+              <>
+                <Link to="/exercises" className="hover:text-blue-500" viewTransition>Ejercicios</Link>
+                <Link to="/routine" className="hover:text-blue-500" viewTransition>Rutina</Link>
+              </>
+            )}
             <Link to="/history" className="hover:text-blue-500" viewTransition>Historial</Link>
             <Link to="/store" className="hover:text-blue-500" viewTransition>Tienda</Link>
           </>
@@ -42,7 +47,7 @@ export default function Navbar() {
             Cerrar Sesión
           </button>
         ): (
-          <LoginButton /> // 👈 Aquí inyectamos el botón genérico de login si no hay sesión
+          <LoginButton />
         )}
         
       </div>

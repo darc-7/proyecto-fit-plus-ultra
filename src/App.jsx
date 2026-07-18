@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 export default function App() {
   return (
     <div className="app min-h-screen flex flex-col">
-      <Toaster position="top-right" />
+      <Toaster position="bottom-center" />
       <FloatingTimer />
       <main className="flex-1">
         <Navbar />

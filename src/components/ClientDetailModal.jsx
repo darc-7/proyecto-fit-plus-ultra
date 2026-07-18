@@ -28,14 +28,6 @@ export default function ClientDetailModal({ client, onClose }) {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-xs text-gray-500 uppercase font-semibold tracking-wide mb-1">Estado</p>
-              <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide
-                ${client.status === 'online' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}
-              >
-                {client.status || 'offline'}
-              </span>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-4">
               <p className="text-xs text-gray-500 uppercase font-semibold tracking-wide mb-1">Racha Actual</p>
               <p className="text-xl font-bold text-orange-500">{client.streak || 0} días 🔥</p>
             </div>
@@ -46,6 +38,16 @@ export default function ClientDetailModal({ client, onClose }) {
             <div className="bg-gray-50 rounded-lg p-4">
               <p className="text-xs text-gray-500 uppercase font-semibold tracking-wide mb-1">Rutinas Completadas</p>
               <p className="text-xl font-bold text-green-600">{client.completedRoutines || 0}</p>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-4">
+              <p className="text-xs text-gray-500 uppercase font-semibold tracking-wide mb-1">Días Registrado</p>
+              <p className="text-xl font-bold text-blue-600">
+                {(() => {
+                  const raw = client.createdAt;
+                  const date = raw?.toDate ? raw.toDate() : raw ? new Date(raw) : null;
+                  return date ? Math.floor((new Date() - date) / (1000 * 60 * 60 * 24)) : 0;
+                })()}
+              </p>
             </div>
           </div>
 

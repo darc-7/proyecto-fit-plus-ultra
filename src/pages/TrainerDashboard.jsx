@@ -1,24 +1,30 @@
 import { useState } from "react";
 import { flushSync } from "react-dom";
-import { doc, getDoc, updateDoc, arrayUnion, deleteField, addDoc, collection } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useTrainerClients } from "../hooks/useTrainerClients";
 import { useAuth } from "../context/AuthContext";
-import { upStreak } from "../utils/streakUtils";
-import { checkAchieve } from "../utils/achievements";
 import { toast } from "react-hot-toast";
 import ClientDetailModal from "../components/ClientDetailModal";
+import ReviewRoutineModal from "../components/ReviewRoutineModal";
+import VerifyExecutionModal from "../components/VerifyExecutionModal";
 
 export default function TrainerDashboard() {
   const { user } = useAuth();
   const { clients, loading } = useTrainerClients(user?.uid);
-  const [verifyingId, setVerifyingId] = useState(null);
-
   const [selectedClient, setSelectedClient] = useState(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
+  const [reviewClient, setReviewClient] = useState(null);
+  const [verifyClient, setVerifyClient] = useState(null);
 
   const MAX_CLIENTS = 5;
-  const pendingClients = clients.filter(c => c.pendingVerification);
+
+  const pendingConsistency = clients.filter(
+    (c) => c.pendingVerification?.stage === "consistency" && c.pendingVerification?.status === "pending"
+  );
+  const pendingExecution = clients.filter(
+    (c) => c.pendingVerification?.stage === "execution"
+  );
 
   const handleOpenDetail = (client) => {
     setSelectedClient(client);
@@ -52,79 +58,6 @@ export default function TrainerDashboard() {
     }
   };
 
-  const handleApprove = async (client) => {
-    setVerifyingId(client.id);
-    try {
-      const today = new Date().toLocaleDateString("sv-SE");
-      const pv = client.pendingVerification;
-      const userRef = doc(db, "users", client.id);
-      const userSnap = await getDoc(userRef);
-      const data = userSnap.data();
-
-      const points = pv.totalPoints;
-      const updatedStreakData = upStreak(data, today);
-      const updatedTotalPoints = (data.totalPoints || 0) + points;
-      const updatedCompleted = (data.completedRoutines || 0) + 1;
-
-      const newBadges = checkAchieve({
-        ...data,
-        totalPoints: updatedTotalPoints,
-        streak: updatedStreakData.streak,
-        completedRoutines: updatedCompleted,
-        unlockedRewards: data.unlockedRewards || [],
-        badges: data.badges || []
-      });
-
-      await updateDoc(userRef, {
-        lastRoutineCompleted: today,
-        pendingVerification: deleteField(),
-        currentRoutine: [],
-        ...(updatedStreakData.streak !== undefined && { streak: updatedStreakData.streak }),
-        ...(updatedStreakData.streakProtectors !== undefined && { streakProtectors: updatedStreakData.streakProtectors }),
-        ...(updatedStreakData.protectedDates !== undefined && { protectedDates: updatedStreakData.protectedDates }),
-        totalPoints: updatedTotalPoints,
-        completedRoutines: updatedCompleted,
-        ...(newBadges.length > 0 && { badges: arrayUnion(...newBadges) })
-      });
-      // ── Guardar historial del cliente ──
-      await addDoc(collection(db, "users", client.id, "workoutHistory"), {
-        date: today,
-        exercises: pv.exercises || [],
-        totalPoints: points,
-        elapsed: pv.elapsed || 0,
-        completedSteps: pv.completedSteps || 0,
-        approvedByTrainer: true,
-        createdAt: new Date().toISOString(),
-      });
-      toast.success(`Rutina de ${client.displayName || "cliente"} aprobada. ${points} puntos otorgados.`);
-    } catch (error) {
-      toast.error("Error al aprobar: " + error.message);
-    } finally {
-      setVerifyingId(null);
-    }
-  };
-
-  const handleReject = async (client) => {
-    if (!window.confirm(`¿Rechazar la solicitud de ${client.displayName || "este cliente"}? Los ejercicios se conservan para que pueda reintentar.`)) return;
-    setVerifyingId(client.id);
-    try {
-      await updateDoc(doc(db, "users", client.id), {
-        pendingVerification: deleteField(),
-      });
-      toast(`Solicitud de ${client.displayName || "cliente"} rechazada.`, { icon: "ℹ️" });
-    } catch (error) {
-      toast.error("Error al rechazar: " + error.message);
-    } finally {
-      setVerifyingId(null);
-    }
-  };
-
-  const formatTime = (s) => {
-    const m = Math.floor(s / 60);
-    const sec = s % 60;
-    return `${m}:${String(sec).padStart(2, "0")}`;
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -146,50 +79,33 @@ export default function TrainerDashboard() {
           </div>
         </div>
 
-        {pendingClients.length > 0 && (
+        {/* ── Primera verificación: consistencia ── */}
+        {pendingConsistency.length > 0 && (
           <div className="mb-8">
             <h2 className="text-xl font-bold text-gray-800 mb-4">
-              ⏳ Verificaciones Pendientes ({pendingClients.length})
+              📋 Revisiones de Consistencia ({pendingConsistency.length})
             </h2>
+            <p className="text-sm text-gray-500 mb-3">
+              Revisa los ejercicios y la configuración de series y repeticiones antes de aprobar.
+            </p>
             <div className="space-y-3">
-              {pendingClients.map(client => {
+              {pendingConsistency.map(client => {
                 const pv = client.pendingVerification;
                 return (
                   <div key={client.id} className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
                     <div className="flex-1">
                       <p className="font-semibold text-gray-900">{client.displayName || "Sin nombre"}</p>
                       <p className="text-sm text-gray-600">
-                        {pv.completedSteps} ejercicios · {pv.totalPoints} pts
-                        {pv.elapsed ? ` · Tiempo: ${formatTime(pv.elapsed)}` : ""}
+                        {pv.exercises?.length || 0} ejercicios · {pv.totalPoints} pts
                         · {new Date(pv.timestamp).toLocaleString()}
                       </p>
-                      {pv.exerciseNames && (
-                        <details className="mt-1">
-                          <summary className="text-xs text-blue-600 cursor-pointer hover:underline">
-                            Ver ejercicios
-                          </summary>
-                          <ul className="mt-1 text-sm text-gray-700 list-disc list-inside">
-                            {pv.exerciseNames.map((name, i) => <li key={i}>{name}</li>)}
-                          </ul>
-                        </details>
-                      )}
                     </div>
-                    <div className="flex gap-2 shrink-0">
-                      <button
-                        onClick={() => handleApprove(client)}
-                        disabled={verifyingId === client.id}
-                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 text-sm font-medium"
-                      >
-                        {verifyingId === client.id ? "..." : "✓ Aprobar"}
-                      </button>
-                      <button
-                        onClick={() => handleReject(client)}
-                        disabled={verifyingId === client.id}
-                        className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:opacity-50 text-sm font-medium"
-                      >
-                        ✕ Rechazar
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => setReviewClient(client)}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium shrink-0"
+                    >
+                      Revisar rutina
+                    </button>
                   </div>
                 );
               })}
@@ -197,6 +113,42 @@ export default function TrainerDashboard() {
           </div>
         )}
 
+        {/* ── Segunda verificación: ejecución ── */}
+        {pendingExecution.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
+              ✅ Verificaciones de Ejecución ({pendingExecution.length})
+            </h2>
+            <p className="text-sm text-gray-500 mb-3">
+              El cliente completó la rutina. Verifica los datos y aprueba para otorgar puntos.
+            </p>
+            <div className="space-y-3">
+              {pendingExecution.map(client => {
+                const pv = client.pendingVerification;
+                const totalPts = (pv.totalPoints || 0) + (pv.bonusPoints || 0);
+                return (
+                  <div key={client.id} className="bg-green-50 border border-green-200 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                    <div className="flex-1">
+                      <p className="font-semibold text-gray-900">{client.displayName || "Sin nombre"}</p>
+                      <p className="text-sm text-gray-600">
+                        {pv.completedSteps || pv.exercises?.length}/{pv.exercises?.length} ejercicios · {totalPts} pts totales
+                        · {new Date(pv.timestamp).toLocaleString()}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => setVerifyClient(client)}
+                      className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium shrink-0"
+                    >
+                      Verificar ejecución
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ── Tabla de clientes ── */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm text-gray-600">
@@ -216,38 +168,53 @@ export default function TrainerDashboard() {
                     </td>
                   </tr>
                 ) : (
-                  clients.map((client) => (
-                    <tr key={client.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4">
-                        <div className="font-bold text-gray-900">{client.displayName || "Sin nombre asignado"}</div>
-                        <div className="text-gray-500">{client.email}</div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide
-                          ${client.pendingVerification ? 'bg-yellow-100 text-yellow-700' : client.status === 'online' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}
-                        >
-                          {client.pendingVerification ? 'pendiente' : (client.status || 'offline')}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 font-medium text-orange-500">
-                        {client.streak || 0} días 🔥
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <button
-                          onClick={() => handleOpenDetail(client)}
-                          className="text-blue-600 hover:text-blue-800 font-medium mr-4 transition-colors"
-                        >
-                          Ver Detalles
-                        </button>
-                        <button
-                          onClick={() => handleUnlink(client)}
-                          className="text-red-500 hover:text-red-700 font-medium transition-colors"
-                        >
-                          Desvincular
-                        </button>
-                      </td>
-                    </tr>
-                  ))
+                  clients.map((client) => {
+                    const pvStage = client.pendingVerification?.stage;
+                    const pvStatus = client.pendingVerification?.status;
+                    let statusLabel = "—";
+                    let statusClass = "bg-gray-100 text-gray-500";
+                    if (pvStage === "consistency" && pvStatus === "pending") {
+                      statusLabel = "consistencia pendiente";
+                      statusClass = "bg-yellow-100 text-yellow-700";
+                    } else if (pvStage === "consistency" && pvStatus === "approved") {
+                      statusLabel = "aprobado para entrenar";
+                      statusClass = "bg-blue-100 text-blue-700";
+                    } else if (pvStage === "execution") {
+                      statusLabel = "ejecución pendiente";
+                      statusClass = "bg-green-100 text-green-700";
+                    }
+
+                    return (
+                      <tr key={client.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4">
+                          <div className="font-bold text-gray-900">{client.displayName || "Sin nombre asignado"}</div>
+                          <div className="text-gray-500">{client.email}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${statusClass}`}>
+                            {statusLabel}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 font-medium text-orange-500">
+                          {client.streak || 0} días 🔥
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <button
+                            onClick={() => handleOpenDetail(client)}
+                            className="text-blue-600 hover:text-blue-800 font-medium mr-4 transition-colors"
+                          >
+                            Ver Detalles
+                          </button>
+                          <button
+                            onClick={() => handleUnlink(client)}
+                            className="text-red-500 hover:text-red-700 font-medium transition-colors"
+                          >
+                            Desvincular
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })
                 )}
               </tbody>
             </table>
@@ -258,6 +225,20 @@ export default function TrainerDashboard() {
           <ClientDetailModal
             client={selectedClient}
             onClose={handleCloseDetail}
+          />
+        )}
+
+        {reviewClient && (
+          <ReviewRoutineModal
+            client={reviewClient}
+            onClose={() => setReviewClient(null)}
+          />
+        )}
+
+        {verifyClient && (
+          <VerifyExecutionModal
+            client={verifyClient}
+            onClose={() => setVerifyClient(null)}
           />
         )}
       </div>

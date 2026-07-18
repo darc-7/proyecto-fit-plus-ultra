@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { collection, doc, getDoc, onSnapshot, updateDoc, arrayUnion, addDoc } from "firebase/firestore";
+import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import ExerciseCard from "../components/ExerciseCard";
-import { upStreak } from "../utils/streakUtils";
-import { checkAchieve } from "../utils/achievements";
 import toast from "react-hot-toast";
 import { useTimer } from "../context/TimerContext";
 
@@ -26,8 +24,19 @@ const Routine = () => {
   const [completedSteps, setCompletedSteps] = useState([]);
   const [resting, setResting] = useState(false);
   const [routineConfig, setRoutineConfig] = useState({});
-  const [configDone, setConfigDone] = useState(false);
+  const [sentForExecution, setSentForExecution] = useState(false);
   const { elapsed, active, start, reset } = useTimer();
+
+  const hasTrainer = !!userData?.trainerId;
+  const pv = userData?.pendingVerification;
+  const pvStage = pv?.stage;
+  const pvStatus = pv?.status;
+
+  const isConsistencyPending = pvStage === "consistency" && pvStatus === "pending";
+  const isConsistencyApproved = pvStage === "consistency" && pvStatus === "approved";
+  const isExecutionPending = pvStage === "execution";
+
+  const routineExercises = exercises.filter(e => routineIds.includes(e.id));
 
   useEffect(() => {
     if (!user) return;
@@ -42,7 +51,7 @@ const Routine = () => {
     if (!userData) return;
     const { currentRoutine = [], lastRoutineCompleted = "" } = userData;
     const today = getTodayDate();
-    if (lastRoutineCompleted === today) {
+    if (lastRoutineCompleted === today && !pv) {
       setRoutineFinished(true);
       localStorage.removeItem(`routine-progress-${user?.uid}`);
       localStorage.removeItem(`routine-config-${user?.uid}`);
@@ -52,6 +61,12 @@ const Routine = () => {
     setRoutineIds(currentRoutine);
     setRoutineFinished(false);
     setConfirmingStop(false);
+
+    if (isExecutionPending) {
+      setSentForExecution(true);
+    } else {
+      setSentForExecution(false);
+    }
 
     const savedProgress = JSON.parse(localStorage.getItem(`routine-progress-${user?.uid}`) || "{}");
     if (savedProgress.date === today && arraysEqual(savedProgress.routineIds, currentRoutine)) {
@@ -67,40 +82,33 @@ const Routine = () => {
     const savedConfig = JSON.parse(localStorage.getItem(`routine-config-${user?.uid}`) || "{}");
     if (savedConfig.date === today && arraysEqual(savedConfig.routineIds, currentRoutine)) {
       setRoutineConfig(savedConfig.config || {});
-      setConfigDone(savedConfig.configDone || false);
-    } else {
+    } else if (!isConsistencyApproved) {
       setRoutineConfig({});
-      setConfigDone(false);
     }
   }, [userData, user?.uid]);
 
   useEffect(() => {
-    if (routineIds.length > 0) {
+    if (routineIds.length > 0 || isConsistencyApproved) {
+      const ids = isConsistencyApproved ? pv.exercises.map(e => e.id) : routineIds;
       localStorage.setItem(`routine-progress-${user?.uid}`, JSON.stringify({
         date: getTodayDate(),
-        routineIds,
+        routineIds: ids,
         currentStep,
         completedSteps,
         resting,
       }));
     }
-  }, [currentStep, completedSteps, resting, routineIds, user?.uid]);
+  }, [currentStep, completedSteps, resting, routineIds, user?.uid, isConsistencyApproved]);
 
   useEffect(() => {
-    if (routineIds.length > 0) {
+    if (routineIds.length > 0 && !isConsistencyApproved) {
       localStorage.setItem(`routine-config-${user?.uid}`, JSON.stringify({
         date: getTodayDate(),
         routineIds,
         config: routineConfig,
-        configDone,
       }));
     }
-  }, [routineConfig, configDone, routineIds, user?.uid]);
-
-  const routineExercises = exercises.filter(e => routineIds.includes(e.id));
-  const totalPoints = routineExercises.reduce((sum, e) => sum + (e.points || 0), 0);
-  const minimumTime = 45 * 60;
-  const hasTrainer = !!userData?.trainerId;
+  }, [routineConfig, routineIds, user?.uid, isConsistencyApproved]);
 
   const getDefaults = () => {
     const defaults = {};
@@ -117,17 +125,40 @@ const Routine = () => {
     }));
   };
 
-  const handleConfirmConfig = () => {
+  const handleConfirmConfig = async () => {
     if (routineExercises.length < 3) {
       toast.error("Selecciona al menos 3 ejercicios para comenzar la rutina.");
       return;
     }
     if (!window.confirm("¿Estás seguro con la configuración de series y repeticiones?")) return;
-    setConfigDone(true);
+
+    const userRef = doc(db, "users", user.uid);
+    const pts = routineExercises.reduce((sum, e) => sum + (e.points || 0), 0);
+
+    await updateDoc(userRef, {
+      pendingVerification: {
+        exercises: routineExercises.map(e => ({
+          id: e.id,
+          name: e.name,
+          category: e.category,
+          level: e.level,
+          points: e.points || 0,
+          description: e.description,
+          sets: routineConfig[e.id]?.sets || 3,
+          reps: routineConfig[e.id]?.reps || 10,
+        })),
+        totalPoints: pts,
+        timestamp: new Date().toISOString(),
+        stage: "consistency",
+        status: "pending",
+      },
+    });
+
+    toast.success("Rutina enviada para revisión del entrenador.");
   };
 
   const handleStart = () => {
-    if (routineExercises.length < 3) {
+    if (!pv?.exercises || pv.exercises.length < 3) {
       toast.error("Selecciona al menos 3 ejercicios para comenzar la rutina.");
       return;
     }
@@ -147,8 +178,8 @@ const Routine = () => {
     const newCompleted = [...completedSteps, currentStep];
     setCompletedSteps(newCompleted);
 
-    if (currentStep + 1 >= routineExercises.length) {
-      setCurrentStep(routineExercises.length);
+    if (currentStep + 1 >= pv.exercises.length) {
+      setCurrentStep(pv.exercises.length);
       return;
     }
 
@@ -157,7 +188,7 @@ const Routine = () => {
   };
 
   const handleStop = async () => {
-    if (!user || routineIds.length === 0 || routineExercises.length === 0) return;
+    if (!user || !pv?.exercises || pv.exercises.length === 0) return;
 
     if (!confirmingStop) {
       setConfirmingStop(true);
@@ -165,143 +196,71 @@ const Routine = () => {
     }
 
     reset();
-    setRoutineFinished(false);
     setConfirmingStop(false);
     setCurrentStep(0);
     setCompletedSteps([]);
     setResting(false);
-    setConfigDone(false);
-    setRoutineConfig({});
     localStorage.removeItem(`routine-progress-${user?.uid}`);
-    localStorage.removeItem(`routine-config-${user?.uid}`);
 
-    toast("Rutina detenida. No se han otorgado puntos.", { icon: "⏹️" });
+    toast("Rutina detenida. No se perdieron puntos.", { icon: "⏹️" });
   };
 
   const completeRoutine = async () => {
-    if (!user || routineExercises.length === 0 || !active) return;
+    if (!user || !pv?.exercises || pv.exercises.length === 0 || !active) return;
+    if (isExecutionPending) return;
 
-    if (!hasTrainer && elapsed < minimumTime) {
-      toast("Aún no ha pasado el tiempo mínimo necesario. Entrena al menos 45 minutos para obtener tus recompensas.", {
-        icon: "⏳",
-        duration: 5000
-      });
-      return;
-    }
+    const exList = pv.exercises;
+    const sumPoints = exList.reduce((s, e) => s + (e.points || 0), 0);
+    const count = exList.length;
+    const avg = Math.floor(sumPoints / count);
+    const bonusPoints = avg * count * 5;
 
     const userRef = doc(db, "users", user.uid);
 
-    // ── Cliente con entrenador: enviar para verificación ──
-    if (hasTrainer) {
-      await updateDoc(userRef, {
-        pendingVerification: {
-          exercises: routineExercises.map(e => ({
-            id: e.id,
-            name: e.name,
-            category: e.category,
-            level: e.level,
-            points: e.points || 0,
-            sets: routineConfig[e.id]?.sets || 3,
-            reps: routineConfig[e.id]?.reps || 10,
-          })),
-          totalPoints,
-          elapsed,
-          completedSteps: completedSteps.length,
-          timestamp: new Date().toISOString(),
-        }
-      });
-      reset();
-      setConfirmingStop(false);
-      setCurrentStep(0);
-      setCompletedSteps([]);
-      setResting(false);
-      setConfigDone(false);
-      setRoutineConfig({});
-      localStorage.removeItem(`routine-progress-${user?.uid}`);
-      localStorage.removeItem(`routine-config-${user?.uid}`);
-      toast.success("Rutina enviada para verificación. Espera la confirmación de tu entrenador.");
-      return;
-    }
-
-    // ── Cliente sin entrenador: completar directamente ──
-    const userSnap = await getDoc(userRef);
-    const data = userSnap.data();
-    const today = getTodayDate();
-    const points = totalPoints;
-
-    const updatedStreakData = upStreak(data, today);
-    const updatedTotalPoints = (data.totalPoints || 0) + points;
-    const updatedCompleted = (data.completedRoutines || 0) + 1;
-
-    const newBadges = checkAchieve({
-      ...data,
-      totalPoints: updatedTotalPoints,
-      streak: updatedStreakData.streak,
-      completedRoutines: updatedCompleted,
-      unlockedRewards: data.unlockedRewards || [],
-      badges: data.badges || []
-    });
-
     await updateDoc(userRef, {
-      lastRoutineCompleted: today,
-      ...(updatedStreakData.streak !== undefined && { streak: updatedStreakData.streak }),
-      ...(updatedStreakData.streakProtectors !== undefined && { streakProtectors: updatedStreakData.streakProtectors }),
-      ...(updatedStreakData.protectedDates !== undefined && { protectedDates: updatedStreakData.protectedDates }),
-      currentRoutine: [],
-      totalPoints: updatedTotalPoints,
-      completedRoutines: updatedCompleted,
-      ...(newBadges.length > 0 && { badges: arrayUnion(...newBadges) })
-    });
-
-    // ── Guardar historial ──
-    const historyExercises = routineExercises.map(e => ({
-      id: e.id,
-      name: e.name,
-      category: e.category,
-      level: e.level,
-      points: e.points || 0,
-      sets: routineConfig[e.id]?.sets || 3,
-      reps: routineConfig[e.id]?.reps || 10,
-    }));
-
-    await addDoc(collection(db, "users", user.uid, "workoutHistory"), {
-      date: today,
-      exercises: historyExercises,
-      totalPoints,
-      elapsed,
-      completedSteps: completedSteps.length || routineExercises.length,
-      approvedByTrainer: null,
-      createdAt: new Date().toISOString(),
+      pendingVerification: {
+        exercises: exList,
+        totalPoints: sumPoints,
+        bonusPoints,
+        elapsed,
+        completedSteps: completedSteps.length,
+        timestamp: new Date().toISOString(),
+        stage: "execution",
+        status: "pending",
+      },
     });
 
     reset();
-    setRoutineIds([]);
-    setRoutineFinished(true);
-    setConfirmingStop(false);
     setCurrentStep(0);
     setCompletedSteps([]);
     setResting(false);
-    setConfigDone(false);
-    setRoutineConfig({});
+    setSentForExecution(true);
     localStorage.removeItem(`routine-progress-${user?.uid}`);
-    localStorage.removeItem(`routine-config-${user?.uid}`);
 
-    toast.success(`¡Rutina completada! Ganaste ${points} puntos.`);
-
-    if (newBadges.length > 0) {
-      newBadges.forEach(badge => {
-        toast.success(`🏅 Nuevo logro: ${badge}!`, { duration: 6000 });
-      });
-    }
+    toast.success("Rutina enviada para verificación del entrenador.");
   };
 
   const formattedTime = `${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, "0")}`;
+
+  const approvedExercises = isConsistencyApproved ? pv.exercises : [];
 
   return (
     <div className="p-4 max-w-2xl mx-auto">
       <h1 className="text-3xl font-bold text-center mb-2">Tu rutina</h1>
 
-      {routineExercises.length === 0 && !routineFinished && !userData?.pendingVerification && (
+      {!hasTrainer && (
+        <div className="mt-10 flex flex-col items-center">
+          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 max-w-sm text-center shadow-lg">
+            <p className="text-yellow-800 font-bold text-lg mb-2">🔒 Sin entrenador asignado</p>
+            <p className="text-yellow-700 text-sm">
+              No puedes acceder a esta sección hasta que tengas un entrenador.
+              Comunícate con la dirección del gimnasio para que te asignen uno.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {hasTrainer && routineIds.length === 0 && !routineFinished && !isConsistencyPending && !isConsistencyApproved && !isExecutionPending && (
         <div className="text-center mt-10 space-y-4">
           <p className="text-gray-600">
             Parece que no has armado tu rutina. Comienza a agregar ejercicios desde la sección de Ejercicios.
@@ -309,7 +268,7 @@ const Routine = () => {
         </div>
       )}
 
-      {routineFinished && (
+      {hasTrainer && routineFinished && (
         <div className="text-center mt-10 space-y-4">
           <p className="text-green-600 font-semibold text-lg">
             ✅ ¡Felicidades! Has completado tu rutina del día.
@@ -317,19 +276,28 @@ const Routine = () => {
         </div>
       )}
 
-      {userData?.pendingVerification && !routineFinished && (
+      {hasTrainer && isConsistencyPending && (
         <div className="text-center py-10 space-y-4">
-          <p className="text-lg font-semibold text-yellow-600">⏳ En espera de verificación</p>
+          <p className="text-lg font-semibold text-yellow-600">⏳ En espera de revisión</p>
           <p className="text-gray-600">
-            Tu entrenador está revisando tu rutina. Recibirás los puntos una vez que sea aprobada.
+            Tu entrenador está revisando la rutina. Una vez aprobada podrás comenzar a entrenar.
           </p>
         </div>
       )}
 
-      {routineExercises.length > 0 && !routineFinished && !userData?.pendingVerification && !configDone && (
+      {hasTrainer && isExecutionPending && (
+        <div className="text-center py-10 space-y-4">
+          <p className="text-lg font-semibold text-yellow-600">⏳ En espera de verificación final</p>
+          <p className="text-gray-600">
+            Tu entrenador está verificando la ejecución de tu rutina. Recibirás los puntos una vez que sea aprobada.
+          </p>
+        </div>
+      )}
+
+      {routineIds.length > 0 && !routineFinished && !isConsistencyPending && !isConsistencyApproved && !isExecutionPending && (
         <div className="transition-all duration-500">
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-sm text-blue-800">
-            💡 Configura las series y repeticiones de cada ejercicio antes de comenzar.
+            💡 Configura las series y repeticiones de cada ejercicio. Al continuar se enviará a tu entrenador para revisión.
           </div>
 
           <div className="space-y-4 mb-6">
@@ -379,47 +347,45 @@ const Routine = () => {
             onClick={handleConfirmConfig}
             className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
           >
-            Continuar
+            Enviar para revisión
           </button>
         </div>
       )}
 
-      {routineExercises.length > 0 && !routineFinished && !userData?.pendingVerification && configDone && (
+      {hasTrainer && isConsistencyApproved && !routineFinished && (
         <>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-sm text-blue-800">
-            💡 Completa cada ejercicio uno por uno. El cronómetro registra tu tiempo total.
-            Al completar todos los ejercicios recibirás <strong>{totalPoints} puntos</strong>.
+            💡 Completa cada ejercicio uno por uno. Al completar todos, la rutina se enviará a tu entrenador para verificación final.
           </div>
 
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm font-medium text-gray-600">
-              Ejercicio {Math.min(currentStep + 1, routineExercises.length)} de {routineExercises.length}
+              Ejercicio {Math.min(currentStep + 1, approvedExercises.length)} de {approvedExercises.length}
             </span>
-            <span className="text-sm font-semibold text-yellow-600">
-              ⭐ {totalPoints} puntos estimados
+            <span className="text-sm font-semibold text-blue-600">
+              {completedSteps.length}/{approvedExercises.length} completados
             </span>
           </div>
 
           <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
             <div
               className="bg-blue-500 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${(completedSteps.length / routineExercises.length) * 100}%` }}
+              style={{ width: `${(completedSteps.length / approvedExercises.length) * 100}%` }}
             />
           </div>
 
-          {/* ── Ejercicio actual ── */}
           <div>
-            {currentStep < routineExercises.length && (
+            {currentStep < approvedExercises.length && (
               <div className="mb-4">
                 <ExerciseCard
-                  key={routineExercises[currentStep].id}
-                  exercise={routineExercises[currentStep]}
+                  key={approvedExercises[currentStep].id}
+                  exercise={approvedExercises[currentStep]}
                   selected
                   disabled
                 />
 
                 <div className="mt-2 text-center text-sm font-medium text-gray-600">
-                  {(routineConfig[routineExercises[currentStep].id]?.sets || 3)} × {(routineConfig[routineExercises[currentStep].id]?.reps || 10)} repeticiones
+                  {approvedExercises[currentStep].sets} × {approvedExercises[currentStep].reps} repeticiones
                 </div>
 
                 {!active && (
@@ -443,13 +409,11 @@ const Routine = () => {
             )}
           </div>
 
-          {/* ── Sidebar fija en escritorio ── */}
           <div className="hidden md:block fixed right-4 top-24 w-52 z-10">
             <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 shadow-md">
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Tu rutina</p>
               <ul className="space-y-1 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                {routineExercises.map((e, i) => {
-                  const cfg = routineConfig[e.id] || { sets: 3, reps: 10 };
+                {approvedExercises.map((e, i) => {
                   const isCurrent = i === currentStep;
                   const isDone = completedSteps.includes(i);
                   return (
@@ -462,7 +426,7 @@ const Routine = () => {
                       }`}
                     >
                       <span className="block truncate">{isDone ? '✓' : isCurrent ? '▶' : '○'} {e.name}</span>
-                      <span className="text-xs opacity-75">{cfg.sets}×{cfg.reps}</span>
+                      <span className="text-xs opacity-75">{e.sets}×{e.reps}</span>
                     </li>
                   );
                 })}
@@ -483,7 +447,7 @@ const Routine = () => {
             </div>
           )}
 
-          {currentStep >= routineExercises.length && (
+          {currentStep >= approvedExercises.length && (
             <div className="text-center py-6">
               <p className="text-lg font-semibold text-gray-700 mb-3">
                 ¡Completaste todos los ejercicios!
@@ -497,7 +461,7 @@ const Routine = () => {
                     : 'bg-green-600 hover:bg-green-700 text-white'
                 }`}
               >
-                {hasTrainer ? '📤 Enviar para verificación' : `🏆 Completar rutina (${totalPoints} pts)`}
+                📤 Enviar para verificación final
               </button>
             </div>
           )}
@@ -527,7 +491,9 @@ const Routine = () => {
                 </button>
               ) : (
                 <div className="flex gap-2 items-center">
-                  <span className="text-sm text-red-600 font-medium">¿Detener? No obtendrás puntos.</span>
+                  <span className="text-sm text-red-600 font-medium">
+                    ¿Detener? No se otorgarán puntos.
+                  </span>
                   <button
                     onClick={handleStop}
                     className="px-3 py-2 bg-red-600 text-white rounded-md text-sm font-bold"

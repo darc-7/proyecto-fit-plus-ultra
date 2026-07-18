@@ -1,9 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+﻿import { createContext, useContext, useEffect, useState } from "react";
 import { auth, db } from "../services/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import quotes from "../data/quotes.json";
-import { usePresence } from "../hooks/usePresence";
 import { verifyStreak } from "../utils/streakUtils";
 import toast from "react-hot-toast";
 
@@ -18,8 +17,6 @@ export function AuthProvider({ children }) {
   const [transientAuth, setTransientAuth] = useState(false);
   const [suppressAuth, setSuppressAuth] = useState(false);
 
-  usePresence(user?.uid);
-
   const logout = async () => {
     try {
       await signOut(auth);
@@ -30,11 +27,10 @@ export function AuthProvider({ children }) {
         window.location.href = "/auth";
       }
     } catch (error) {
-      console.error("Error al cerrar sesión:", error);
+      console.error("Error al cerrar sesion:", error);
     }
   };
 
-  // ── Efecto 1: escuchar cambios de autenticación ──
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
@@ -45,11 +41,9 @@ export function AuthProvider({ children }) {
         setLoading(false);
       }
     });
-
     return () => unsubscribeAuth();
   }, []);
 
-  // ── Efecto 2: escuchar documento del usuario en Firestore ──
   useEffect(() => {
     if (!user) return;
     if (suppressAuth) return;
@@ -69,30 +63,32 @@ export function AuthProvider({ children }) {
           setMotivationalQuote("");
         }
       } else {
+        setUserData(null);
         setRole("cliente");
       }
-
+      setLoading(false);
+    }, (error) => {
+      console.error("Error al cargar datos del usuario:", error);
+      setRole("cliente");
       setLoading(false);
     });
 
     return () => unsubscribeUser();
   }, [user, suppressAuth]);
 
-  // ── Efecto 3: verificar racha perdida UNA VEZ al iniciar sesión ──
   useEffect(() => {
     if (!user || !userData) return;
 
     const today = new Date().toLocaleDateString("sv-SE");
-    const key = `streakToastShown_${user.uid}`;
+    const key = "streakToastShown_" + user.uid;
     if (localStorage.getItem(key) === today) return;
 
-    // Guard sincrónico: bloquea cualquier segunda ejecución concurrente
     localStorage.setItem(key, today);
 
     const reset = verifyStreak(userData);
     if (reset) {
       updateDoc(doc(db, "users", user.uid), reset).catch(() => {});
-      toast.error("¡Has perdido tu racha diaria! 😢", { duration: 8000 });
+      toast.error("Has perdido tu racha diaria!", { duration: 8000 });
     }
   }, [user, userData]);
 

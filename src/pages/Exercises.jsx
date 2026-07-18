@@ -9,6 +9,8 @@ export default function ExercisesPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedLevel, setSelectedLevel] = useState('all');
 
+  const hasTrainer = !!userData?.trainerId;
+
   const selectedCount = !loading && exercises.length > 0
     ? (userData?.currentRoutine || []).filter(id => exercises.some(e => e.id === id)).length
     : (userData?.currentRoutine || []).length;
@@ -32,7 +34,7 @@ export default function ExercisesPage() {
   if (error) return <div className="text-red-500 text-center py-8">Error: {error.message}</div>;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 relative">
       <h1 className="text-3xl font-bold text-center mb-2">Catálogo de Ejercicios</h1>
 
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-6 text-sm text-blue-800 text-center">
@@ -82,7 +84,7 @@ export default function ExercisesPage() {
           No hay ejercicios que coincidan con los filtros seleccionados.
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${!hasTrainer ? 'pointer-events-none select-none' : ''}`}>
           {filteredExercises.map((exercise) => (
             <ExerciseCard
               key={exercise.id}
@@ -90,6 +92,18 @@ export default function ExercisesPage() {
               selected={userData?.currentRoutine?.includes(exercise.id)}
             />
           ))}
+        </div>
+      )}
+
+      {!hasTrainer && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/60 backdrop-blur-[1px] z-10">
+          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 max-w-sm text-center shadow-lg">
+            <p className="text-yellow-800 font-bold text-lg mb-2">🔒 Sin entrenador asignado</p>
+            <p className="text-yellow-700 text-sm">
+              No puedes acceder a esta sección hasta que tengas un entrenador.
+              Comunícate con la dirección del gimnasio para que te asignen uno.
+            </p>
+          </div>
         </div>
       )}
     </div>
