@@ -1,85 +1,66 @@
+function hasWeekdayGap(start, end) {
+  const d = new Date(start);
+  d.setDate(d.getDate() + 1);
+  while (d < end) {
+    const day = d.getDay();
+    if (day >= 1 && day <= 5) return true;
+    d.setDate(d.getDate() + 1);
+  }
+  return false;
+}
+
 export function upStreak(userData, today) {
-  const lastDate = userData.lastRoutineCompleted;
-  const protectors = userData.streakProtectors || 0;
-  const protectedDates = userData.protectedDates || [];
+  const lastStr = userData.lastRoutineCompleted;
   const streak = userData.streak || 0;
 
-  if (!lastDate) {
-    return {
-      lastRoutineCompleted: today,
-      streak: 1,
-      streakProtectors: protectors,
-      protectedDates,
-    };
+  if (!lastStr) {
+    return { lastRoutineCompleted: today, streak: 1 };
   }
 
-  const dayDiff = getDayDiff(lastDate, today);
+  const todayDate = new Date(today + "T12:00:00");
+  const lastDate = new Date(lastStr + "T12:00:00");
+  const todayDay = todayDate.getDay();
+  const diffDays = Math.round((todayDate - lastDate) / (1000 * 60 * 60 * 24));
 
-  let newStreak = streak;
-  let newProtectors = protectors;
-  let newProtected = [...protectedDates];
-
-  if (dayDiff === 1) {
-    newStreak++;
-  } else if (dayDiff === 0) {
-    return {
-      lastRoutineCompleted: today,
-    };
-  } else if (dayDiff === 2 && protectors > 0) {
-    newProtectors--;
-    newProtected.push(today);
-    newStreak++;
-  } else {
-    newStreak = 1;
-    newProtected = [];
+  if (diffDays === 0) {
+    return { lastRoutineCompleted: today };
   }
 
-  if (newStreak === 6) {
-    newProtected.push(sumarDias(today, 1));
+  if (todayDay === 0) {
+    return { lastRoutineCompleted: today };
   }
 
-  return {
-    lastRoutineCompleted: today,
-    streak: newStreak,
-    streakProtectors: newProtectors,
-    protectedDates: newProtected,
-  };
+  if (hasWeekdayGap(lastDate, todayDate)) {
+    const result = { lastRoutineCompleted: today, streak: 1 };
+    if (!userData.streakLostAt) {
+      result.lastKnownStreak = streak;
+      result.streakLostAt = today;
+    }
+    return result;
+  }
+
+  return { lastRoutineCompleted: today, streak: streak + 1 };
 }
 
 export function verifyStreak(userData) {
   const today = new Date().toLocaleDateString("sv-SE");
   const lastDate = userData.lastRoutineCompleted;
-  const protectedDates = userData.protectedDates || [];
 
   if (!lastDate) return null;
 
-  const dayDiff = getDayDiff(lastDate, today);
+  const todayDate = new Date(today + "T12:00:00");
+  const lastDateObj = new Date(lastDate + "T12:00:00");
 
-  if (dayDiff > 1 && !protectedDates.includes(today)) {
-    return {
-      streak: 0,
-      protectedDates: [],
-    };
+  if (todayDate.getDay() === 0) return null;
+
+  if (hasWeekdayGap(lastDateObj, todayDate)) {
+    const result = { streak: 0 };
+    if (!userData.streakLostAt) {
+      result.lastKnownStreak = userData.streak || 0;
+      result.streakLostAt = today;
+    }
+    return result;
   }
 
   return null;
-}
-
-function getDayDiff(date1, date2) {
-  const [y1, m1, d1] = date1.split("-").map(Number);
-  const [y2, m2, d2] = date2.split("-").map(Number);
-  const d1Obj = new Date(y1, m1 - 1, d1);
-  const d2Obj = new Date(y2, m2 - 1, d2);
-  const diff = (d2Obj - d1Obj) / (1000 * 60 * 60 * 24);
-  return Math.round(diff);
-}
-
-function sumarDias(fecha, dias) {
-  const [y, m, d] = fecha.split("-").map(Number);
-  const fechaObj = new Date(y, m - 1, d);
-  fechaObj.setDate(fechaObj.getDate() + dias);
-  const año = fechaObj.getFullYear();
-  const mes = String(fechaObj.getMonth() + 1).padStart(2, "0");
-  const dia = String(fechaObj.getDate()).padStart(2, "0");
-  return `${año}-${mes}-${dia}`;
 }

@@ -78,6 +78,8 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     if (!user || !userData) return;
+    if (!userData.lastRoutineCompleted) return;
+    if (userData.streak === 0) return;
 
     const today = new Date().toLocaleDateString("sv-SE");
     const key = "streakToastShown_" + user.uid;

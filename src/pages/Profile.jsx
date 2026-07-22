@@ -150,7 +150,7 @@ export default function Profile() {
         <p><strong>Correo:</strong> {userData.email}</p>
         <p><strong>Racha actual:</strong> {userData.streak || 0} dias</p>
         <p><strong>Puntos totales:</strong> {userData.totalPoints || 0}</p>
-        <p><strong>Protectores:</strong> {userData.streakProtectors || 0}</p>
+        
         <p><strong>Fecha de registro:</strong> {creationDate}</p>
       </div>
 

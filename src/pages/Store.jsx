@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { collection, getDocs, doc, getDoc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, updateDoc, deleteField } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
@@ -99,6 +99,48 @@ export default function Store() {
     }));
   };
 
+  const recuperarRacha = async () => {
+    if (!user || !userData) return;
+    if (userData.streak > 0) return toast("Ya tienes una racha activa. No hace falta comprar el recuperador.");
+
+    const COSTO = 200;
+    if (userData.totalPoints < COSTO) {
+      return toast.error("No tienes puntos suficientes.");
+    }
+
+    const userRef = doc(db, "users", user.uid);
+    const today = new Date().toLocaleDateString("sv-SE");
+
+    const { lastKnownStreak = 0, streakLostAt } = userData;
+    let newStreak = 1;
+
+    if (lastKnownStreak > 0 && streakLostAt) {
+      const lostDate = new Date(streakLostAt + "T12:00:00");
+      const todayDate = new Date(today + "T12:00:00");
+      const diffDays = Math.round((todayDate - lostDate) / (1000 * 60 * 60 * 24));
+      if (diffDays <= 1) {
+        newStreak = lastKnownStreak;
+      }
+    }
+
+    await updateDoc(userRef, {
+      totalPoints: userData.totalPoints - COSTO,
+      streak: newStreak,
+      lastRoutineCompleted: today,
+      lastKnownStreak: deleteField(),
+      streakLostAt: deleteField(),
+    });
+
+    toast.success(`Racha recuperada a ${newStreak} días!`);
+
+    setUserData((prev) => ({
+      ...prev,
+      totalPoints: prev.totalPoints - COSTO,
+      streak: newStreak,
+      lastRoutineCompleted: today,
+    }));
+  };
+
   if (loadError) {
     return (
       <div className="max-w-4xl mx-auto p-6 text-center">
@@ -151,6 +193,23 @@ export default function Store() {
           ))}
         </div>
       </div>
+
+      {userData.streak === 0 && (
+        <div className="mb-10">
+          <h2 className="text-xl font-semibold mb-4">🔄 Recuperación de Racha</h2>
+          <div className="border border-red-200 rounded-lg p-4 shadow-md bg-red-50 max-w-sm">
+            <h3 className="text-lg font-bold text-red-800">Recuperador de Racha</h3>
+            <p className="text-sm text-red-600 mb-2">Recupera tu racha al valor anterior si la compras dentro del mismo día.</p>
+            <p className="text-yellow-600 font-bold">Costo: 200 puntos</p>
+            <button
+              onClick={recuperarRacha}
+              className="mt-2 px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded transition-colors"
+            >
+              Recuperar racha
+            </button>
+          </div>
+        </div>
+      )}
 
       <div>
         <h2 className="text-xl font-semibold mb-4">Recompensas Fisicas</h2>
