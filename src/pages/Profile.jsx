@@ -1,7 +1,8 @@
-﻿import { useEffect, useState } from "react";
+﻿import { useEffect, useState, useCallback } from "react";
 import { useAuth } from "../context/AuthContext";
 import { doc, updateDoc, onSnapshot, getDocs, collection } from "firebase/firestore";
 import { db } from "../services/firebase";
+import MuscleChart from "../components/MuscleChart";
 
 export default function Profile() {
   const { user } = useAuth();
@@ -11,6 +12,8 @@ export default function Profile() {
   const [visualRewards, setVisualRewards] = useState([]);
   const [allRewards, setAllRewards] = useState([]);
   const [loadError, setLoadError] = useState(false);
+  const [muscleData, setMuscleData] = useState({ Pecho: 0, Piernas: 0, Espalda: 0 });
+  const [range, setRange] = useState("total");
 
   useEffect(() => {
     if (!user) return;
@@ -49,6 +52,45 @@ export default function Profile() {
     );
     setVisualRewards(vis);
   }, [allRewards, userData?.unlockedRewards]);
+
+  const fetchMuscleStats = useCallback(async () => {
+    if (!user) return;
+    try {
+      const snap = await getDocs(collection(db, "users", user.uid, "workoutHistory"));
+      const now = new Date();
+      const counts = { Pecho: 0, Piernas: 0, Espalda: 0 };
+
+      snap.docs.forEach((d) => {
+        const w = d.data();
+        const workoutDate = new Date(w.date + "T12:00:00");
+
+        if (range === "weekly") {
+          const weekAgo = new Date(now);
+          weekAgo.setDate(weekAgo.getDate() - 7);
+          if (workoutDate < weekAgo) return;
+        } else if (range === "monthly") {
+          const monthAgo = new Date(now);
+          monthAgo.setDate(monthAgo.getDate() - 30);
+          if (workoutDate < monthAgo) return;
+        }
+
+        (w.exercises || []).forEach((ex) => {
+          const cat = ex.category;
+          if (cat === "Pecho" || cat === "Piernas" || cat === "Espalda") {
+            counts[cat] = (counts[cat] || 0) + 1;
+          }
+        });
+      });
+
+      setMuscleData(counts);
+    } catch (err) {
+      console.error("Error al cargar estadisticas:", err);
+    }
+  }, [user, range]);
+
+  useEffect(() => {
+    fetchMuscleStats();
+  }, [fetchMuscleStats]);
 
   const toggleVisual = async (rewardId) => {
     if (!user) return;
@@ -102,90 +144,121 @@ export default function Profile() {
     ? "/guerrero_fit.png"
     : userData.photoURL || user.photoURL || "/default-avatar.png";
 
+  const RANGE_LABELS = { weekly: "Semanal", monthly: "Mensual", total: "Total" };
+
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-4 text-center">Perfil de Usuario</h1>
+    <div className="max-w-5xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6 text-center">Perfil de Usuario</h1>
 
-      <div className="flex flex-col items-center mb-4 relative">
-        {avatarExclusivo && (
-          <div className="absolute w-28 h-28 rounded-full bg-blue-400 opacity-40 blur-lg -z-10" />
-        )}
-        <img
-          src={imgSrc}
-          alt="Avatar"
-          className={"w-24 h-24 rounded-full object-cover mb-2 border-4 " + (marcoActivo ? "border-yellow-400 shadow-md" : "border-transparent")}
-        />
-      </div>
-
-      <div className="text-center mb-4">
-        {editingName ? (
-          <div className="flex flex-col items-center gap-2">
-            <input
-              type="text"
-              value={newName}
-              onChange={(e) => setNewName(e.target.value)}
-              className="border px-2 py-1 rounded-md"
+      <div className="grid md:grid-cols-2 gap-8">
+        {/* ── Columna izquierda: info actual ── */}
+        <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="flex flex-col items-center mb-4 relative">
+            {avatarExclusivo && (
+              <div className="absolute w-28 h-28 rounded-full bg-blue-400 opacity-40 blur-lg -z-10" />
+            )}
+            <img
+              src={imgSrc}
+              alt="Avatar"
+              className={"w-24 h-24 rounded-full object-cover mb-2 border-4 " + (marcoActivo ? "border-yellow-400 shadow-md" : "border-transparent")}
             />
-            <button
-              onClick={handleNameSave}
-              className="text-sm bg-blue-500 text-white px-3 py-1 rounded-md"
-            >
-              Guardar
-            </button>
           </div>
-        ) : (
-          <div>
-            <h2 className="text-xl font-semibold">{userData.displayName || "Usuario"}</h2>
-            <button
-              onClick={() => setEditingName(true)}
-              className="text-sm text-blue-600 mt-1"
-            >
-              Editar nombre
-            </button>
+
+          <div className="text-center mb-4">
+            {editingName ? (
+              <div className="flex flex-col items-center gap-2">
+                <input
+                  type="text"
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
+                  className="border px-2 py-1 rounded-md"
+                />
+                <button
+                  onClick={handleNameSave}
+                  className="text-sm bg-blue-500 text-white px-3 py-1 rounded-md"
+                >
+                  Guardar
+                </button>
+              </div>
+            ) : (
+              <div>
+                <h2 className="text-xl font-semibold">{userData.displayName || "Usuario"}</h2>
+                <button
+                  onClick={() => setEditingName(true)}
+                  className="text-sm text-blue-600 mt-1"
+                >
+                  Editar nombre
+                </button>
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
-      <div className="text-sm space-y-2 text-center">
-        <p><strong>Correo:</strong> {userData.email}</p>
-        <p><strong>Racha actual:</strong> {userData.streak || 0} dias</p>
-        <p><strong>Puntos totales:</strong> {userData.totalPoints || 0}</p>
-        
-        <p><strong>Fecha de registro:</strong> {creationDate}</p>
-      </div>
+          <div className="text-sm space-y-2 text-center">
+            <p><strong>Correo:</strong> {userData.email}</p>
+            <p><strong>Racha actual:</strong> {userData.streak || 0} dias</p>
+            <p><strong>Puntos totales:</strong> {userData.totalPoints || 0}</p>
+            <p><strong>Fecha de registro:</strong> {creationDate}</p>
+          </div>
 
-      <div className="mt-6 grid md:grid-cols-2 gap-6">
-        <div>
-          <h2 className="text-lg font-bold">Logros Desbloqueados</h2>
-          {userData.badges?.length ? (
-            <ul className="mt-2 list-disc list-inside text-sm text-gray-700">
-              {userData.badges.map((b, i) => (
-                <li key={i}>{b}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-500 text-sm mt-2">Aun no has desbloqueado logros.</p>
-          )}
+          <div className="mt-6">
+            <h2 className="text-lg font-bold mb-2">Logros Desbloqueados</h2>
+            {userData.badges?.length ? (
+              <ul className="list-disc list-inside text-sm text-gray-700">
+                {userData.badges.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-500 text-sm">Aun no has desbloqueado logros.</p>
+            )}
+          </div>
+
+          <div className="mt-6">
+            <h2 className="text-lg font-bold mb-2">Personalizacion Visual</h2>
+            {visualRewards.length > 0 ? (
+              <ul className="text-sm text-gray-700 space-y-2">
+                {visualRewards.map((r) => (
+                  <li key={r.id} className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={userData.activeVisuals?.includes(r.id)}
+                      onChange={() => toggleVisual(r.id)}
+                    />
+                    <label>{r.name}</label>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-500 text-sm">No has desbloqueado recompensas visuales aun.</p>
+            )}
+          </div>
         </div>
 
-        <div>
-          <h2 className="text-lg font-bold">Personalizacion Visual</h2>
-          {visualRewards.length > 0 ? (
-            <ul className="mt-2 text-sm text-gray-700 space-y-2">
-              {visualRewards.map((r) => (
-                <li key={r.id} className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={userData.activeVisuals?.includes(r.id)}
-                    onChange={() => toggleVisual(r.id)}
-                  />
-                  <label>{r.name}</label>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-500 text-sm mt-2">No has desbloqueado recompensas visuales aun.</p>
-          )}
+        {/* ── Columna derecha: estadisticas ── */}
+        <div className="bg-white rounded-xl shadow-md p-6">
+          <h2 className="text-lg font-bold mb-4">Estadisticas por Grupo Muscular</h2>
+
+          <div className="flex gap-2 mb-6">
+            {Object.entries(RANGE_LABELS).map(([key, label]) => (
+              <button
+                key={key}
+                onClick={() => setRange(key)}
+                className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
+                  range === key
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+
+          <MuscleChart data={muscleData} />
+
+          <div className="mt-6 text-xs text-gray-400 text-center">
+            Basado en los ejercicios registrados en tu historial de rutinas.
+          </div>
         </div>
       </div>
     </div>
