@@ -31,7 +31,7 @@ export function upStreak(userData, today) {
   }
 
   if (hasWeekdayGap(lastDate, todayDate)) {
-    const result = { lastRoutineCompleted: today, streak: 1 };
+    const result = { lastRoutineCompleted: today, streak: 0 };
     if (!userData.streakLostAt) {
       result.lastKnownStreak = streak;
       result.streakLostAt = today;
