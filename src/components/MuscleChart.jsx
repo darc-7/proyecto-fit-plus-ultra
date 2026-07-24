@@ -1,13 +1,19 @@
 const COLORS = {
-  Pecho: "#3B82F6",
-  Piernas: "#22C55E",
+  Brazos: "#EF4444",
   Espalda: "#A855F7",
+  Pecho: "#3B82F6",
+  Hombros: "#F97316",
+  Piernas: "#22C55E",
+  Cardio: "#EC4899",
 };
 
 const LABELS = {
-  Pecho: "Pecho",
-  Piernas: "Piernas",
+  Brazos: "Brazos",
   Espalda: "Espalda",
+  Pecho: "Pecho",
+  Hombros: "Hombros",
+  Piernas: "Piernas",
+  Cardio: "Cardio",
 };
 
 export default function MuscleChart({ data = {} }) {

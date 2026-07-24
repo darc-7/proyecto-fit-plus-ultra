@@ -143,7 +143,7 @@ const Routine = () => {
           category: e.category,
           level: e.level,
           points: e.points || 0,
-          description: e.description,
+          instructions: e.instructions,
           sets: routineConfig[e.id]?.sets || 3,
           reps: routineConfig[e.id]?.reps || 10,
         })),
@@ -307,11 +307,11 @@ const Routine = () => {
                 <div key={exercise.id} className="bg-white rounded-lg shadow-md border border-gray-200 p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-2xl">
-                      {exercise.category === 'Pecho' ? '💪' : exercise.category === 'Piernas' ? '🦵' : '🏋️'}
+                      {exercise.category === 'Piernas' ? '🦵' : exercise.category === 'Cardio' ? '🏃' : '💪'}
                     </span>
                     <div>
                       <h3 className="font-bold text-gray-800">{exercise.name}</h3>
-                      <p className="text-sm text-gray-500">{exercise.description}</p>
+                      <p className="text-sm text-gray-500">{exercise.instructions || ''}</p>
                     </div>
                   </div>
                   <div className="flex gap-4 items-center">

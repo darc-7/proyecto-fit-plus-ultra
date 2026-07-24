@@ -1,54 +1,1804 @@
 {
   "exercises": {
-    "doc1": { "name": "Press de banca", "category": "Pecho", "level": 1, "points": 1, "description": "Ejercicio básico para desarrollar fuerza en el pecho" },
-    "doc2": { "name": "Press de banca inclinado", "category": "Pecho", "level": 1, "points": 1, "description": "Variación del press de banca que trabaja la parte superior del pecho" },
-    "doc3": { "name": "Flexiones", "category": "Pecho", "level": 1, "points": 1, "description": "Ejercicio de peso corporal para fortalecer el pecho" },
-    "doc4": { "name": "Aperturas con mancuernas", "category": "Pecho", "level": 1, "points": 1, "description": "Ejercicio de aislamiento para el pecho" },
-    "doc5": { "name": "Press de banca declinado", "category": "Pecho", "level": 1, "points": 1, "description": "Variación que enfatiza la parte inferior del pecho" },
-    "doc6": { "name": "Press de banca con agarre cerrado", "category": "Pecho", "level": 2, "points": 5, "description": "Variación que trabaja más los tríceps y el pecho" },
-    "doc7": { "name": "Fondos en paralelas", "category": "Pecho", "level": 2, "points": 5, "description": "Ejercicio avanzado para pecho y tríceps" },
-    "doc8": { "name": "Press con cable cruzado", "category": "Pecho", "level": 2, "points": 5, "description": "Ejercicio con máquina para trabajar el pecho" },
-    "doc9": { "name": "Press de banca con banda elástica", "category": "Pecho", "level": 2, "points": 5, "description": "Variación con resistencia variable" },
-    "doc10": { "name": "Flexiones con palmada", "category": "Pecho", "level": 2, "points": 5, "description": "Variación pliométrica de las flexiones" },
-    
-    "doc11": { "name": "Sentadillas", "category": "Piernas", "level": 1, "points": 1, "description": "Ejercicio fundamental para piernas y glúteos" },
-    "doc12": { "name": "Prensa de piernas", "category": "Piernas", "level": 1, "points": 1, "description": "Ejercicio con máquina para trabajar piernas" },
-    "doc13": { "name": "Zancadas", "category": "Piernas", "level": 1, "points": 1, "description": "Ejercicio unilateral para piernas" },
-    "doc14": { "name": "Extensiones de cuádriceps", "category": "Piernas", "level": 1, "points": 1, "description": "Ejercicio de aislamiento para los cuádriceps" },
-    "doc15": { "name": "Curl de femoral", "category": "Piernas", "level": 1, "points": 1, "description": "Ejercicio de aislamiento para los femorales" },
-    "doc16": { "name": "Sentadillas búlgaras", "category": "Piernas", "level": 2, "points": 5, "description": "Variación avanzada de sentadilla unilateral" },
-    "doc17": { "name": "Peso muerto rumano", "category": "Piernas", "level": 2, "points": 5, "description": "Ejercicio para femorales y glúteos" },
-    "doc18": { "name": "Sentadillas frontales", "category": "Piernas", "level": 2, "points": 5, "description": "Variación que enfatiza los cuádriceps" },
-    "doc19": { "name": "Step-ups con peso", "category": "Piernas", "level": 2, "points": 5, "description": "Ejercicio funcional para piernas" },
-    "doc20": { "name": "Sentadillas overhead", "category": "Piernas", "level": 2, "points": 5, "description": "Variación avanzada que trabaja movilidad y fuerza" },
-    
-    "doc21": { "name": "Dominadas", "category": "Espalda", "level": 1, "points": 1, "description": "Ejercicio básico para la espalda superior" },
-    "doc22": { "name": "Remo con barra", "category": "Espalda", "level": 1, "points": 1, "description": "Ejercicio fundamental para la espalda media" },
-    "doc23": { "name": "Jalón al pecho", "category": "Espalda", "level": 1, "points": 1, "description": "Ejercicio con máquina para espalda ancha" },
-    "doc24": { "name": "Remo con mancuerna", "category": "Espalda", "level": 1, "points": 1, "description": "Ejercicio unilateral para la espalda" },
-    "doc25": { "name": "Peso muerto convencional", "category": "Espalda", "level": 1, "points": 1, "description": "Ejercicio completo para espalda baja y piernas" },
-    "doc26": { "name": "Remo invertido", "category": "Espalda", "level": 2, "points": 5, "description": "Variación avanzada para espalda media" },
-    "doc27": { "name": "Pull-ups", "category": "Espalda", "level": 2, "points": 5, "description": "Variación avanzada de dominadas" },
-    "doc28": { "name": "Remo T-bar", "category": "Espalda", "level": 2, "points": 5, "description": "Variación de remo con barra especial" },
-    "doc29": { "name": "Jalón polea alta", "category": "Espalda", "level": 2, "points": 5, "description": "Ejercicio avanzado para espalda ancha" },
-    "doc30": { "name": "Hiperextensiones", "category": "Espalda", "level": 2, "points": 5, "description": "Ejercicio para fortalecer la espalda baja" },
-    
-    "doc31": { "name": "Press de banca con pausa isométrica", "category": "Pecho", "level": 3, "points": 10, "description": "Press con pausa de 3 segundos para máxima activación muscular" },
-    "doc32": { "name": "Flexiones con lastre y agarre excéntrico", "category": "Pecho", "level": 3, "points": 10, "description": "Flexiones con peso adicional y fase excéntrica de 5 segundos" },
-    "doc33": { "name": "Press inclinado con cadena", "category": "Pecho", "level": 3, "points": 10, "description": "Press en banco inclinado con cadenas para resistencia progresiva" },
-    "doc34": { "name": "Aperturas en suspensión", "category": "Pecho", "level": 3, "points": 10, "description": "Aperturas con TRX para mayor inestabilidad y control neuromuscular" },
-    "doc35": { "name": "Press de banca con agarre giratorio", "category": "Pecho", "level": 3, "points": 10, "description": "Press con mancuernas rotatorias para activación máxima de fibras" },
-    
-    "doc36": { "name": "Sentadilla con barra de seguridad", "category": "Piernas", "level": 3, "points": 10, "description": "Sentadilla profunda con barra especial para mayor rango de movimiento" },
-    "doc37": { "name": "Peso muerto con bandas de resistencia", "category": "Piernas", "level": 3, "points": 10, "description": "Peso muerto con bandas elásticas para resistencia variable en todo el movimiento" },
-    "doc38": { "name": "Zancadas con salto excéntrico", "category": "Piernas", "level": 3, "points": 10, "description": "Zancadas pliométricas con fase de descenso controlado de 4 segundos" },
-    "doc39": { "name": "Sentadilla Jefferson", "category": "Piernas", "level": 3, "points": 10, "description": "Sentadilla asimétrica con barra entre las piernas para desarrollo equilibrado" },
-    "doc40": { "name": "Prensa unilateral excéntrica", "category": "Piernas", "level": 3, "points": 10, "description": "Prensa de piernas a una pierna con énfasis en fase negativa (8 segundos)" },
-    
-    "doc41": { "name": "Dominadas lastradas con discos", "category": "Espalda", "level": 3, "points": 10, "description": "Dominadas con peso adicional usando cinturón de lastre para sobrecarga progresiva" },
-    "doc42": { "name": "Peso muerto con déficit", "category": "Espalda", "level": 3, "points": 10, "description": "Peso muerto desde plataforma elevada para mayor rango de movimiento" },
-    "doc43": { "name": "Remo Pendlay con parada en pecho", "category": "Espalda", "level": 3, "points": 10, "description": "Remo olímpico con pausa isométrica en cada repetición" },
-    "doc44": { "name": "Pull-over con barra excéntrica", "category": "Espalda", "level": 3, "points": 10, "description": "Pull-over con fase negativa de 6 segundos para máxima expansión torácica" },
-    "doc45": { "name": "Remo invertido con lastre", "category": "Espalda", "level": 3, "points": 10, "description": "Remo invertido en anillas con chaleco lastrado para mayor dificultad" }
+    "ex001": {
+      "name": "Elevación de talones con barra en el suelo",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Coloca una barra en el suelo frente a ti. Ponte de pie con la parte delantera de los pies sobre el borde de la barra, dejando los talones colgando. Sujétate de un objeto estable para mantener el equilibrio si es necesario. Levanta los talones lo más alto posible, usando las pantorrillas para elevar el cuerpo. Haz una pausa breve en la parte alta y luego baja lentamente los talones de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1370-2IHEa2T.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1370-2IHEa2T.gif"
+    },
+    "ex002": {
+      "name": "Sentadilla con abrazo de rodillas al pecho",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Comienza de pie con los pies separados a la altura de los hombros. Flexiona las rodillas y baja el cuerpo hacia una posición de sentadilla. Al ponerte en cuclillas, lleva las rodillas hacia el pecho y abrázalas con los brazos. Mantén esta posición por un momento, luego regresa lentamente a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1418-znP9SIh.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1418-znP9SIh.gif"
+    },
+    "ex003": {
+      "name": "Cargada de potencia (power clean)",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Comienza con la barra en el suelo frente a ti, con los pies separados a la altura de los hombros. Agáchate y agarra la barra con un agarre prono, un poco más separado que la anchura de los hombros. Mantén la espalda recta y el pecho hacia arriba al levantar la barra del suelo, extendiendo las caderas y las rodillas. Cuando la barra llegue a la mitad del muslo, tira de ella explosivamente hacia arriba, encogiendo los hombros y llevando los codos hacia arriba y hacia los lados. Cuando la barra alcance su punto más alto, baja rápidamente debajo de ella, rotando los codos y atrapando la barra sobre los hombros en una posición de sentadilla frontal. Ponte de pie con la barra, extendiendo completamente las caderas y las rodillas. Baja la barra de nuevo a la posición inicial, manteniendo el control del peso durante todo el movimiento. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0648-SiWCcTN.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0648-SiWCcTN.gif"
+    },
+    "ex004": {
+      "name": "Elevación de talones a una pierna con banda bajo ambas piernas",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y coloca una banda elástica bajo ambos pies. Sujeta los extremos de la banda con las manos para mantener el equilibrio. Levanta los talones del suelo lo más alto posible, usando las pantorrillas. Haz una pausa breve en la parte alta y luego baja lentamente los talones de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1369-jl6uxZV.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1369-jl6uxZV.gif"
+    },
+    "ex005": {
+      "name": "Estiramiento de zancada con peso",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros. Da un paso adelante con el pie derecho, manteniendo la espalda recta. Baja el cuerpo flexionando las rodillas hasta que el muslo derecho quede paralelo al suelo. Empuja con el talón derecho para regresar a la posición inicial. Repite con la pierna izquierda. Continúa alternando las piernas durante el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3642-13VW2VO.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3642-13VW2VO.gif"
+    },
+    "ex006": {
+      "name": "Elevación de talones de pie con mancuerna",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sujetando una mancuerna en cada mano. Levanta los talones del suelo lo más alto posible, usando las pantorrillas. Haz una pausa breve en la parte alta y luego baja lentamente los talones de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0417-dPmaUaU.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0417-dPmaUaU.gif"
+    },
+    "ex007": {
+      "name": "Elevación de talones a una pierna en prensa de piernas (máquina)",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ajusta el asiento de la máquina de prensa de piernas de modo que tus rodillas queden ligeramente flexionadas cuando los pies estén sobre la plataforma. Siéntate en la máquina con la espalda apoyada en el respaldo y los pies planos sobre la plataforma, separados a la altura de los hombros. Coloca los dedos y la planta de los pies sobre la plataforma, manteniendo los talones alejados del borde. Suelta las palancas de seguridad y empuja la plataforma alejándola de ti extendiendo las rodillas. Una vez que tus rodillas estén completamente extendidas, baja lentamente los talones flexionando las pantorrillas. Haz una pausa por un momento en la parte baja y luego empuja la plataforma de nuevo hacia arriba extendiendo las pantorrillas. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1385-IeDEXTe.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1385-IeDEXTe.gif"
+    },
+    "ex008": {
+      "name": "Sentadilla Zercher con barra",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y los dedos de los pies ligeramente hacia afuera. Sujeta la barra en el pliegue de los codos, con las manos agarrando la barra para mayor estabilidad. Activa el core y mantén el pecho elevado mientras bajas las caderas hacia atrás y hacia abajo en una posición de sentadilla. Mantén las rodillas alineadas con los dedos de los pies y el peso sobre los talones. Haz una pausa breve en la parte baja de la sentadilla y luego empuja con los talones para volver a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0127-LSTChY9.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0127-LSTChY9.gif"
+    },
+    "ex009": {
+      "name": "Subida al cajón (step-up) con mancuernas",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie frente a un banco o escalón con una mancuerna en cada mano, con las palmas hacia tu cuerpo. Coloca el pie derecho sobre el banco o escalón, asegurándote de que todo el pie esté en contacto con la superficie. Empuja con el talón derecho y sube el cuerpo sobre el banco o escalón, enderezando la pierna derecha. Sube el pie izquierdo hasta el banco o escalón, quedando completamente erguido. Baja con el pie izquierdo, seguido del pie derecho, volviendo a la posición inicial. Repite el número de repeticiones deseado, luego cambia de pierna.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0431-aXtJhlg.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0431-aXtJhlg.gif"
+    },
+    "ex010": {
+      "name": "Zancada hacia adelante",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de las caderas y las manos en las caderas. Da un paso grande hacia adelante con el pie derecho, bajando el cuerpo hasta una posición de zancada. Dobla la rodilla derecha hasta unos 90 grados, manteniendo la rodilla alineada con el tobillo. Empuja con el pie derecho y vuelve a la posición inicial. Repite con la pierna izquierda, alternando los lados durante el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3470-kMzUs9Y.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3470-kMzUs9Y.gif"
+    },
+    "ex011": {
+      "name": "Flexión de brazos con patada lateral de pierna",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Comienza en posición de flexión con las manos un poco más separadas que la anchura de los hombros y los pies juntos. Baja el cuerpo hacia el suelo flexionando los codos, manteniendo la espalda recta y el core activado. Al empujar de vuelta hacia arriba, lanza una pierna hacia el lado, extendiéndola completamente y activando los glúteos. Vuelve a colocar la pierna en la posición inicial y repite la flexión, alternando las piernas en cada repetición. Continúa alternando las patadas de pierna y las flexiones el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0642-jNU1gFQ.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0642-jNU1gFQ.gif"
+    },
+    "ex012": {
+      "name": "Sentadilla a una pierna con barra",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sujeta una barra sobre la parte superior de la espalda. Levanta un pie del suelo y extiéndelo hacia delante, manteniéndolo paralelo al suelo. Flexiona la pierna de apoyo y baja el cuerpo como si te sentaras en una silla, manteniendo el pecho elevado y la espalda recta. Baja hasta que el muslo quede paralelo al suelo, luego empuja con el talón para volver a la posición inicial. Repite el número de repeticiones deseado y luego cambia de pierna y repite.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0068-uKyN64F.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0068-uKyN64F.gif"
+    },
+    "ex013": {
+      "name": "Abducción de cadera sentado con banda de resistencia",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate en una silla o banco con la espalda recta y los pies apoyados en el suelo. Envuelve la banda elástica alrededor de los muslos, justo por encima de las rodillas. Coloca las manos en los lados de la silla o el banco para mayor apoyo. Activa los abductores (los músculos externos del muslo) y empuja lentamente las rodillas hacia afuera, contra la resistencia de la banda. Haz una pausa al final del movimiento y luego junta lentamente las rodillas de nuevo. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3006-0xDpB4L.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3006-0xDpB4L.gif"
+    },
+    "ex014": {
+      "name": "Sentadilla dividida a una pierna con barra",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sujetando una barra sobre la parte superior de la espalda. Da un paso grande hacia adelante con una pierna, manteniendo el torso erguido. Baja el cuerpo flexionando la rodilla delantera y la cadera, mientras mantienes la pierna trasera recta. Continúa bajando hasta que el muslo delantero quede paralelo al suelo. Haz una pausa breve, luego empuja con el talón delantero para volver a la posición inicial. Repite el número de repeticiones deseado, luego cambia de pierna.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0099-gGNQmVt.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0099-gGNQmVt.gif"
+    },
+    "ex015": {
+      "name": "Estiramiento de pantorrilla con cuerda",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie frente a una pared u objeto firme con los pies separados a la altura de las caderas. Sujeta los extremos de la cuerda con cada mano y coloca el centro de la cuerda alrededor de la planta del pie derecho. Da un paso atrás con el pie izquierdo, manteniendo el talón en el suelo y la pierna recta. Inclínate hacia adelante, manteniendo la espalda recta, y tira suavemente de la cuerda para estirar la pantorrilla. Mantén el estiramiento durante 20-30 segundos, luego suelta. Repite con la otra pierna.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1378-1LVFcEn.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1378-1LVFcEn.gif"
+    },
+    "ex016": {
+      "name": "Sentadilla a una pierna (pistol squat)",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y los brazos extendidos frente a ti. Levanta el pie derecho del suelo y extiéndelo hacia delante. Baja lentamente el cuerpo doblando la rodilla izquierda y empujando las caderas hacia atrás. Mantén el pecho elevado y la espalda recta mientras bajas el cuerpo. Baja hasta que el muslo izquierdo quede paralelo al suelo, o lo más abajo que puedas llegar cómodamente. Haz una pausa por un momento en la posición baja, luego empuja con el talón izquierdo para volver a la posición inicial. Repite el número de repeticiones deseado, luego cambia de pierna.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1759-nqs5HGV.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1759-nqs5HGV.gif"
+    },
+    "ex017": {
+      "name": "Prensa de piernas (sled) acostado",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ajusta la máquina de trineo a un peso adecuado. Túmbate boca arriba en la máquina de trineo con los pies sobre la placa. Coloca los pies separados a la altura de los hombros y ligeramente angulados hacia fuera. Sujeta las asas de la máquina de trineo para mayor estabilidad. Activa los glúteos y los músculos del core. Empuja con los talones y extiende las piernas para levantar el trineo. Baja el trineo de nuevo doblando las rodillas y las caderas. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0744-9n2149Z.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0744-9n2149Z.gif"
+    },
+    "ex018": {
+      "name": "Sentadilla dividida a una pierna con banda",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de las caderas y coloca una banda elástica alrededor de los tobillos. Da un paso grande hacia adelante con el pie derecho y un paso más pequeño hacia atrás con el pie izquierdo. Flexiona las rodillas y baja el cuerpo hasta que el muslo derecho quede paralelo al suelo, manteniendo la rodilla izquierda ligeramente por encima del suelo. Empuja con el talón derecho para regresar a la posición inicial. Repite del otro lado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1001-y8bYM8w.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1001-y8bYM8w.gif"
+    },
+    "ex019": {
+      "name": "Elevación de talones tipo burro con peso",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie sobre una plataforma elevada con la punta de los pies en el borde y los talones colgando. Sujétate de un objeto estable para mayor apoyo. Eleva los talones tan alto como puedas extendiendo los tobillos. Haz una pausa breve en la parte alta y luego baja lentamente los talones de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0833-LmaFNZS.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0833-LmaFNZS.gif"
+    },
+    "ex020": {
+      "name": "Sentadilla completa con barra (vista posterior)",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, con los dedos de los pies ligeramente hacia afuera. Sujeta la barra sobre la parte superior de la espalda, apoyándola en los trapecios o los deltoides posteriores. Activa el core y mantén el pecho elevado mientras comienzas a bajar el cuerpo. Flexiona las rodillas y las caderas, empujando las caderas hacia atrás y hacia abajo como si te sentaras en una silla. Baja el cuerpo hasta que los muslos queden paralelos al suelo o un poco por debajo. Mantén las rodillas alineadas con los dedos de los pies y el peso sobre los talones. Empuja con los talones para volver a ponerte de pie, extendiendo las caderas y las rodillas. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1461-DhMl549.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1461-DhMl549.gif"
+    },
+    "ex021": {
+      "name": "Abducción de cadera con pierna recta",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Túmbate de lado con las piernas rectas y apiladas una sobre la otra. Coloca el brazo de abajo bajo la cabeza para apoyarte. Activa el core y levanta la pierna superior lo más alto posible sin rotar las caderas ni inclinarte hacia atrás. Haz una pausa por un momento en la posición alta, luego baja lentamente la pierna de nuevo a la posición inicial. Repite el número de repeticiones deseado, luego cambia de lado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1427-mQ1tBXn.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1427-mQ1tBXn.gif"
+    },
+    "ex022": {
+      "name": "Sentadilla cosaca con peso",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies más separados que la anchura de los hombros y la punta de los pies apuntando ligeramente hacia afuera. Sostén un peso frente al pecho con ambas manos. Traslada tu peso hacia un lado y baja el cuerpo flexionando la rodilla del lado hacia el que te inclinaste, manteniendo la otra pierna recta. Baja todo lo que puedas mientras mantienes el equilibrio y el pecho elevado. Empuja con el talón de la pierna flexionada para volver a la posición inicial. Repite con el otro lado, alternando entre las piernas.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3643-GWoKnIm.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3643-GWoKnIm.gif"
+    },
+    "ex023": {
+      "name": "Patada abdominal hacia afuera",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate en el borde de un banco o una silla con los pies planos en el suelo y las rodillas flexionadas en un ángulo de 90 grados. Inclínate ligeramente hacia atrás y coloca las manos en el borde del banco o la silla como apoyo. Activando los isquiotibiales, levanta los pies del suelo y extiende las piernas rectas hacia adelante. Haz una pausa breve en lo alto, luego flexiona lentamente las rodillas y lleva los pies de vuelta hacia el cuerpo. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0555-v7p5bYl.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0555-v7p5bYl.gif"
+    },
+    "ex024": {
+      "name": "Sentadilla profunda con apoyo",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, los dedos de los pies ligeramente hacia afuera. Sujétate de un apoyo estable, como una silla o una pared, para mantener el equilibrio. Baja el cuerpo hacia una posición de sentadilla flexionando las rodillas y empujando las caderas hacia atrás. Mantén el pecho hacia arriba y la espalda recta durante todo el movimiento. Haz una pausa por un momento en la parte inferior, luego empuja con los talones para regresar a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3132-b63ZzGe.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3132-b63ZzGe.gif"
+    },
+    "ex025": {
+      "name": "Curl femoral de pie a una pierna",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de las caderas y las manos en las caderas. Traslada tu peso a la pierna izquierda y levanta el pie derecho del suelo, flexionando la rodilla. Curva lentamente el talón derecho hacia los glúteos, contrayendo el isquiotibial. Haz una pausa de un momento en la parte superior y luego baja lentamente el pie derecho de nuevo a la posición inicial. Repite el número de repeticiones deseado, luego cambia de pierna.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0795-C5jncD2.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0795-C5jncD2.gif"
+    },
+    "ex026": {
+      "name": "Rotación de tren inferior boca abajo a una pierna sobre balón",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Túmbate boca abajo sobre el balón de estabilidad con las caderas apoyadas en el balón y las piernas extendidas rectas detrás de ti. Coloca las manos en el suelo frente a ti para mayor apoyo. Activa los glúteos y el abdomen para estabilizar el cuerpo. Levanta lentamente una pierna del suelo, manteniéndola recta y paralela al piso. Gira la pierna hacia afuera, alejándola del cuerpo, mientras mantienes las caderas y la parte superior del cuerpo estables. Haz una pausa al final de la rotación, luego regresa lentamente la pierna a la posición inicial. Repite la rotación con la otra pierna. Continúa alternando las piernas durante el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1416-M72BExt.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1416-M72BExt.gif"
+    },
+    "ex027": {
+      "name": "Prensa horizontal a una pierna (máquina)",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ajusta el asiento de la máquina de modo que las rodillas queden en un ángulo de 90 grados cuando los pies estén sobre la placa para los pies. Siéntate en la máquina con la espalda apoyada en el respaldo y los pies separados a la altura de los hombros sobre la placa para los pies. Coloca las manos en las asas o en los lados de la máquina para mayor estabilidad. Empuja la placa para los pies alejándola del cuerpo extendiendo la pierna, manteniendo la espalda apoyada en el respaldo. Haz una pausa breve en la posición completamente extendida, luego flexiona lentamente la pierna para volver a la posición inicial. Repite el número de repeticiones deseado, luego cambia de pierna.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/2611-9KU9TYF.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/2611-9KU9TYF.gif"
+    },
+    "ex028": {
+      "name": "Salto hacia atrás",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros. Flexiona ligeramente las rodillas y salta hacia atrás, impulsándote con ambos pies. Aterriza suavemente sobre la punta de los pies, flexionando las rodillas para absorber el impacto. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1473-SaDOwk7.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1473-SaDOwk7.gif"
+    },
+    "ex029": {
+      "name": "Estiramiento de pierna extendida en silla",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate al borde de una silla con la espalda recta y los pies planos en el suelo. Extiende una pierna recta frente a ti, manteniendo el talón en el suelo. Inclínate ligeramente hacia adelante, sintiendo un estiramiento en los cuádriceps. Mantén esta posición durante 20-30 segundos. Cambia de pierna y repite el estiramiento.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1548-xGgAGPm.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1548-xGgAGPm.gif"
+    },
+    "ex030": {
+      "name": "Peso muerto con barra",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y la barra en el suelo frente a ti. Flexiona las rodillas y las caderas para bajar el torso y agarra la barra con un agarre pronado, con las manos un poco más separadas que el ancho de los hombros. Mantén la espalda recta y el pecho elevado mientras empujas con los talones para levantar la barra del suelo, extendiendo las caderas y las rodillas. Al ponerte de pie, aprieta los glúteos y mantén el core activado. Baja la barra de vuelta al suelo flexionando las caderas y las rodillas, manteniendo la espalda recta. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0032-ila4NZS.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0032-ila4NZS.gif"
+    },
+    "ex031": {
+      "name": "Elevación de talones sentado (máquina)",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ajusta la altura del asiento de modo que las rodillas queden ligeramente flexionadas y los pies queden planos sobre la placa para los pies. Coloca los dedos de los pies sobre la placa para los pies, con los talones colgando fuera del borde. Sujeta las asas o los lados del asiento para mayor estabilidad. Empuja con la parte delantera de los pies para elevar los talones tan alto como sea posible. Haz una pausa breve en la parte alta y luego baja lentamente los talones de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0594-bOOdeyc.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0594-bOOdeyc.gif"
+    },
+    "ex032": {
+      "name": "Sentadilla goblet con pesa rusa",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sujetando una pesa rusa cerca del pecho con ambas manos. Manteniendo el pecho elevado y el core activado, baja el cuerpo a una posición de sentadilla flexionando las rodillas y las caderas. Continúa bajando hasta que los muslos queden paralelos al suelo, o tan abajo como puedas hacerlo cómodamente. Haz una pausa por un momento en la parte inferior, luego empuja con los talones para regresar a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0534-ZA8b5hc.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0534-ZA8b5hc.gif"
+    },
+    "ex033": {
+      "name": "Estiramiento de glúteo sentado",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Siéntate en el suelo con las piernas extendidas frente a ti. Dobla la rodilla derecha y cruza el tobillo derecho sobre el muslo izquierdo. Coloca la mano derecha en el suelo detrás de ti para apoyarte. Con la mano izquierda, presiona suavemente la rodilla derecha para profundizar el estiramiento. Mantén el estiramiento durante 30 segundos a 1 minuto. Cambia de lado y repite.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1424-DeDThfG.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1424-DeDThfG.gif"
+    },
+    "ex034": {
+      "name": "Elevación de talones de pie con barra",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y coloca una barra sobre la parte superior de la espalda. Levanta los talones del suelo lo más alto posible, usando las pantorrillas. Haz una pausa breve en la parte alta y luego baja lentamente los talones de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0108-rGwhJ5o.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0108-rGwhJ5o.gif"
+    },
+    "ex035": {
+      "name": "Sentadilla de rodillas con barra",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Comienza arrodillado en el suelo con las rodillas separadas a la altura de las caderas y las puntas de los pies apuntando hacia adelante. Coloca una barra sobre los hombros, sujetándola con agarre prono y las manos un poco más separadas que el ancho de los hombros. Activa el core y mantén el pecho elevado mientras bajas lentamente el cuerpo flexionando las rodillas, manteniendo la espalda recta. Continúa bajando hasta que los muslos queden paralelos al suelo, o tan abajo como puedas hacerlo cómodamente. Haz una pausa por un momento en la parte inferior, luego empuja con los talones para regresar a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0102-oR7O9LW.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0102-oR7O9LW.gif"
+    },
+    "ex036": {
+      "name": "Elevación de talones contra la pared con balón (pelota entre las rodillas)",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con la espalda contra una pared y coloca un balón de ejercicio entre tu zona lumbar y la pared. Coloca los pies separados a la altura de los hombros y ligeramente por delante de ti. Sujeta una mancuerna en cada mano, con los brazos extendidos a los lados. Coloca una pelota de tenis entre las rodillas. Levanta los talones del suelo, elevando el cuerpo sobre la punta de los pies. Haz una pausa breve en la parte alta y luego baja lentamente los talones de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3240-j74M6Zn.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3240-j74M6Zn.gif"
+    },
+    "ex037": {
+      "name": "Abducción lateral de cadera",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y las manos en las caderas. Traslada el peso a una pierna y levanta la pierna opuesta hacia el lado, manteniéndola recta. Haz una pausa por un momento en la posición alta, luego baja lentamente la pierna de nuevo a la posición inicial. Repite del otro lado. Continúa alternando lados durante el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0710-7WaDzyL.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0710-7WaDzyL.gif"
+    },
+    "ex038": {
+      "name": "Elevación de talones sentado a una pierna con mancuerna",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate en un banco o silla con los pies apoyados en el suelo y una mancuerna apoyada sobre el muslo derecho. Extiende la pierna izquierda recta hacia adelante, manteniendo el pie flexionado. Coloca la punta del pie derecho sobre una superficie elevada, como un escalón o un disco de peso. Usando los músculos de la pantorrilla, eleva el talón derecho lo más alto posible. Haz una pausa por un momento en la parte superior, luego baja lentamente el talón de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de pierna.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0400-Ia7tumC.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0400-Ia7tumC.gif"
+    },
+    "ex039": {
+      "name": "Sentadilla pliométrica con mancuernas",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sosteniendo una mancuerna en cada mano a los costados. Baja el cuerpo hacia una posición de sentadilla flexionando las rodillas y empujando las caderas hacia atrás. Cuando llegues al punto más bajo de la sentadilla, impúlsate explosivamente hacia arriba, saltando del suelo. Mientras estás en el aire, cambia rápidamente la posición de los pies, aterrizando con el pie opuesto adelante. Baja inmediatamente el cuerpo de vuelta a la posición de sentadilla y repite el salto, cambiando de nuevo los pies. Continúa alternando la posición de los pies en cada salto durante el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0371-S4pwGlc.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0371-S4pwGlc.gif"
+    },
+    "ex040": {
+      "name": "Prensa de piernas a una pierna (trineo, vista lateral)",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ajusta el asiento de la máquina de trineo de modo que las rodillas queden en un ángulo de 90 grados cuando los pies estén sobre la placa. Siéntate en la máquina de trineo con la espalda plana contra el respaldo y los pies separados a la altura de los hombros sobre la placa. Sujeta las asas a los lados del asiento para mayor estabilidad. Empuja contra la placa para extender las piernas, estirándolas por completo. Haz una pausa por un momento en la posición alta, luego dobla lentamente las rodillas para bajar la placa de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1463-2Qh2J1e.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1463-2Qh2J1e.gif"
+    },
+    "ex041": {
+      "name": "Sentadilla dividida a una pierna y un brazo con banda",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de las caderas y coloca una banda elástica alrededor de los tobillos. Extiende una pierna hacia adelante y apoya la parte superior del pie sobre un banco o escalón detrás de ti. Sujétate de un apoyo con una mano para mantener el equilibrio. Flexiona la pierna de apoyo y baja el cuerpo hacia una posición de sentadilla, manteniendo la rodilla alineada con los dedos del pie. Empuja con el talón para regresar a la posición inicial. Repite el número de repeticiones deseado, luego cambia de pierna.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0987-arsYEd3.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0987-arsYEd3.gif"
+    },
+    "ex042": {
+      "name": "Elevación de talones con agarre inverso en máquina Smith",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ajusta la barra de la máquina Smith a una altura justo debajo de los hombros. Ponte de pie frente a la barra con los pies separados a la altura de la cadera y los dedos de los pies apuntando hacia delante. Coloca la punta de los pies en el borde de un escalón o plataforma, con los talones colgando. Sujétate de la barra para apoyarte. Levanta los talones lo más alto posible, elevando el cuerpo sobre la punta de los pies. Haz una pausa breve en la parte alta y luego baja lentamente los talones de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1394-Lsqrgh4.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1394-Lsqrgh4.gif"
+    },
+    "ex043": {
+      "name": "Peso muerto con banda entre las piernas (pull-through)",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Sujeta una banda elástica a un punto de anclaje resistente a nivel del suelo. Ponte de pie de espaldas al punto de anclaje con los pies separados a la altura de los hombros. Da un paso adelante para generar tensión en la banda, manteniendo las rodillas ligeramente flexionadas. Flexiona las caderas y lleva los glúteos hacia atrás, manteniendo una ligera flexión en las rodillas. Baja el torso hasta que quede paralelo al suelo, sintiendo un estiramiento en los isquiotibiales. Empuja las caderas hacia adelante y aprieta los glúteos para regresar a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0991-VtTbiP3.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0991-VtTbiP3.gif"
+    },
+    "ex044": {
+      "name": "Zancada lateral con barra",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sujetando una barra sobre la parte superior de la espalda. Da un paso grande hacia el lado con el pie derecho, manteniendo el pie izquierdo fijo en el suelo. Flexiona la rodilla derecha y baja el cuerpo hacia una posición de zancada, manteniendo la pierna izquierda recta. Empuja con el pie derecho y vuelve a la posición inicial. Repite hacia el otro lado, dando el paso con el pie izquierdo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1410-py1HSzx.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1410-py1HSzx.gif"
+    },
+    "ex045": {
+      "name": "Estiramiento dorsal de cadera con rodillo",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Comienza arrodillándote en el suelo con el rodillo colocado debajo de las caderas. Coloca las manos sobre el rodillo para mayor apoyo. Rueda lentamente el rodillo hacia adelante, extendiendo las caderas y estirando los glúteos. Mantén el estiramiento durante unos segundos, luego regresa a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/2205-0L2KwtI.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/2205-0L2KwtI.gif"
+    },
+    "ex046": {
+      "name": "Peso muerto con piernas rectas y mancuernas",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sujetando una mancuerna en cada mano con un agarre prono. Manteniendo la espalda recta y el core activado, inclínate desde las caderas y baja las mancuernas hacia el suelo, permitiendo que el torso se incline hacia adelante. Continúa bajando las mancuernas hasta sentir un estiramiento en los isquiotibiales, manteniendo las rodillas ligeramente flexionadas. Haz una pausa breve en la posición más baja, luego activa los glúteos y los isquiotibiales para levantar el torso de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0434-oom75KC.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0434-oom75KC.gif"
+    },
+    "ex047": {
+      "name": "Sentadilla frontal con barra",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Empieza de pie con los pies separados a la altura de los hombros, con los dedos de los pies ligeramente hacia afuera. Sujeta la barra frente a los hombros, apoyándola sobre la clavícula y los hombros. Activa el core y mantén el pecho elevado mientras bajas el cuerpo hacia una posición de sentadilla, empujando las caderas hacia atrás y flexionando las rodillas. Baja hasta que los muslos queden paralelos al suelo, o tan abajo como puedas hacerlo cómodamente. Haz una pausa por un momento en la parte inferior, luego empuja con los talones para regresar a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0042-zG0zs85.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0042-zG0zs85.gif"
+    },
+    "ex048": {
+      "name": "Elevación de talones tipo burro a una pierna",
+      "category": "Piernas",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, con las puntas de los pies apuntando hacia adelante. Coloca las manos sobre una superficie estable para apoyarte, como una pared o una barra. Levanta una pierna del suelo, manteniendo la rodilla ligeramente flexionada. Eleva el talón lo más alto posible, usando los músculos de la pantorrilla. Haz una pausa por un momento en la parte superior, luego baja lentamente el talón de vuelta hacia abajo. Repite el número de repeticiones deseado, luego cambia de pierna.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1386-A2upspL.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1386-A2upspL.gif"
+    },
+    "ex049": {
+      "name": "Salto al cajón con estabilización a una pierna",
+      "category": "Piernas",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie frente a una caja o plataforma con los pies separados a la altura de los hombros. Flexiona las rodillas y salta sobre la caja, aterrizando suavemente con un pie sobre la caja y el otro pie colgando del borde. Estabilízate sobre la caja con el pie que está sobre ella, mientras mantienes el otro pie fuera del suelo. Mantén esta posición durante unos segundos, activando los músculos de la pantorrilla para conservar el equilibrio. Baja lentamente con el pie que está sobre la caja, volviendo a la posición inicial. Repite el ejercicio con la otra pierna.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1374-iPm26QU.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1374-iPm26QU.gif"
+    },
+    "ex050": {
+      "name": "Elevación de talones con agarre inverso en máquina Smith",
+      "category": "Piernas",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ajusta la barra de la máquina Smith a una altura justo debajo de los hombros. Ponte de pie frente a la barra con los pies separados a la altura de la cadera y los dedos de los pies apuntando hacia delante. Coloca la punta de los pies en el borde de un escalón o plataforma, con los talones colgando. Sujétate de la barra para apoyarte, manteniendo la espalda recta y el core activado. Levanta los talones lo más alto posible, elevando el peso de tu cuerpo sobre las puntas de los pies. Haz una pausa breve en la parte alta y luego baja lentamente los talones de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0763-ywaNfuh.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0763-ywaNfuh.gif"
+    },
+    "ex051": {
+      "name": "Remo invertido (vista dominante)",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Coloca una barra a la altura de la cintura en una máquina Smith o usa un entrenador de suspensión. Ponte de pie frente a la barra o al entrenador de suspensión y agárrala con agarre prono, manos separadas a la altura de los hombros. Camina con los pies hacia adelante, inclinándote hacia atrás hasta que el cuerpo quede en un ligero ángulo. Mantén el cuerpo recto y tira del pecho hacia la barra o las asas, apretando los omóplatos entre sí. Haz una pausa breve en la parte más alta, luego baja lentamente de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0497-uX3sUBz.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0497-uX3sUBz.gif"
+    },
+    "ex052": {
+      "name": "Dominada en L",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Sujeta la barra de dominadas con un agarre prono, un poco más ancho que la altura de los hombros. Cuélgate con los brazos completamente extendidos y el cuerpo recto. Activa los dorsales y los bíceps para llevar el cuerpo hacia arriba en dirección a la barra, manteniendo los codos cerca del cuerpo. Continúa subiendo hasta que la barbilla quede por encima de la barra. Haz una pausa por un momento en la parte superior, luego baja lentamente el cuerpo de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3418-d1GgzTU.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3418-d1GgzTU.gif"
+    },
+    "ex053": {
+      "name": "Muscle-up",
+      "category": "Espalda",
+      "level": 3,
+      "points": 10,
+      "instructions": "Comienza colgándote de una barra de dominadas con las palmas hacia afuera y los brazos completamente extendidos. Activa el core y tira de tu cuerpo hacia arriba, hacia la barra, guiando con el pecho. Al llegar a la parte alta del movimiento, cambia el agarre de modo que las palmas queden hacia ti. Sigue tirando hacia arriba hasta que el pecho quede por encima de la barra y los brazos estén completamente flexionados. Invierte el movimiento bajando lentamente de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0631-yJUHKTn.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0631-yJUHKTn.gif"
+    },
+    "ex054": {
+      "name": "Perro boca arriba (postura de yoga)",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Túmbate boca abajo en el suelo con las piernas extendidas detrás de ti. Coloca las manos en el suelo junto a las costillas inferiores, con los dedos apuntando hacia adelante. Presiona las manos firmemente contra el suelo y estira los brazos, levantando el torso y los muslos del suelo. Lleva los hombros hacia atrás y hacia abajo, abriendo el pecho y elevando la mirada hacia el techo. Mantén esta posición durante unas cuantas respiraciones, luego baja lentamente el cuerpo de nuevo a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1366-01qpYSe.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1366-01qpYSe.gif"
+    },
+    "ex055": {
+      "name": "Remo de pie a un brazo con peso corporal (con toalla)",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, las rodillas ligeramente flexionadas, y sujeta una toalla con una mano. Inclínate hacia adelante desde las caderas, manteniendo la espalda recta y el core activado. Tira de la toalla hacia el pecho, juntando los omóplatos. Haz una pausa breve en la parte más alta, luego baja lentamente la toalla de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia al otro brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3161-O4oIqQD.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3161-O4oIqQD.gif"
+    },
+    "ex056": {
+      "name": "Remo en sentadilla con peso corporal (con toalla)",
+      "category": "Espalda",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sujetando una toalla frente a ti con las palmas hacia abajo. Flexiona las rodillas y baja el cuerpo hacia una posición de sentadilla, manteniendo la espalda recta y el pecho elevado. Mientras bajas a la sentadilla, tira simultáneamente de la toalla hacia el pecho, juntando los omóplatos. Haz una pausa breve en la parte más baja de la sentadilla, luego vuelve lentamente a la posición inicial mientras extiendes los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3167-BReCuOn.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3167-BReCuOn.gif"
+    },
+    "ex057": {
+      "name": "Extensión de brazo recto en polea (vista dominante)",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Sujeta una barra recta a una máquina de cable con polea alta. Ponte de pie frente a la máquina con los pies separados a la altura de los hombros y una ligera flexión en las rodillas. Sujeta la barra con un agarre prono, manteniendo los brazos rectos y las palmas hacia abajo. Activa el core y mantén la espalda recta mientras exhalas y empujas la barra hacia abajo en dirección a los muslos. Haz una pausa por un momento en la parte baja y luego regresa lentamente la barra a la posición inicial mientras inhalas. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0199-PskORrA.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0199-PskORrA.gif"
+    },
+    "ex058": {
+      "name": "Pull-over con barra en banco declinado/inclinado",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Túmbate en un banco declinado con la cabeza más baja que las caderas y los pies sujetos. Sujeta una barra con un agarre pronado (palmas mirando hacia afuera) y extiende los brazos rectos por encima del pecho. Baja la barra detrás de la cabeza de forma controlada, manteniendo los brazos ligeramente flexionados. Haz una pausa breve y luego levanta la barra de vuelta a la posición inicial contrayendo los dorsales. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0034-hMEptv0.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0034-hMEptv0.gif"
+    },
+    "ex059": {
+      "name": "Dominada tras nuca",
+      "category": "Espalda",
+      "level": 3,
+      "points": 10,
+      "instructions": "Sujeta la barra de dominadas con un agarre prono, un poco más ancho que la altura de los hombros. Cuélgate de la barra con los brazos completamente extendidos y el cuerpo recto. Activa los músculos de la espalda y tira de tu cuerpo hacia arriba, hacia la barra, manteniendo los codos cerca del cuerpo. Continúa subiendo hasta que la barbilla quede por encima de la barra. Haz una pausa por un momento en la parte superior, luego baja lentamente el cuerpo de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0670-CbFSYC1.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0670-CbFSYC1.gif"
+    },
+    "ex060": {
+      "name": "Remo sentado en polea con cuerda",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate en la máquina de remo con los pies planos sobre los apoyapiés y las rodillas ligeramente flexionadas. Sujeta las cuerdas del cable con un agarre prono, con las palmas una frente a la otra. Mantén la espalda recta e inclínate ligeramente hacia adelante, manteniendo una ligera flexión en los codos. Jala las cuerdas del cable hacia el cuerpo, apretando los omóplatos entre sí. Haz una pausa por un momento en el punto más alto del movimiento, luego libera lentamente la tensión y regresa a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1323-SJqRxOt.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1323-SJqRxOt.gif"
+    },
+    "ex061": {
+      "name": "Escalada de cuerda",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie frente a la cuerda con los pies separados a la altura de los hombros. Sujeta la cuerda con ambas manos, con las palmas mirando hacia ti. Flexiona ligeramente las rodillas y activa el core. Comienza a subir por la cuerda alternando los movimientos de las manos. Usa las piernas para ayudar en el movimiento ascendente. Continúa trepando hasta alcanzar la altura deseada o la parte superior de la cuerda. Para descender, invierte el movimiento alterno de las manos mientras controlas tu descenso. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0680-yaAxcQr.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0680-yaAxcQr.gif"
+    },
+    "ex062": {
+      "name": "Estiramiento de espalda baja sentado",
+      "category": "Espalda",
+      "level": 3,
+      "points": 10,
+      "instructions": "Siéntate en el borde de una silla con los pies planos sobre el suelo. Coloca las manos sobre los muslos o a los lados de la silla para apoyarte. Inclínate lentamente hacia delante desde la cadera, manteniendo la espalda recta. Siente el estiramiento en la zona lumbar y mantén la posición durante 20-30 segundos. Regresa lentamente a la posición inicial y repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0690-QFmz6ch.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0690-QFmz6ch.gif"
+    },
+    "ex063": {
+      "name": "Remo en sentadilla con peso corporal",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sujetando un objeto resistente o un entrenador de suspensión con los brazos extendidos. Baja el cuerpo hacia una posición de sentadilla, manteniendo la espalda recta y las rodillas detrás de las puntas de los pies. Desde la posición de sentadilla, tira del cuerpo hacia arriba en dirección al objeto o al entrenador de suspensión, juntando los omóplatos. Haz una pausa por un momento en la parte superior, luego baja lentamente el cuerpo de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3168-3xK09Sk.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3168-3xK09Sk.gif"
+    },
+    "ex064": {
+      "name": "Dominada supina (chin-up)",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Cuélgate de una barra de dominadas con las palmas mirando hacia ti y las manos separadas a la altura de los hombros. Activa el core y tira de tu cuerpo hacia arriba, hacia la barra, guiando con el pecho. Continúa subiendo hasta que la barbilla quede por encima de la barra. Haz una pausa por un momento en la parte superior, luego baja lentamente el cuerpo de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1326-T2mxWqc.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1326-T2mxWqc.gif"
+    },
+    "ex065": {
+      "name": "Estiramiento de espalda y pectoral",
+      "category": "Espalda",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con la espalda recta y los pies separados a la altura de los hombros. Extiende los brazos rectos frente a ti, paralelos al suelo. Cruza los brazos frente al cuerpo, con el brazo derecho sobre el brazo izquierdo. Entrelaza los dedos y gira las palmas alejándolas del cuerpo. Levanta lentamente los brazos hacia arriba y alejándolos del cuerpo, sintiendo un estiramiento en la espalda y el pecho. Mantén el estiramiento durante 15-30 segundos, luego suelta. Repite del lado opuesto.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1405-chfnQnM.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1405-chfnQnM.gif"
+    },
+    "ex066": {
+      "name": "Elevador de espalda",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y las rodillas ligeramente flexionadas. Coloca las manos sobre las caderas o crúzalas frente al pecho. Manteniendo la espalda recta, inclínate lentamente hacia adelante desde la cintura, bajando la parte superior del cuerpo hacia el suelo. Haz una pausa por un momento en la posición más baja, luego sube lentamente la parte superior del cuerpo de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3292-zYmNaoY.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3292-zYmNaoY.gif"
+    },
+    "ex067": {
+      "name": "Remo sentado en polea con agarre ancho",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate en la máquina de remo con cable con los pies planos sobre los apoyapiés y las rodillas ligeramente flexionadas. Sujeta la agarradera con un agarre prono amplio, palmas hacia abajo. Mantén la espalda recta e inclínate ligeramente hacia adelante desde las caderas. Jala la agarradera hacia la parte baja del pecho, apretando los omóplatos entre sí. Haz una pausa por un momento en el punto más alto de la contracción. Suelta lentamente la agarradera de vuelta a la posición inicial, extendiendo los brazos por completo. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0218-qcY50ZD.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0218-qcY50ZD.gif"
+    },
+    "ex068": {
+      "name": "Encogimiento de hombros en máquina Smith",
+      "category": "Espalda",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y las rodillas ligeramente flexionadas. Agarra la barra con un agarre pronado, con las manos un poco más separadas que el ancho de los hombros. Mantén los brazos rectos y deja que la barra cuelgue frente a los muslos. Levanta los hombros directamente hacia las orejas, contrayendo los trapecios en la parte alta. Mantén la posición por un momento, luego baja los hombros de nuevo a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0746-MzNnwx9.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0746-MzNnwx9.gif"
+    },
+    "ex069": {
+      "name": "Remo sentado elevado en polea con cuerda",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate en el asiento elevado frente a la máquina de cable. Agarra las agarraderas de cuerda con un agarre prono, con las palmas una frente a la otra. Mantén la espalda recta e inclínate ligeramente hacia atrás, conservando una ligera flexión en las rodillas. Jala el cable hacia el cuerpo retrayendo los omóplatos y apretando los músculos de la espalda. Haz una pausa por un momento en la posición de contracción completa. Libera lentamente la tensión y extiende los brazos de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1321-c8oybX6.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1321-c8oybX6.gif"
+    },
+    "ex070": {
+      "name": "Hiperextensión en banco",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ajusta el banco de hiperextensiones para que las caderas queden apoyadas cómodamente en la almohadilla y los pies queden asegurados. Cruza los brazos sobre el pecho o coloca las manos detrás de la cabeza. Baja lentamente la parte superior del cuerpo hacia el suelo manteniendo la espalda recta. Haz una pausa breve en la parte baja, luego eleva la parte superior del cuerpo hasta que quede alineada con las piernas. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0488-zkgRrbK.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0488-zkgRrbK.gif"
+    },
+    "ex071": {
+      "name": "Remo inclinado a un brazo en polea",
+      "category": "Espalda",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie frente a una máquina de cable con los pies separados a la altura de los hombros. Flexiona ligeramente las rodillas e inclínate hacia adelante desde las caderas, manteniendo la espalda recta. Sujeta la agarradera del cable con una mano, con la palma hacia adentro, y extiende el brazo por completo. Jala la agarradera del cable hacia el cuerpo, manteniendo el codo cerca del costado, hasta que la mano llegue a la parte baja del pecho. Haz una pausa por un momento y luego extiende lentamente el brazo de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de lado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0189-EIsE3u8.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0189-EIsE3u8.gif"
+    },
+    "ex072": {
+      "name": "Remo inclinado en máquina",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y las rodillas ligeramente flexionadas. Sujeta la barra con un agarre pronado, manos un poco más separadas que el ancho de los hombros. Inclínate hacia delante desde las caderas, manteniendo la espalda recta y el pecho elevado. Tira de la barra hacia la parte inferior del pecho, juntando los omóplatos. Haz una pausa breve en la parte alta y luego baja lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0574-X3cqyXz.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0574-X3cqyXz.gif"
+    },
+    "ex073": {
+      "name": "Remo a un brazo en banco inclinado con mancuerna, agarre inverso",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Coloca un banco inclinado a un ángulo de 45 grados. Coloca una mancuerna en el suelo junto al banco. Ponte de pie frente al banco con los pies separados a la altura de los hombros. Inclínate desde la cintura y coloca la rodilla izquierda y la mano izquierda sobre el banco para apoyarte. Toma la mancuerna con la mano derecha usando un agarre inverso (con la palma hacia abajo). Mantén la espalda recta y el core activado. Tira de la mancuerna hacia el pecho, manteniendo el codo cerca del cuerpo. Aprieta los músculos de la espalda en la parte superior del movimiento. Baja la mancuerna de nuevo a la posición inicial de manera controlada. Repite el número de repeticiones deseado. Cambia de lado y repite el ejercicio con el brazo izquierdo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1330-ZIViNh1.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1330-ZIViNh1.gif"
+    },
+    "ex074": {
+      "name": "Remo alto en polea (de rodillas)",
+      "category": "Espalda",
+      "level": 3,
+      "points": 10,
+      "instructions": "Sujeta una barra recta a una máquina de cable a la altura del pecho. Ponte de rodillas frente a la máquina de cable y agarra la barra con un agarre prono, con las manos separadas a la altura de los hombros. Siéntate sobre los talones, manteniendo la espalda recta y el core activado. Jala la barra hacia la parte superior del abdomen, apretando los omóplatos entre sí. Haz una pausa por un momento en la parte más alta del movimiento y luego suelta lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0167-ZSJNetl.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0167-ZSJNetl.gif"
+    },
+    "ex075": {
+      "name": "Jalón en polea",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ajusta la máquina de jalón de cable de modo que el asiento quede a una altura cómoda y la almohadilla de rodillas esté asegurada. Siéntate con la espalda recta y los pies apoyados planos en el suelo. Sujeta la barra del cable con un agarre prono, un poco más separado que el ancho de los hombros. Inclínate ligeramente hacia atrás y activa el core. Jala la barra del cable hacia el pecho, apretando los omóplatos entre sí. Haz una pausa por un momento en la parte baja del movimiento y luego suelta lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0198-RVwzP10.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0198-RVwzP10.gif"
+    },
+    "ex076": {
+      "name": "Remo a un brazo con toalla",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, las rodillas ligeramente flexionadas, y sujeta una toalla con una mano. Inclínate hacia adelante desde la cintura, manteniendo la espalda recta y el core activado. Extiende completamente el brazo, dejando que la toalla cuelgue frente a ti. Tira de la toalla hacia el pecho, juntando los omóplatos. Haz una pausa breve en la parte más alta, luego baja lentamente la toalla de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1773-bKWbrTA.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1773-bKWbrTA.gif"
+    },
+    "ex077": {
+      "name": "Remo con mancuerna, agarre inverso",
+      "category": "Espalda",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y las rodillas ligeramente flexionadas. Sujeta una mancuerna en cada mano con agarre prono, con las palmas hacia tu cuerpo. Inclínate hacia adelante desde la cintura, manteniendo la espalda recta y el core activado. Deja que tus brazos cuelguen rectos hacia abajo, completamente extendidos, con una ligera flexión en los codos. Tira de las mancuernas hacia arriba, hacia el pecho, apretando los omóplatos entre sí. Haz una pausa breve en la parte alta, luego baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/2327-Nh3mvOO.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/2327-Nh3mvOO.gif"
+    },
+    "ex078": {
+      "name": "Estiramiento de espalda alta",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con la espalda recta y los pies separados a la altura de los hombros. Extiende los brazos rectos frente a ti, paralelos al suelo. Entrelaza los dedos y gira las palmas alejándolas de tu cuerpo. Eleva lentamente los brazos por encima de la cabeza, manteniéndolos rectos y paralelos entre sí. Mientras elevas los brazos, aprieta los omóplatos entre sí. Mantén el estiramiento de 15 a 30 segundos, luego suelta y repite.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1365-GSDioYu.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1365-GSDioYu.gif"
+    },
+    "ex079": {
+      "name": "Remo inclinado con barra",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Coloca un banco inclinado a un ángulo de 45 grados. Túmbate boca abajo en el banco con el pecho apoyado en el respaldo y los pies planos sobre el suelo. Agarra la barra con un agarre pronado un poco más ancho que la separación de los hombros. Mantén la espalda recta y el core activado. Tira de la barra hacia el pecho, juntando los omóplatos. Haz una pausa breve en la parte alta y luego baja lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0049-dmgMp3n.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0049-dmgMp3n.gif"
+    },
+    "ex080": {
+      "name": "Estiramiento de columna",
+      "category": "Espalda",
+      "level": 3,
+      "points": 10,
+      "instructions": "Siéntate en el suelo con las piernas extendidas frente a ti. Coloca las manos en el suelo detrás de ti, con los dedos apuntando hacia tu cuerpo. Activa el core e inclínate lentamente hacia atrás, manteniendo la espalda recta. Sigue inclinándote hacia atrás hasta que sientas un estiramiento en la columna. Mantén el estiramiento durante unos segundos, luego regresa lentamente a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1363-JbC2iaV.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1363-JbC2iaV.gif"
+    },
+    "ex081": {
+      "name": "Extensión de espalda sobre balón con rodillas fuera del suelo",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Coloca el balón de estabilidad en el suelo y túmbate boca abajo sobre él, con las caderas apoyadas en el balón y los pies contra una pared para mayor estabilidad. Coloca las manos detrás de la cabeza o cruzadas sobre el pecho. Activa el core y levanta lentamente la parte superior del cuerpo del balón, extendiendo la espalda hasta que tu cuerpo forme una línea recta desde la cabeza hasta los talones. Haz una pausa por un momento en la parte superior, luego baja lentamente la parte superior del cuerpo de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1335-WME869U.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1335-WME869U.gif"
+    },
+    "ex082": {
+      "name": "Jalón a un brazo en polea",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Sujeta una agarradera individual a una máquina de cable con polea alta. Ponte de pie frente a la máquina con los pies separados a la altura de los hombros. Sujeta la agarradera con un agarre prono y extiende el brazo por completo. Mantén la espalda recta y el core activado. Jala la agarradera hacia abajo en dirección al costado, manteniendo el codo cerca del cuerpo. Haz una pausa por un momento en la parte baja del movimiento, apretando el dorsal. Suelta lentamente la agarradera de vuelta a la posición inicial. Repite el número de repeticiones deseado. Cambia de lado y repite el ejercicio con el otro brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3563-U5INZY6.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3563-U5INZY6.gif"
+    },
+    "ex083": {
+      "name": "Hiperextensión",
+      "category": "Espalda",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ajusta el banco de hiperextensiones para que la parte superior de los muslos quede apoyada en la almohadilla y los pies queden asegurados. Cruza los brazos sobre el pecho o coloca las manos detrás de la cabeza. Baja la parte superior del cuerpo hacia el suelo manteniendo la espalda recta. Haz una pausa breve en la parte baja, luego eleva la parte superior del cuerpo hasta que quede alineada con las piernas. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0489-zhMwOwE.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0489-zhMwOwE.gif"
+    },
+    "ex084": {
+      "name": "Jalón al pecho en polea con cuerda",
+      "category": "Espalda",
+      "level": 1,
+      "points": 1,
+      "instructions": "Sujeta un accesorio de cuerda a la máquina de cable en una posición alta. Ponte de pie frente a la máquina con los pies separados a la altura de los hombros. Sujeta la cuerda con un agarre prono, con las palmas una frente a la otra. Mantén la espalda recta e inclínate ligeramente hacia atrás. Jala la cuerda hacia los costados, apretando los omóplatos entre sí. Haz una pausa por un momento en la parte baja del movimiento. Libera lentamente la tensión y permite que la cuerda vuelva a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0177-CuaWCmC.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0177-CuaWCmC.gif"
+    },
+    "ex085": {
+      "name": "Toque de dos puntos",
+      "category": "Espalda",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y los brazos extendidos hacia los lados. Inclínate hacia adelante desde la cintura, manteniendo la espalda recta y las rodillas ligeramente flexionadas. Estira los brazos hacia la punta de los pies con ambas manos, manteniendo las piernas rectas. Haz una pausa por un momento en la parte inferior, luego regresa lentamente a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3231-p195zsJ.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3231-p195zsJ.gif"
+    },
+    "ex086": {
+      "name": "Flexión de brazos inclinada",
+      "category": "Pecho",
+      "level": 1,
+      "points": 1,
+      "instructions": "Coloca las manos sobre una superficie elevada, como un banco o un escalón, ligeramente más separadas que la altura de los hombros. Extiende las piernas detrás de ti, apoyándote en la punta de los pies, formando una línea recta desde la cabeza hasta los talones. Baja el pecho hacia la superficie elevada doblando los codos, manteniendo el cuerpo en línea recta. Haz una pausa breve en la parte baja, luego empújate de nuevo hacia arriba a la posición inicial estirando los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0493-B1EVP9F.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0493-B1EVP9F.gif"
+    },
+    "ex087": {
+      "name": "Apertura a un brazo inclinada sobre balón con mancuerna",
+      "category": "Pecho",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate sobre un balón de estabilidad con una mancuerna en una mano. Camina con los pies hacia adelante y baja el cuerpo rodando hasta que la cabeza, el cuello y la parte superior de la espalda queden apoyados sobre el balón. Sostén la mancuerna con el brazo extendido recto hacia arriba sobre el pecho, con la palma hacia adentro. Baja lentamente la mancuerna hacia el lado, manteniendo una ligera flexión en el codo. Haz una pausa por un momento cuando el brazo esté paralelo al suelo. Activa los músculos del pecho para llevar la mancuerna de nuevo hacia arriba hasta la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1280-LLNh6q5.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1280-LLNh6q5.gif"
+    },
+    "ex088": {
+      "name": "Press declinado a un brazo en polea",
+      "category": "Pecho",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ajusta la máquina de cable a una posición declinada. Ponte de pie de espaldas a la máquina y sujeta la agarradera con una mano. Colócate con la espalda contra el banco declinado y el brazo extendido recto frente a ti. Flexiona el codo y baja la agarradera hacia el pecho, manteniendo el brazo superior quieto. Haz una pausa breve en la parte más baja, luego empuja la agarradera de vuelta hacia la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1260-KHGNa16.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1260-KHGNa16.gif"
+    },
+    "ex089": {
+      "name": "Press a un brazo en polea sobre balón",
+      "category": "Pecho",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate sobre un balón de ejercicio con los pies apoyados planos en el suelo y la espalda recta. Sujeta una agarradera del cable con una mano y coloca el brazo a la altura del pecho, con el codo flexionado. Coloca la otra mano en la cadera para mantener el equilibrio. Empuja la agarradera del cable hacia adelante, extendiendo el brazo por completo. Haz una pausa por un momento, luego regresa lentamente a la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1267-MKIelrR.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1267-MKIelrR.gif"
+    },
+    "ex090": {
+      "name": "Apertura baja en polea",
+      "category": "Pecho",
+      "level": 2,
+      "points": 5,
+      "instructions": "Sujeta las agarraderas a las poleas bajas de una máquina de cable y selecciona un peso adecuado. Ponte de pie en el centro de la máquina con los pies separados a la altura de los hombros y una ligera flexión en las rodillas. Sujeta las agarraderas con un agarre prono y extiende los brazos hacia los lados, manteniendo una ligera flexión en los codos. Manteniendo el control, lleva lentamente los brazos hacia adelante con un movimiento amplio, cruzándolos frente al cuerpo. Haz una pausa por un momento en el punto más alto del movimiento, sintiendo el estiramiento en los músculos del pecho. Invierte el movimiento y regresa lentamente los brazos a la posición inicial, manteniendo la tensión en los músculos del pecho durante todo el recorrido. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0179-FVmZVhk.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0179-FVmZVhk.gif"
+    },
+    "ex091": {
+      "name": "Apertura declinada en polea",
+      "category": "Pecho",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ajusta la máquina de cable a una posición declinada. Ponte de pie de espaldas a la máquina con los pies separados a la altura de los hombros. Sujeta las agarraderas con las palmas hacia adelante y los brazos extendidos rectos frente a ti. Manteniendo una ligera flexión en los codos, abre los brazos hacia los lados con un movimiento controlado. Haz una pausa breve en la posición completamente extendida, luego vuelve lentamente a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0158-7saC5zz.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0158-7saC5zz.gif"
+    },
+    "ex092": {
+      "name": "Cruce de poleas (variación)",
+      "category": "Pecho",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ajusta las poleas del cable a la altura del pecho. Ponte de pie en el centro de la máquina de cable con un pie delante del otro. Sujeta las agarraderas con las palmas hacia abajo y los brazos extendidos hacia los lados. Da un paso hacia adelante, manteniendo los brazos ligeramente flexionados. Con una ligera flexión en los codos, junta las manos frente al pecho. Haz una pausa breve, luego vuelve lentamente los brazos a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0155-0CXGHya.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0155-0CXGHya.gif"
+    },
+    "ex093": {
+      "name": "Apertura alta con mancuerna",
+      "category": "Pecho",
+      "level": 2,
+      "points": 5,
+      "instructions": "Túmbate boca arriba en un banco con una mancuerna en cada mano, con las palmas enfrentadas entre sí. Extiende los brazos rectos hacia arriba sobre el pecho, con una ligera flexión en los codos. Manteniendo una ligera flexión en los codos, baja las mancuernas hacia los lados describiendo un amplio arco hasta sentir un estiramiento en el pecho. Haz una pausa por un momento, luego invierte el movimiento y lleva las mancuernas de nuevo hacia arriba hasta la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3234-P9ZRyLT.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3234-P9ZRyLT.gif"
+    },
+    "ex094": {
+      "name": "Press de banca con barra, agarre abierto e inverso",
+      "category": "Pecho",
+      "level": 3,
+      "points": 10,
+      "instructions": "Túmbate sobre un banco con los pies apoyados en el suelo y la espalda presionada contra el banco. Sujeta la barra con un agarre supino amplio, un poco más separado que el ancho de los hombros. Levanta la barra del soporte y sostenla directamente sobre el pecho con los brazos completamente extendidos. Baja la barra lentamente hacia el pecho, manteniendo los codos pegados al cuerpo y las muñecas rectas. Haz una pausa breve cuando la barra toque el pecho y luego empújala de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1258-945zpRg.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1258-945zpRg.gif"
+    },
+    "ex095": {
+      "name": "Press en polea sobre balón",
+      "category": "Pecho",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate sobre un balón de ejercicio con los pies apoyados planos en el suelo y las rodillas en un ángulo de 90 grados. Sujeta las agarraderas del cable a la altura del pecho con las palmas hacia abajo y los codos flexionados. Activa el core y empuja las agarraderas del cable hacia adelante hasta que los brazos queden completamente extendidos. Haz una pausa por un momento y luego libera lentamente la tensión, regresando las agarraderas del cable a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1268-vAwm6rK.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1268-vAwm6rK.gif"
+    },
+    "ex096": {
+      "name": "Press inclinado a un brazo con mancuerna",
+      "category": "Pecho",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate en un banco inclinado con una mancuerna en una mano, apoyada sobre el muslo. Recuéstate en el banco y coloca la mancuerna a la altura del hombro, con la palma hacia adelante. Empuja la mancuerna hacia arriba y ligeramente hacia adentro, extendiendo completamente el brazo. Haz una pausa breve en la parte más alta, luego baja lentamente la mancuerna de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia al otro brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1281-rDAiRf9.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1281-rDAiRf9.gif"
+    },
+    "ex097": {
+      "name": "Flexión de brazos con balón medicinal",
+      "category": "Pecho",
+      "level": 3,
+      "points": 10,
+      "instructions": "Comienza en una posición de plancha alta con las manos sobre el balón medicinal, separadas a la altura de los hombros. Activa el core y baja el cuerpo hacia el suelo flexionando los codos, manteniendo la espalda recta. Empuja con las palmas para extender los brazos y regresar a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0663-W8KAlkI.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0663-W8KAlkI.gif"
+    },
+    "ex098": {
+      "name": "Press con mancuernas sobre balón",
+      "category": "Pecho",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate sobre un balón de estabilidad con los pies planos en el suelo y una mancuerna en cada mano, apoyadas sobre los muslos. Camina lentamente hacia adelante con los pies, haciendo rodar el balón de estabilidad hasta que tu zona lumbar quede apoyada sobre el balón y tus rodillas formen un ángulo de 90 grados. Sube las mancuernas hasta la altura de los hombros, con las palmas hacia adelante. Empuja las mancuernas hacia arriba hasta que los brazos estén completamente extendidos. Haz una pausa breve en la parte alta, luego baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1293-O8o7q4d.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1293-O8o7q4d.gif"
+    },
+    "ex099": {
+      "name": "Apertura con mancuernas sobre balón",
+      "category": "Pecho",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate sobre un balón de estabilidad y sostén una mancuerna en cada mano. Camina con los pies hacia adelante y baja el cuerpo rodando hasta que la cabeza, el cuello y la parte superior de la espalda queden apoyados sobre el balón. Extiende los brazos rectos por encima del pecho, con las palmas enfrentadas entre sí. Flexiona ligeramente los codos y baja los brazos hacia los lados describiendo un amplio arco hasta sentir un estiramiento en el pecho. Haz una pausa por un momento, luego invierte el movimiento y contrae los músculos del pecho mientras llevas las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1277-Lt3iWnf.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1277-Lt3iWnf.gif"
+    },
+    "ex100": {
+      "name": "Flexión de brazos declinada",
+      "category": "Pecho",
+      "level": 3,
+      "points": 10,
+      "instructions": "Coloca las manos en el suelo un poco más separadas que el ancho de los hombros, con los pies elevados sobre una superficie estable. Mantén el cuerpo en línea recta de la cabeza a los pies, activando los músculos del core. Baja el pecho hacia el suelo flexionando los codos, manteniéndolos cerca del cuerpo. Empuja con las palmas para extender los brazos y regresar a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0279-i5cEhka.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0279-i5cEhka.gif"
+    },
+    "ex101": {
+      "name": "Estiramiento asistido de pectoral mayor sentado con balón suizo",
+      "category": "Pecho",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate sobre un balón de estabilidad con los pies apoyados en el suelo y la espalda recta. Sostén un balón de estabilidad con ambas manos y extiende los brazos rectos frente a ti. Baja lentamente el balón de estabilidad hacia el pecho, sintiendo un estiramiento en los pectorales. Mantén el estiramiento durante unos segundos, luego regresa lentamente a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1716-RoV1Rfa.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1716-RoV1Rfa.gif"
+    },
+    "ex102": {
+      "name": "Flexión de brazos de rodillas",
+      "category": "Pecho",
+      "level": 2,
+      "points": 5,
+      "instructions": "Comienza arrodillado en el suelo con las manos separadas a la altura de los hombros, los dedos apuntando hacia adelante. Extiende las piernas hacia atrás, apoyándote en la punta de los pies, de modo que tu cuerpo forme una línea recta desde la cabeza hasta los talones. Activa el core y baja el cuerpo hacia el suelo flexionando los codos, manteniéndolos cerca de los costados. Continúa bajando hasta que el pecho esté justo encima del suelo, luego empuja hacia arriba a la posición inicial enderezando los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3211-ZOuKWir.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3211-ZOuKWir.gif"
+    },
+    "ex103": {
+      "name": "Press de banca con mancuerna",
+      "category": "Pecho",
+      "level": 3,
+      "points": 10,
+      "instructions": "Túmbate sobre un banco con los pies apoyados en el suelo y la espalda presionada contra el banco. Sujeta una mancuerna en cada mano, con las palmas hacia adelante y los brazos extendidos por encima del pecho. Baja lentamente las mancuernas hacia los lados del pecho, manteniendo los codos en un ángulo de 90 grados. Haz una pausa breve, luego empuja las mancuernas de vuelta hacia arriba hasta la posición inicial, extendiendo completamente los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0289-SpYC0Kp.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0289-SpYC0Kp.gif"
+    },
+    "ex104": {
+      "name": "Press alterno en el suelo con pesas rusas",
+      "category": "Pecho",
+      "level": 1,
+      "points": 1,
+      "instructions": "Comienza acostado boca arriba en el suelo con las rodillas dobladas y los pies planos sobre el suelo. Sostén una pesa rusa en cada mano, con las palmas hacia los pies y los brazos extendidos rectos hacia el techo. Baja una pesa rusa hacia el hombro mientras mantienes la otra pesa rusa extendida recta hacia arriba. Empuja la pesa rusa bajada de vuelta hacia la posición inicial mientras al mismo tiempo bajas la otra pesa rusa hacia el hombro. Continúa alternando el movimiento de empuje con cada pesa rusa durante el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0519-7w6i0vE.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0519-7w6i0vE.gif"
+    },
+    "ex105": {
+      "name": "Flexión de brazos con activación escapular",
+      "category": "Pecho",
+      "level": 2,
+      "points": 5,
+      "instructions": "Comienza en una posición de plancha alta con las manos justo debajo de los hombros y el cuerpo en línea recta. Baja el pecho hacia el suelo, manteniendo los codos cerca del cuerpo. A medida que bajas, junta las escápulas y empuja el pecho hacia delante. Haz una pausa por un momento en la posición baja, luego empuja de nuevo hacia arriba hasta la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3021-jV65tKx.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3021-jV65tKx.gif"
+    },
+    "ex106": {
+      "name": "Flexión de brazos en suspensión (TRX)",
+      "category": "Pecho",
+      "level": 3,
+      "points": 10,
+      "instructions": "Busca un entrenador de suspensión y ajústalo a una altura adecuada. Ponte de pie de espaldas al punto de anclaje y sostén las asas con un agarre prono. Camina hacia adelante con los pies, inclinando el cuerpo hacia adelante hasta que tu peso quede sostenido por el entrenador de suspensión. Mantén el cuerpo recto desde la cabeza hasta los talones, activa el core y baja el pecho hacia las asas. Empuja con el pecho y los brazos para volver a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0806-IaGQCrC.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0806-IaGQCrC.gif"
+    },
+    "ex107": {
+      "name": "Press de pecho declinado en máquina",
+      "category": "Pecho",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ajusta la altura del asiento y el respaldo de la máquina de palanca a una posición cómoda. Siéntate en la máquina con la espalda apoyada en el respaldo y los pies planos en el suelo. Sujeta las asas con un agarre prono y coloca las manos un poco más separadas que la altura de los hombros. Empuja las asas hacia adelante y alejándolas del cuerpo hasta que los brazos queden completamente extendidos. Baja lentamente las asas de vuelta hacia el pecho, manteniendo los codos ligeramente flexionados. Haz una pausa breve en la parte baja, luego empuja las asas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1300-vsVoPHt.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1300-vsVoPHt.gif"
+    },
+    "ex108": {
+      "name": "Flexión de pecho con balón medicinal (repeticiones múltiples)",
+      "category": "Pecho",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sosteniendo un balón medicinal a la altura del pecho. Extiende los brazos hacia adelante, alejando el balón medicinal de tu pecho. Haz una pausa por un momento y luego lleva lentamente el balón medicinal de vuelta al pecho. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1304-7aolH9D.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1304-7aolH9D.gif"
+    },
+    "ex109": {
+      "name": "Flexión de pecho con balón medicinal y lanzamiento en carrera",
+      "category": "Pecho",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sosteniendo un balón medicinal a la altura del pecho. Da un paso adelante con el pie derecho y, al mismo tiempo, empuja el balón medicinal hacia adelante, extendiendo completamente los brazos. Mientras empujas el balón hacia adelante, suéltalo y déjalo rodar. Corre rápidamente hacia adelante y atrapa el balón antes de que toque el suelo. Una vez que atrapes el balón, llévalo de vuelta al pecho y repite el movimiento con el pie izquierdo adelante. Continúa alternando piernas y repitiendo el ejercicio el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1312-pX9Elbe.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1312-pX9Elbe.gif"
+    },
+    "ex110": {
+      "name": "Press en el suelo a un brazo con pesa rusa",
+      "category": "Pecho",
+      "level": 1,
+      "points": 1,
+      "instructions": "Túmbate boca arriba en el suelo con las rodillas flexionadas y los pies planos sobre el suelo. Sujeta la pesa rusa con una mano con la palma hacia los pies y el brazo extendido recto hacia el techo. Baja lentamente la pesa rusa hacia el pecho flexionando el codo, manteniendo el brazo superior cerca del cuerpo. Haz una pausa cuando la pesa rusa esté justo encima del pecho, luego empújala de vuelta hacia arriba a la posición inicial extendiendo el codo. Repite el número de repeticiones deseado, luego cambia al otro brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1298-rg59QCH.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1298-rg59QCH.gif"
+    },
+    "ex111": {
+      "name": "Aperturas inclinadas con giro y mancuernas",
+      "category": "Pecho",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ajusta un banco inclinado a un ángulo de 45 grados y siéntate en él con una mancuerna en cada mano, con las palmas enfrentadas entre sí. Recuéstate en el banco y empuja las mancuernas hacia arriba hasta la posición inicial, directamente por encima del pecho, con los brazos extendidos. Baja las mancuernas hacia los lados describiendo un amplio arco hasta sentir un estiramiento en el pecho. Mientras bajas las mancuernas, gira las muñecas de modo que las palmas queden mirando hacia adelante en la parte inferior del movimiento. Invierte el movimiento y lleva las mancuernas de nuevo hacia arriba hasta la posición inicial, contrayendo los músculos del pecho en la parte superior. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0331-1PLE8e9.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0331-1PLE8e9.gif"
+    },
+    "ex112": {
+      "name": "Press martillo inclinado con mancuernas",
+      "category": "Pecho",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ajusta un banco inclinado a un ángulo de 45 grados y siéntate en él con una mancuerna en cada mano, apoyadas sobre los muslos. Recuéstate en el banco y coloca las mancuernas a la altura de los hombros con las palmas enfrentadas entre sí. Empuja las mancuernas hacia arriba y alejándolas del cuerpo hasta que los brazos queden completamente extendidos. Haz una pausa breve en la parte alta, luego baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0321-PG1kcIb.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0321-PG1kcIb.gif"
+    },
+    "ex113": {
+      "name": "Apertura a un brazo con mancuerna sobre balón",
+      "category": "Pecho",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate sobre un balón de estabilidad con una mancuerna en una mano y los pies apoyados en el suelo. Camina con los pies hacia adelante y baja el cuerpo rodando hasta que la parte superior de la espalda quede apoyada sobre el balón de estabilidad. Extiende el brazo con la mancuerna recto hacia arriba sobre el pecho, con la palma hacia adentro. Baja lentamente la mancuerna hacia el lado, manteniendo una ligera flexión en el codo. Haz una pausa por un momento, luego contrae los músculos del pecho para llevar la mancuerna de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1288-Am02iPd.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1288-Am02iPd.gif"
+    },
+    "ex114": {
+      "name": "Curl a un brazo en polea con agarre inverso",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie frente a una máquina de cable con los pies separados a la altura de los hombros. Sujeta la agarradera del cable con un agarre supino, con la palma hacia abajo. Mantén el codo cerca del costado y curva lentamente el antebrazo hacia el hombro. Haz una pausa por un momento en la parte superior, luego baja lentamente el antebrazo de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1413-gVlnLIJ.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1413-gVlnLIJ.gif"
+    },
+    "ex115": {
+      "name": "Extensión de tríceps de pie asistida (con toalla)",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sostén una toalla con ambas manos detrás de la cabeza. Mantén los codos cerca de las orejas y la parte superior de los brazos quieta. Extiende lentamente los antebrazos hacia arriba, apretando los tríceps en la parte superior. Haz una pausa por un momento, luego baja lentamente la toalla de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0018-7HcfMBP.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0018-7HcfMBP.gif"
+    },
+    "ex116": {
+      "name": "Curl de bíceps con mancuerna, agarre inverso",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con una mancuerna en cada mano, con las palmas hacia abajo y los brazos completamente extendidos. Manteniendo los brazos superiores fijos, exhala y levanta el peso mientras contraes los bíceps. Continúa levantando las pesas hasta que los bíceps estén completamente contraídos y las mancuernas estén a la altura de los hombros. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Inhala y comienza a bajar lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0382-e4ojVhP.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0382-e4ojVhP.gif"
+    },
+    "ex117": {
+      "name": "Curl martillo en banco predicador con mancuerna",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con una mancuerna en cada mano, con las palmas mirando hacia el torso. Mantén los codos cerca del torso y gira las palmas de las manos hasta que queden mirando hacia adelante. Esta será tu posición inicial. Ahora, manteniendo los brazos superiores quietos, exhala y flexiona los brazos contrayendo los bíceps. Continúa levantando las pesas hasta que los bíceps estén completamente contraídos y las mancuernas estén a la altura de los hombros. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Luego, inhala y comienza a bajar lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones recomendado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0370-F1KxjBa.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0370-F1KxjBa.gif"
+    },
+    "ex118": {
+      "name": "Extensión de tríceps sentado inclinado con mancuerna",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate en un banco con los pies apoyados en el suelo y sujeta una mancuerna en cada mano. Inclínate hacia adelante desde la cintura, manteniendo la espalda recta y la cabeza erguida. Extiende los brazos rectos hacia atrás, manteniendo los codos cerca de la cabeza. Haz una pausa por un momento, luego baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1737-4ievMJ9.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1737-4ievMJ9.gif"
+    },
+    "ex119": {
+      "name": "Curl a dos brazos en polea sobre banco inclinado",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Siéntate en un banco inclinado con la espalda apoyada en el respaldo y los pies planos en el suelo. Agarra los mangos del cable con un agarre supino, con las palmas hacia arriba y los brazos completamente extendidos. Manteniendo los brazos superiores quietos, exhala y flexiona los mangos hacia los hombros mientras contraes los bíceps. Haz una pausa breve en la parte más alta del movimiento, contrayendo los bíceps. Inhala y baja lentamente los mangos de vuelta a la posición inicial, extendiendo completamente los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1645-H9y3Dkr.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1645-H9y3Dkr.gif"
+    },
+    "ex120": {
+      "name": "Extensión de tríceps alterna en polea",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie frente a la máquina de cable con los pies separados a la altura de los hombros. Sujeta la agarradera del cable con la mano derecha y levanta el brazo de modo que el brazo superior quede paralelo al suelo y el codo flexionado en un ángulo de 90 grados. Mantén el brazo superior quieto y extiende el antebrazo hacia atrás, estirando completamente el brazo. Haz una pausa por un momento, luego regresa lentamente a la posición inicial. Repite con el brazo izquierdo. Continúa alternando los brazos durante el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0149-Gchi5Tr.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0149-Gchi5Tr.gif"
+    },
+    "ex121": {
+      "name": "Press desde pines con barra",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Coloca una barra en un rack de potencia a la altura del pecho. Ponte de pie frente a la barra y colócate debajo de ella, con los pies separados a la altura de los hombros. Agarra la barra con un agarre pronado un poco más ancho que la separación de los hombros. Levanta la barra del soporte y sostenla directamente sobre el pecho con los brazos completamente extendidos. Baja la barra hacia el pecho, manteniendo los codos pegados cerca del cuerpo. Haz una pausa breve cuando la barra toque el pecho. Empuja la barra de vuelta a la posición inicial, extendiendo completamente los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1751-bndCa3Q.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1751-bndCa3Q.gif"
+    },
+    "ex122": {
+      "name": "Curl inclinado con mancuerna",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ajusta un banco inclinado a un ángulo de 45 grados y siéntate en él con una mancuerna en cada mano, con las palmas hacia adelante. Apoya los brazos superiores en el banco inclinado y deja que los codos cuelguen hacia abajo, extendiendo completamente los brazos. Manteniendo los brazos superiores fijos, exhala y levanta el peso mientras contraes los bíceps. Continúa levantando las mancuernas hasta que los bíceps estén completamente contraídos y las mancuernas estén a la altura de los hombros. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Inhala y comienza a bajar lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0318-ae9UoXQ.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0318-ae9UoXQ.gif"
+    },
+    "ex123": {
+      "name": "Curl sentado con mancuerna",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate en un banco con los pies apoyados en el suelo y una mancuerna en cada mano, con las palmas hacia adelante. Mantén la espalda recta y los codos cerca del torso. Exhala y flexiona las mancuernas hacia los hombros, contrayendo los bíceps. Haz una pausa por un momento en la parte superior, luego inhala y baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0391-TiaZTxx.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0391-TiaZTxx.gif"
+    },
+    "ex124": {
+      "name": "Patada de tríceps sobre balón con mancuerna",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate sobre un balón de ejercicio con los pies apoyados planos en el suelo y la espalda recta. Sostén una mancuerna en cada mano con las palmas hacia adentro y los brazos flexionados en un ángulo de 90 grados. Extiende los brazos rectos hacia atrás, contrayendo los tríceps en la parte superior del movimiento. Haz una pausa por un momento, luego baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1734-cAvTaSg.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1734-cAvTaSg.gif"
+    },
+    "ex125": {
+      "name": "Extensión en polea con agarre inverso",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Sujeta una barra recta a una máquina de cable con polea alta. Ponte de pie frente a la máquina con los pies separados a la altura de los hombros. Sujeta la barra con un agarre supino, con las palmas hacia arriba y las manos separadas a la altura de los hombros. Mantén los codos cerca de los costados y los brazos superiores quietos durante todo el ejercicio. Usando los tríceps, empuja la barra hacia abajo hasta que los brazos queden completamente extendidos y los tríceps contraídos. Haz una pausa por un momento y luego regresa lentamente la barra a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0207-VjYliFZ.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0207-VjYliFZ.gif"
+    },
+    "ex126": {
+      "name": "Press de banca agarre cerrado e inverso con barra",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Túmbate sobre un banco con los pies apoyados en el suelo y la espalda presionada contra el banco. Agarra la barra con un agarre invertido, manos separadas a la altura de los hombros. Levanta la barra del soporte y sostenla directamente sobre el pecho con los brazos completamente extendidos. Baja la barra lentamente hacia el pecho, manteniendo los codos cerca del cuerpo. Haz una pausa breve cuando la barra esté justo encima del pecho. Empuja la barra de vuelta a la posición inicial, extendiendo completamente los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/2187-YqJw82s.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/2187-YqJw82s.gif"
+    },
+    "ex127": {
+      "name": "Curl de bíceps en máquina",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ajusta la altura del asiento y colócate en la máquina con la espalda apoyada en la almohadilla. Sujeta las asas con un agarre supino, con las palmas hacia arriba, y mantén los codos cerca de los costados. Exhala y flexiona las asas hacia arriba, contrayendo los bíceps. Haz una pausa breve en la parte más alta del movimiento, contrayendo los bíceps. Inhala y baja lentamente los mangos de vuelta a la posición inicial, extendiendo completamente los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0575-q6y3OhV.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0575-q6y3OhV.gif"
+    },
+    "ex128": {
+      "name": "Curl de muñeca inverso de pie con barra",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sujeta una barra con agarre prono. Apoya la barra sobre el dorso de las manos con las palmas hacia abajo y los dedos apuntando hacia el cuerpo. Manteniendo los brazos superiores quietos, exhala y flexiona las muñecas hacia arriba lo más posible. Mantén la posición contraída durante una breve pausa, luego inhala y baja lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0104-2qTvJAZ.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0104-2qTvJAZ.gif"
+    },
+    "ex129": {
+      "name": "Curl martillo boca abajo en banco inclinado con mancuerna",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ajusta el banco a una inclinación de 45 grados. Túmbate boca abajo en el banco con una mancuerna en cada mano, con las palmas mirándose entre sí. Deja que los brazos cuelguen rectos hacia el suelo, manteniendo los codos ligeramente flexionados. Manteniendo los brazos superiores fijos, exhala y levanta el peso mientras contraes los bíceps. Continúa levantando las mancuernas hasta que los bíceps estén completamente contraídos y las mancuernas estén a la altura de los hombros. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Inhala y comienza a bajar lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1674-cWemPG8.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1674-cWemPG8.gif"
+    },
+    "ex130": {
+      "name": "Extensión de tríceps elevada en polea con cuerda",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Sujeta una cuerda a una máquina de cable en una posición alta. Ponte de pie de espaldas a la máquina con los pies separados a la altura de los hombros. Sujeta la cuerda con ambas manos, con las palmas una frente a la otra, y lleva las manos por encima de la cabeza. Mantén la parte superior de los brazos cerca de la cabeza y los codos apuntando hacia adelante. Baja lentamente la cuerda detrás de la cabeza flexionando los codos. Haz una pausa breve y luego extiende los brazos de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0194-2IxROQ1.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0194-2IxROQ1.gif"
+    },
+    "ex131": {
+      "name": "Curl a un brazo de pie con mancuerna (apoyado en banco inclinado)",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sujetando una mancuerna con una mano, con la palma hacia adelante. Coloca la otra mano sobre un banco inclinado para apoyarte. Manteniendo fija la parte superior del brazo, exhala y flexiona la mancuerna hacia el hombro contrayendo el bíceps. Haz una pausa por un momento arriba, luego inhala y baja lentamente la mancuerna a la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0422-BIb1tGo.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0422-BIb1tGo.gif"
+    },
+    "ex132": {
+      "name": "Curl de bíceps a un brazo sentado sobre balón con mancuerna",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate sobre un balón de ejercicio con los pies apoyados planos en el suelo y la espalda recta. Sostén una mancuerna en una mano con la palma hacia arriba y el brazo completamente extendido. Manteniendo el brazo superior quieto, flexiona la mancuerna hacia el hombro contrayendo el bíceps. Haz una pausa breve en la parte más alta, luego baja lentamente la mancuerna de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1668-s999Hdo.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1668-s999Hdo.gif"
+    },
+    "ex133": {
+      "name": "Flexión de brazos con agarre cerrado y banda",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Coloca una banda alrededor de la parte superior de los brazos, justo por encima de los codos. Adopta una posición de flexión de brazos con las manos justo debajo de los hombros y el cuerpo en línea recta desde la cabeza hasta los talones. Flexiona los codos y baja el pecho hacia el suelo, manteniendo los codos cerca de los costados. Empuja con las palmas para extender los brazos y regresar a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0975-ufaxB52.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0975-ufaxB52.gif"
+    },
+    "ex134": {
+      "name": "Curl de bíceps sentado con mancuerna",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Siéntate en un banco con los pies apoyados en el suelo y sostén una mancuerna en cada mano, con las palmas hacia arriba. Mantén la espalda recta y los codos cerca del torso. Exhala y flexiona las mancuernas hacia los hombros, contrayendo los bíceps. Haz una pausa por un momento en la parte superior, luego inhala y baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1677-xiA6lRr.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1677-xiA6lRr.gif"
+    },
+    "ex135": {
+      "name": "Flexión de brazos lateral",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Comienza tumbado de lado con las piernas extendidas y apiladas una sobre la otra. Coloca la mano de abajo en el suelo directamente debajo del hombro, con los dedos apuntando hacia delante. Empuja con la mano de abajo para levantar el cuerpo del suelo, manteniendo las piernas rectas y el core activado. Extiende el brazo de arriba recto hacia el techo, formando una línea recta desde la cabeza hasta los talones. Baja el cuerpo de nuevo a la posición inicial con control. Repite el número de repeticiones deseado, luego cambia de lado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0717-wpbD28t.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0717-wpbD28t.gif"
+    },
+    "ex136": {
+      "name": "Extensión de tríceps boca arriba sobre balón",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate sobre un balón de estabilidad con los pies apoyados en el suelo y las rodillas flexionadas en un ángulo de 90 grados. Sostén una mancuerna con ambas manos y extiende los brazos rectos hacia el techo. Baja lentamente la mancuerna detrás de la cabeza, manteniendo los codos cerca de las orejas. Haz una pausa por un momento, luego sube la mancuerna de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1746-Gm2Uv1z.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1746-Gm2Uv1z.gif"
+    },
+    "ex137": {
+      "name": "Curl de bíceps elevado a un brazo con banda",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y coloca un extremo de la banda bajo el pie. Sostén el otro extremo de la banda con el brazo completamente extendido por encima de la cabeza, con la palma hacia adelante. Manteniendo quieta la parte superior del brazo, flexiona el antebrazo hacia el hombro, apretando el bíceps. Haz una pausa por un momento en la parte superior, luego baja lentamente el antebrazo de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0986-UNAB8ak.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0986-UNAB8ak.gif"
+    },
+    "ex138": {
+      "name": "Curl predicador con agarre inverso y barra",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate en un banco predicador con el pecho apoyado en el cojín y los brazos extendidos rectos hacia abajo, sujetando una barra con un agarre pronado. Manteniendo los brazos superiores fijos, exhala y levanta la barra hacia arriba mientras contraes los bíceps. Continúa levantando la barra hasta que los bíceps estén completamente contraídos y la barra esté a la altura de los hombros. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Inhala y baja lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0081-4LIG9xr.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0081-4LIG9xr.gif"
+    },
+    "ex139": {
+      "name": "Curl de muñeca con palmas arriba y abajo sobre banco con barra",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate en un banco con los pies planos sobre el suelo y sujeta una barra con un agarre supino, con las palmas hacia arriba. Apoya los antebrazos sobre el banco, dejando que las muñecas cuelguen del borde. Manteniendo los antebrazos fijos, exhala y flexiona las muñecas hacia arriba tanto como sea posible. Mantén la posición contraída durante una breve pausa, luego inhala y baja lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1412-SJAA2IQ.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1412-SJAA2IQ.gif"
+    },
+    "ex140": {
+      "name": "Flexión de brazos en diamante",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Comienza en posición de plancha alta con las manos juntas, formando una figura de diamante con los pulgares y los índices. Mantén el cuerpo en línea recta de la cabeza a los pies, activando el core y los glúteos. Baja el pecho hacia la figura de diamante formada por tus manos, manteniendo los codos cerca del cuerpo. Haz una pausa por un momento en la parte inferior, luego empuja tu cuerpo de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0283-soIB2rj.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0283-soIB2rj.gif"
+    },
+    "ex141": {
+      "name": "Fondos de tríceps con peso",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate en el borde de un banco o silla con las manos sujetando el borde junto a las caderas. Desliza los glúteos fuera del frente del banco con las piernas extendidas frente a ti. Mantén la espalda cerca del banco y los codos ligeramente flexionados. Baja el cuerpo flexionando los codos hasta que los brazos queden paralelos al suelo. Empújate de vuelta hacia arriba a la posición inicial extendiendo los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1755-bZq4bwK.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1755-bZq4bwK.gif"
+    },
+    "ex142": {
+      "name": "Curl araña con barra EZ",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sostén la barra EZ con agarre supino, palmas hacia arriba. Apoya los brazos superiores en un banco scott o en un balón de estabilidad, dejando que los codos cuelguen hacia abajo. Manteniendo los brazos superiores fijos, exhala y levanta la barra hacia los hombros. Haz una pausa breve en la parte alta, apretando los bíceps. Inhala y baja lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0454-Ye5Qxb0.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0454-Ye5Qxb0.gif"
+    },
+    "ex143": {
+      "name": "Press de banca con giro y mancuernas",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Túmbate sobre un banco con los pies apoyados en el suelo y la espalda presionada contra el banco. Sujeta una mancuerna en cada mano con agarre prono, con las palmas alejadas de ti. Extiende los brazos rectos hacia arriba sobre el pecho, con una ligera flexión en los codos. Baja las mancuernas hacia el pecho, manteniendo los codos cerca del cuerpo. Mientras bajas las mancuernas, gira las muñecas de modo que las palmas queden hacia ti en la parte más baja del movimiento. Haz una pausa por un momento en la parte más baja, luego invierte el movimiento presionando las mancuernas de vuelta hacia arriba, hasta la posición inicial. Mientras presionas las mancuernas hacia arriba, gira las muñecas de vuelta a la posición inicial con las palmas alejadas de ti. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1743-z6TAHoT.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1743-z6TAHoT.gif"
+    },
+    "ex144": {
+      "name": "Extensión de tríceps a dos brazos inclinada con mancuerna",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate en un banco inclinado con una mancuerna en cada mano, apoyadas sobre los muslos. Recuéstate lentamente en el banco, manteniendo las mancuernas cerca del pecho. Una vez completamente recostado, extiende los brazos rectos hacia el techo, manteniendo los codos ligeramente flexionados. Haz una pausa breve en la parte alta, luego baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1733-U7D9Fx3.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1733-U7D9Fx3.gif"
+    },
+    "ex145": {
+      "name": "Curl martillo predicador en polea con cuerda",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Sujeta un accesorio de cuerda a una máquina de cable con polea baja. Ponte de pie frente a la máquina con los pies separados a la altura de los hombros. Sujeta la cuerda con un agarre neutro (las palmas una frente a la otra). Coloca la parte superior de los brazos contra la almohadilla del banco scott, manteniendo los codos ligeramente flexionados. Manteniendo la parte superior de los brazos inmóvil, exhala y curva la cuerda hacia los hombros contrayendo los bíceps. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Inhala y baja lentamente la cuerda de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1639-PcPe0P5.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1639-PcPe0P5.gif"
+    },
+    "ex146": {
+      "name": "Curl martillo con mancuerna (con blaster de brazo)",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con una mancuerna en cada mano, con las palmas mirando hacia el torso. Mantén los codos cerca del torso y gira las palmas de las manos hasta que queden mirando hacia adelante. Esta será tu posición inicial. Ahora, manteniendo el brazo superior quieto, exhala y flexiona los brazos contrayendo los bíceps. Continúa levantando las pesas hasta que los bíceps estén completamente contraídos y las mancuernas estén a la altura de los hombros. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Luego, inhala y comienza a bajar lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones recomendado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/2402-GNhAeJ0.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/2402-GNhAeJ0.gif"
+    },
+    "ex147": {
+      "name": "Fondos \"imposibles\"",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Colócate entre dos barras paralelas con los brazos completamente extendidos y el cuerpo suspendido en el aire. Flexiona las rodillas y cruza los tobillos. Baja el cuerpo flexionando los codos hasta que los brazos queden paralelos al suelo. Haz una pausa breve, luego empújate de nuevo hacia arriba a la posición inicial estirando los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3289-05Cf2v8.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3289-05Cf2v8.gif"
+    },
+    "ex148": {
+      "name": "Extensión de tríceps acostado con barra",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Túmbate boca arriba en un banco con los pies planos sobre el suelo y la cabeza en el extremo del banco. Sujeta una barra con un agarre pronado, manos separadas a la altura de los hombros, y extiende los brazos rectos por encima del pecho. Manteniendo los brazos superiores fijos, baja lentamente la barra hacia la frente flexionando los codos. Haz una pausa breve y luego extiende los brazos de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0057-EMpUwRI.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0057-EMpUwRI.gif"
+    },
+    "ex149": {
+      "name": "Curl de bíceps con jalón en polea",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Sujeta una barra recta a la máquina de cable en el ajuste más alto. Ponte de pie frente a la máquina con los pies separados a la altura de los hombros. Sujeta la barra con agarre supino, manos separadas a la altura de los hombros. Mantén los codos cerca de los costados y los brazos superiores quietos. Exhala y curva lentamente la barra hacia los muslos, manteniendo las muñecas rectas. Haz una pausa por un momento en la parte baja del movimiento, apretando los bíceps. Inhala y regresa lentamente la barra a la posición inicial, extendiendo los brazos por completo. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1638-QTXKWPh.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1638-QTXKWPh.gif"
+    },
+    "ex150": {
+      "name": "Curl acostado con agarre abierto y mancuerna",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Túmbate boca arriba en un banco con una mancuerna en cada mano, con las palmas hacia arriba y los brazos completamente extendidos. Manteniendo los brazos superiores fijos, exhala y levanta el peso mientras contraes los bíceps. Continúa levantando las pesas hasta que los bíceps estén completamente contraídos y las mancuernas estén a la altura de los hombros. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Inhala y comienza a bajar lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1662-qm9veZw.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1662-qm9veZw.gif"
+    },
+    "ex151": {
+      "name": "Fondos sentado en máquina",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ajusta la altura del asiento de modo que tus pies queden planos en el suelo y tus rodillas formen un ángulo de 90 grados. Agarra las asas de la máquina de palanca con las palmas hacia abajo y los brazos completamente extendidos. Baja lentamente el cuerpo flexionando los codos hasta que tus brazos queden paralelos al suelo. Haz una pausa breve, luego empújate de nuevo hacia arriba a la posición inicial estirando los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1451-BRImeP8.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1451-BRImeP8.gif"
+    },
+    "ex152": {
+      "name": "Extensión de tríceps a un brazo acostado con mancuerna (agarre supino)",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Túmbate boca arriba en un banco con la espalda y la cabeza apoyadas, y los pies planos sobre el suelo. Sostén una mancuerna en una mano con agarre supino, y extiende el brazo recto por encima del hombro. Manteniendo el brazo superior quieto, baja lentamente la mancuerna detrás de la cabeza flexionando el codo. Haz una pausa por un momento en la parte inferior, luego extiende el brazo de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0346-zZlORz6.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0346-zZlORz6.gif"
+    },
+    "ex153": {
+      "name": "Curl arrastrado en polea (drag curl)",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie frente a una máquina de cable con los pies separados a la altura de los hombros. Sujeta el accesorio del cable con agarre supino, palmas hacia arriba, y los brazos completamente extendidos. Manteniendo los brazos superiores quietos, exhala y flexiona el accesorio del cable hacia los hombros contrayendo los bíceps. Haz una pausa breve en la parte más alta del movimiento, contrayendo los bíceps. Inhala y baja lentamente el accesorio del cable de vuelta a la posición inicial, extendiendo completamente los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1632-dXz8zjF.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1632-dXz8zjF.gif"
+    },
+    "ex154": {
+      "name": "Curl alto con mancuerna",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con una mancuerna en cada mano, con las palmas hacia adelante. Mantén los brazos superiores quietos y flexiona las mancuernas lo más alto posible contrayendo los bíceps. Haz una pausa breve en la parte alta, luego baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1664-qAmNMJY.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1664-qAmNMJY.gif"
+    },
+    "ex155": {
+      "name": "Curl de bíceps con mancuerna (con blaster de brazo)",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con una mancuerna en cada mano, con las palmas hacia adelante. Mantén los codos cerca del torso y los brazos superiores quietos. Exhala y flexiona las pesas mientras contraes los bíceps. Continúa levantando las pesas hasta que los bíceps estén completamente contraídos y las mancuernas estén a la altura de los hombros. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Inhala y comienza a bajar lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/2401-nlJsbkW.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/2401-nlJsbkW.gif"
+    },
+    "ex156": {
+      "name": "Curl martillo con mancuerna (vista dominante)",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con una mancuerna en cada mano, con las palmas mirando hacia el torso. Mantén los codos cerca del torso y gira las palmas de las manos hasta que queden mirando hacia adelante. Esta será tu posición inicial. Ahora, manteniendo los brazos superiores quietos, exhala y flexiona los brazos contrayendo los bíceps. Continúa levantando las pesas hasta que los bíceps estén completamente contraídos y las mancuernas estén a la altura de los hombros. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Luego, inhala y comienza a bajar lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones recomendado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0312-2NpxjC1.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0312-2NpxjC1.gif"
+    },
+    "ex157": {
+      "name": "Curl arrastrado con barra (drag curl)",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sujeta una barra con un agarre supino, con las palmas hacia arriba. Deja que la barra cuelgue a la longitud del brazo frente a los muslos. Manteniendo los brazos superiores fijos, levanta la barra hacia el pecho contrayendo los bíceps. Haz una pausa breve en la parte alta y luego baja lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0038-IENzBdA.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0038-IENzBdA.gif"
+    },
+    "ex158": {
+      "name": "Curl de concentración de pie a un brazo con mancuerna",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con la espalda recta y los pies separados a la altura de los hombros, sujetando una mancuerna con una mano, con la palma hacia arriba. Coloca la mano libre sobre el muslo para apoyarte. Manteniendo fija la parte superior del brazo, exhala y flexiona la mancuerna hacia el hombro contrayendo el bíceps. Continúa levantando la mancuerna hasta que el bíceps esté completamente contraído y la mancuerna esté a la altura del hombro. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Inhala y baja lentamente la mancuerna de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0421-8fgqP5a.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0421-8fgqP5a.gif"
+    },
+    "ex159": {
+      "name": "Extensión de tríceps de pie inclinado a un brazo con mancuerna",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sujeta una mancuerna con una mano. Inclínate hacia adelante desde la cintura, manteniendo la espalda recta y paralela al suelo. Extiende el brazo recto hacia atrás, manteniendo el codo cerca de tu cuerpo. Baja lentamente la mancuerna de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1740-CJwa0vD.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1740-CJwa0vD.gif"
+    },
+    "ex160": {
+      "name": "Press de tríceps",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y las rodillas ligeramente flexionadas. Extiende los brazos rectos frente a ti, paralelos al suelo. Flexiona los codos y baja el cuerpo hacia el suelo, manteniendo la parte superior de los brazos cerca de los costados. Haz una pausa por un momento en la parte inferior, luego empuja tu cuerpo de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0816-fSrPP6B.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0816-fSrPP6B.gif"
+    },
+    "ex161": {
+      "name": "Curl agarre cerrado con barra EZ",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sostén la barra EZ con agarre supino, manos separadas a la altura de los hombros. Mantén los codos cerca del torso y los brazos superiores quietos durante todo el movimiento. Sube la barra hacia los hombros, contrayendo los bíceps. Haz una pausa breve en la parte alta y luego baja lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0446-V4ryaZa.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0446-V4ryaZa.gif"
+    },
+    "ex162": {
+      "name": "Curl predicador acostado con barra",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate en un banco predicador con el pecho apoyado en el respaldo y los brazos extendidos sobre el borde, sujetando una barra con un agarre supino. Manteniendo los brazos superiores fijos, exhala y levanta el peso mientras contraes los bíceps. Continúa levantando la barra hasta que los bíceps estén completamente contraídos y la barra esté a la altura de los hombros. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Inhala y comienza a bajar lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0059-SYJ4Bkt.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0059-SYJ4Bkt.gif"
+    },
+    "ex163": {
+      "name": "Press martillo declinado a un brazo con mancuerna",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Túmbate en un banco declinado con una mancuerna en una mano, apoyada sobre el pecho. Extiende el brazo recto hacia arriba, manteniendo el codo ligeramente flexionado. Baja la mancuerna hacia el hombro, manteniendo el codo cerca del cuerpo. Empuja la mancuerna de nuevo hacia arriba hasta la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1617-SHUMp5H.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1617-SHUMp5H.gif"
+    },
+    "ex164": {
+      "name": "Extensión de tríceps en polea (barra en V) con blaster de brazo",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Coloca un accesorio en V en la máquina de cable en el ajuste más alto. Ponte de pie frente a la máquina de cable con los pies separados a la altura de los hombros. Agarra el accesorio en V con un agarre prono, con las palmas hacia abajo y las manos separadas a la altura de los hombros. Mantén los codos cerca de los costados y los brazos superiores quietos durante todo el ejercicio. Activa los tríceps y exhala mientras empujas el accesorio en V hacia abajo hasta que los brazos estén completamente extendidos. Haz una pausa breve en la parte baja del movimiento, apretando los tríceps. Inhala mientras regresas lentamente el accesorio en V a la posición inicial, manteniendo el control. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/2405-OxJk1fg.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/2405-OxJk1fg.gif"
+    },
+    "ex165": {
+      "name": "Curl de muñeca sentado con agarre neutro y mancuerna",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Siéntate en un banco con los pies apoyados en el suelo y sujeta una mancuerna en cada mano, con las palmas mirándose entre sí. Apoya los antebrazos sobre los muslos, dejando que las mancuernas cuelguen hacia abajo. Manteniendo las muñecas en posición neutra, flexiona las mancuernas hacia los hombros. Haz una pausa breve en la parte alta, luego baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0397-uJmK7Z1.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0397-uJmK7Z1.gif"
+    },
+    "ex166": {
+      "name": "Curl de concentración de pie con mancuerna",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sujeta una mancuerna con una mano, con el brazo completamente extendido y la palma hacia adentro. Apoya la otra mano sobre el muslo para mayor estabilidad. Manteniendo fija la parte superior del brazo, exhala y flexiona la mancuerna hacia el hombro contrayendo el bíceps. Continúa levantando la mancuerna hasta que el bíceps esté completamente contraído y la mancuerna esté a la altura del hombro. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Inhala y baja lentamente la mancuerna de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0418-7inpWch.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0418-7inpWch.gif"
+    },
+    "ex167": {
+      "name": "Curl de bíceps inclinado con mancuerna",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Siéntate en un banco inclinado con una mancuerna en cada mano, con las palmas hacia adelante y los brazos completamente extendidos. Manteniendo los brazos superiores fijos, exhala y levanta el peso mientras contraes los bíceps. Continúa levantando las mancuernas hasta que los bíceps estén completamente contraídos y las mancuernas estén a la altura de los hombros. Mantén la posición contraída durante una breve pausa mientras aprietas los bíceps. Inhala y comienza a bajar lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0315-F3xgbjF.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0315-F3xgbjF.gif"
+    },
+    "ex168": {
+      "name": "Extensión de tríceps acostado en polea (vista dominante)",
+      "category": "Brazos",
+      "level": 1,
+      "points": 1,
+      "instructions": "Sujeta una agarradera de cuerda a una máquina de cable con polea baja. Túmbate boca arriba en un banco plano con la cabeza orientada hacia la máquina de cable. Sujeta la agarradera de cuerda con ambas manos, con las palmas una frente a la otra, y extiende los brazos rectos por encima del pecho. Manteniendo la parte superior de los brazos inmóvil, baja lentamente la agarradera de cuerda hacia la frente flexionando los codos. Haz una pausa breve en la parte baja y luego extiende los brazos de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0186-uxJcFUU.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0186-uxJcFUU.gif"
+    },
+    "ex169": {
+      "name": "Curl de muñeca sentado, palmas arriba y abajo, con mancuerna",
+      "category": "Brazos",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate en un banco con los pies apoyados en el suelo y sostén una mancuerna en cada mano, con las palmas hacia arriba. Apoya los antebrazos sobre los muslos, dejando que las muñecas cuelguen del borde. Flexiona lentamente las muñecas hacia arriba, apretando los antebrazos en la parte superior del movimiento. Haz una pausa por un momento y luego baja las muñecas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0401-2dImyQ8.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0401-2dImyQ8.gif"
+    },
+    "ex170": {
+      "name": "Press de banca JM con barra EZ",
+      "category": "Brazos",
+      "level": 3,
+      "points": 10,
+      "instructions": "Túmbate sobre un banco con los pies apoyados en el suelo y la espalda presionada contra el banco. Sujeta la barra EZ con agarre prono, ligeramente más ancho que la altura de los hombros. Baja la barra hacia el pecho, manteniendo los codos pegados cerca del cuerpo. Empuja la barra de vuelta a la posición inicial, extendiendo completamente los brazos. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0450-hnOYgH3.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0450-hnOYgH3.gif"
+    },
+    "ex171": {
+      "name": "Balanceo en dominada (kipping)",
+      "category": "Cardio",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y las rodillas ligeramente flexionadas. Mantén los brazos extendidos rectos frente a ti, paralelos al suelo. Activa el core y mueve los brazos en un movimiento circular, rotando el torso mientras lo haces. Continúa el movimiento circular, moviendo los brazos y rotando el torso el número de repeticiones deseado. Recuerda respirar durante todo el ejercicio.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3318-tnaj0mT.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3318-tnaj0mT.gif"
+    },
+    "ex172": {
+      "name": "De flexión a carrera",
+      "category": "Cardio",
+      "level": 2,
+      "points": 5,
+      "instructions": "Comienza en posición de flexión con las manos separadas a la altura de los hombros y el cuerpo en línea recta. Baja el pecho hacia el suelo flexionando los codos, manteniendo el cuerpo recto. Empuja con las manos para extender los brazos y volver a la posición inicial. Lleva rápidamente una rodilla hacia el pecho, luego cambia rápidamente y lleva la otra rodilla hacia el pecho. Continúa alternando las rodillas tan rápido como puedas manteniendo una buena forma. Continúa durante el tiempo o el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3638-PrQbjvB.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3638-PrQbjvB.gif"
+    },
+    "ex173": {
+      "name": "Caminata en elíptica (cross trainer)",
+      "category": "Cardio",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ajusta el nivel de resistencia y la inclinación de la máquina elíptica a los valores deseados. Sube a los pedales de la máquina y agarra las asas con suavidad. Comienza empujando hacia abajo con los pies y tirando de las asas hacia tu cuerpo. Continúa con este movimiento, alternando entre empujar y tirar, para simular un movimiento de caminar o correr. Mantén un ritmo constante y conserva el core activado durante todo el ejercicio. Continúa durante la duración deseada de tu entrenamiento cardiovascular. Disminuye gradualmente la intensidad y la velocidad de la máquina antes de bajarte.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/2141-rjtuP6X.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/2141-rjtuP6X.gif"
+    },
+    "ex174": {
+      "name": "Burpee",
+      "category": "Cardio",
+      "level": 1,
+      "points": 1,
+      "instructions": "Comienza de pie con los pies separados a la altura de los hombros. Baja el cuerpo hacia una posición de sentadilla flexionando las rodillas y colocando las manos en el suelo frente a ti. Lleva los pies hacia atrás de una patada hasta una posición de flexión de brazos. Realiza una flexión de brazos, manteniendo el cuerpo en línea recta. Salta con los pies de vuelta a la posición de sentadilla. Salta hacia arriba explosivamente, llevando los brazos por encima de la cabeza. Aterriza suavemente y baja de inmediato a una posición de sentadilla para comenzar la siguiente repetición.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/1160-dK9394r.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/1160-dK9394r.gif"
+    },
+    "ex175": {
+      "name": "Salto a la cuerda",
+      "category": "Cardio",
+      "level": 2,
+      "points": 5,
+      "instructions": "Sujeta las asas de la cuerda de saltar con las manos, palmas hacia adentro. Ponte de pie con los pies separados a la altura de los hombros y las rodillas ligeramente flexionadas. Balancea la cuerda por encima de la cabeza y salta sobre ella cuando se acerque a los pies. Aterriza suavemente sobre la punta de los pies y repite el salto cuando la cuerda vuelva a pasar. Continúa saltando durante el tiempo o el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/2612-e1e76I2.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/2612-e1e76I2.gif"
+    },
+    "ex176": {
+      "name": "Estiramiento de deltoides posterior",
+      "category": "Hombros",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con la espalda recta y los pies separados a la altura de los hombros. Extiende el brazo derecho a través del pecho, colocando la mano izquierda sobre el codo derecho. Tira suavemente del brazo derecho hacia el hombro izquierdo, sintiendo un estiramiento en el hombro derecho. Mantén el estiramiento durante 15-30 segundos, luego suelta. Repite del otro lado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0669-xifhB5W.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0669-xifhB5W.gif"
+    },
+    "ex177": {
+      "name": "Cargada y envión a un brazo con pesa rusa",
+      "category": "Hombros",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sujetando una pesa rusa con una mano en agarre prono. Flexiona ligeramente las rodillas y inclínate desde las caderas, bajando la pesa rusa entre las piernas. Extiende explosivamente las caderas, las rodillas y los tobillos, usando el impulso para hacer que la pesa rusa suba hasta la altura del hombro. Cuando la pesa rusa llegue a la altura del hombro, rota la muñeca y lanza la mano recta hacia arriba, bloqueando el brazo por encima de la cabeza. Baja la pesa rusa de vuelta a la posición inicial y repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0537-vzAxBtt.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0537-vzAxBtt.gif"
+    },
+    "ex178": {
+      "name": "Apertura inversa alta cruzada en polea de pie",
+      "category": "Hombros",
+      "level": 3,
+      "points": 10,
+      "instructions": "Coloca un mango en D en cada lado de una máquina de cable a la altura de los hombros. Ponte de pie en el medio de la máquina de cable con los pies separados a la altura de los hombros. Agarra los mangos con un agarre prono y extiende los brazos hacia los lados, con las palmas hacia adelante. Mantén una ligera flexión en los codos y conserva la espalda recta durante todo el ejercicio. Activa los músculos de los hombros y aprieta los omóplatos entre sí mientras tiras de los mangos hacia la parte delantera de tu cuerpo. Haz una pausa breve en el punto máximo del movimiento, luego regresa lentamente a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0225-P5p0j8B.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0225-P5p0j8B.gif"
+    },
+    "ex179": {
+      "name": "Remo vertical con barra (vista dominante)",
+      "category": "Hombros",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sujeta una barra con agarre prono, manos un poco más separadas que el ancho de los hombros. Deja que la barra cuelgue frente a los muslos, con los brazos completamente extendidos. Manteniendo el core activado y la espalda recta, exhala mientras levantas la barra en línea recta hacia la barbilla, guiando el movimiento con los codos. Haz una pausa breve en la parte más alta, luego inhala mientras bajas lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0121-fI18Rbc.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0121-fI18Rbc.gif"
+    },
+    "ex180": {
+      "name": "Elevación frontal con mancuerna (vista dominante)",
+      "category": "Hombros",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sosteniendo una mancuerna en cada mano con las palmas hacia los muslos. Mantén la espalda recta y activa el core. Levanta lentamente las mancuernas frente a ti, con los brazos rectos, hasta que queden a la altura de los hombros. Haz una pausa breve en la parte alta, luego baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0309-Rr7S3yg.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0309-Rr7S3yg.gif"
+    },
+    "ex181": {
+      "name": "Press sentado con pesa rusa",
+      "category": "Hombros",
+      "level": 3,
+      "points": 10,
+      "instructions": "Siéntate en un banco con la espalda recta y los pies planos sobre el suelo. Sujeta una pesa rusa en cada mano a la altura del hombro, con las palmas hacia adelante. Presiona las pesas rusas por encima de la cabeza, extendiendo los brazos por completo. Baja las pesas rusas de vuelta a la altura del hombro. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0546-BkxB8LW.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0546-BkxB8LW.gif"
+    },
+    "ex182": {
+      "name": "Ejercicio de esquiador con barra",
+      "category": "Hombros",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sujeta una barra frente a los muslos con un agarre pronado. Flexiona ligeramente las rodillas e inclínate hacia adelante desde las caderas, manteniendo la espalda recta y el pecho elevado. Levanta simultáneamente la barra hacia los hombros mientras saltas ligeramente del suelo. Al llegar a la parte más alta del movimiento, invierte rápidamente el movimiento y baja la barra de nuevo a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0100-4Leypho.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0100-4Leypho.gif"
+    },
+    "ex183": {
+      "name": "Rotación externa de hombro de pie con mancuerna",
+      "category": "Hombros",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sujeta una mancuerna en cada mano con las palmas hacia tu cuerpo. Levanta los brazos hacia los lados hasta que queden paralelos al suelo, manteniendo los codos ligeramente flexionados. Gira los brazos hacia afuera, llevando las mancuernas hacia la cabeza mientras mantienes los codos en la misma posición. Haz una pausa breve en la parte alta, luego baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0864-x306lCW.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0864-x306lCW.gif"
+    },
+    "ex184": {
+      "name": "Elevación lateral posterior con mancuerna (con apoyo de cabeza)",
+      "category": "Hombros",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sostén una mancuerna en cada mano. Flexiona ligeramente las rodillas e inclínate hacia adelante desde las caderas, manteniendo la espalda recta. Levanta los brazos hacia los lados, manteniendo una ligera flexión en los codos, hasta que queden paralelos al suelo. Haz una pausa por un momento en la parte superior, luego baja lentamente los brazos de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0379-UzkLrem.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0379-UzkLrem.gif"
+    },
+    "ex185": {
+      "name": "Rotación externa de hombro acostado con mancuerna",
+      "category": "Hombros",
+      "level": 1,
+      "points": 1,
+      "instructions": "Túmbate de lado en un banco plano con el brazo superior contra el costado y el codo flexionado a 90 grados. Sostén una mancuerna en la mano con la palma hacia abajo. Manteniendo el brazo superior contra el costado, gira lentamente el antebrazo hacia arriba lo más posible. Haz una pausa por un momento en la parte superior, luego baja lentamente el antebrazo de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de lado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0863-bmBf7LN.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0863-bmBf7LN.gif"
+    },
+    "ex186": {
+      "name": "Remo vertical a un brazo con mancuerna",
+      "category": "Hombros",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sosteniendo una mancuerna en una mano con agarre prono. Deja que la mancuerna cuelgue a la distancia de un brazo frente a los muslos, con la palma hacia el cuerpo. Manteniendo la espalda recta y el core activado, exhala y levanta la mancuerna recta hacia la barbilla, guiando con el codo. Haz una pausa por un momento en la parte superior, luego inhala y baja lentamente la mancuerna de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia al otro brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0363-6cKQC5E.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0363-6cKQC5E.gif"
+    },
+    "ex187": {
+      "name": "Apertura inversa sentado en máquina",
+      "category": "Hombros",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ajusta la altura del asiento y colócate en la máquina con el pecho contra la almohadilla y los pies planos en el suelo. Agarra las asas con un agarre prono y mantén los brazos ligeramente flexionados. Exhala y junta las escápulas mientras llevas las asas hacia atrás y hacia afuera, alejándolas de tu cuerpo. Haz una pausa breve en el punto máximo de contracción, luego inhala y vuelve lentamente a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0602-myfUsKf.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0602-myfUsKf.gif"
+    },
+    "ex188": {
+      "name": "Press Arnold con pesa rusa",
+      "category": "Hombros",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sosteniendo una pesa rusa en cada mano a la altura de los hombros con las palmas hacia ti. Activa el core y empuja las pesas rusas por encima de la cabeza, girando las palmas hacia adelante mientras extiendes los brazos. Haz una pausa en la parte superior del movimiento, luego baja lentamente las pesas rusas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0523-UM8mgyG.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0523-UM8mgyG.gif"
+    },
+    "ex189": {
+      "name": "Arrancada a un brazo con barra",
+      "category": "Hombros",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, los dedos de los pies ligeramente hacia afuera. Sujeta la barra con un agarre pronado, manos un poco más separadas que el ancho de los hombros. Flexiona las rodillas y baja las caderas hacia una posición de sentadilla, manteniendo la espalda recta y el pecho elevado. Extiende las caderas, las rodillas y los tobillos de forma explosiva, impulsando la barra hacia arriba. Cuando la barra llegue a la altura del pecho, tira de ella hacia arriba con el brazo, manteniéndola cerca del cuerpo. Rota el codo por debajo de la barra y extiende el brazo completamente por encima de la cabeza, bloqueando el codo. Baja la barra de vuelta a la posición inicial de forma controlada. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0067-xHKN2s8.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0067-xHKN2s8.gif"
+    },
+    "ex190": {
+      "name": "Thruster con barra",
+      "category": "Hombros",
+      "level": 3,
+      "points": 10,
+      "instructions": "Comienza de pie con los pies separados a la altura de los hombros, sujetando una barra a la altura de los hombros con agarre prono. Baja a una posición de sentadilla flexionando las rodillas y empujando las caderas hacia atrás. Al llegar a la parte más baja de la sentadilla, empuja explosivamente con los talones para ponerte de pie, presionando simultáneamente la barra por encima de la cabeza. Baja la barra de nuevo a la altura de los hombros mientras vuelves a bajar a la posición de sentadilla. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3305-f7Y9eDZ.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3305-f7Y9eDZ.gif"
+    },
+    "ex191": {
+      "name": "Elevación frontal de pie por encima de la cabeza con barra",
+      "category": "Hombros",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sujetando una barra frente a los muslos con agarre prono. Mantén la espalda recta y activa el core. Levanta lentamente la barra frente a ti, manteniendo los brazos rectos y las palmas hacia abajo. Continúa levantando hasta que la barra quede ligeramente por encima del nivel de los hombros. Haz una pausa breve en la parte alta y luego baja lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0107-S8mo30S.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0107-S8mo30S.gif"
+    },
+    "ex192": {
+      "name": "Remo para deltoides posterior en polea (con estribos)",
+      "category": "Hombros",
+      "level": 2,
+      "points": 5,
+      "instructions": "Sujeta un asa de estribo a una polea de cable baja y ponte de pie frente a la máquina. Sujeta el asa con la mano izquierda y retrocede un paso con el pie derecho, colocando el cuerpo en un ligero ángulo. Flexiona ligeramente las rodillas e inclínate hacia adelante desde las caderas, manteniendo la espalda recta y el core activado. Con el brazo izquierdo extendido y la palma hacia abajo, jala el asa hacia el pecho retrayendo el omóplato. Haz una pausa por un momento en la parte más alta del movimiento, apretando el omóplato. Suelta lentamente el asa de vuelta a la posición inicial y repite el número de repeticiones deseado. Cambia de lado y repite el ejercicio con el brazo derecho.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0202-yUdIGNs.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0202-yUdIGNs.gif"
+    },
+    "ex193": {
+      "name": "Press militar tras nuca de pie en máquina Smith",
+      "category": "Hombros",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ajusta la altura del asiento de la máquina Smith de modo que la barra quede a la altura de los hombros. Ponte de pie con los pies separados a la altura de los hombros y las rodillas ligeramente flexionadas. Sujeta la barra con agarre prono, un poco más separado que el ancho de los hombros. Levanta la barra del soporte y da un paso atrás, manteniendo una postura estable. Coloca la barra detrás de la cabeza, apoyándola en la parte alta de los trapecios. Mantén el core activado y el pecho elevado durante todo el ejercicio. Empuja la barra por encima de la cabeza extendiendo los brazos, estirándolos por completo. Haz una breve pausa en la parte alta del movimiento, luego baja lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0772-ht8xDrP.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0772-ht8xDrP.gif"
+    },
+    "ex194": {
+      "name": "Deltoides posterior a un brazo acostado con mancuerna",
+      "category": "Hombros",
+      "level": 1,
+      "points": 1,
+      "instructions": "Túmbate boca abajo en un banco plano con una mancuerna en una mano, con la palma hacia adentro. Extiende el brazo recto hacia el suelo, manteniéndolo cerca del cuerpo. Levanta el brazo hacia arriba y hacia atrás, acercando el omóplato hacia la columna. Haz una pausa breve en la parte más alta, luego baja lentamente el brazo de vuelta a la posición inicial. Repite el número de repeticiones deseado, luego cambia de brazo.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0341-gSw59a4.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0341-gSw59a4.gif"
+    },
+    "ex195": {
+      "name": "Elevación lateral \"full can\" con mancuerna",
+      "category": "Hombros",
+      "level": 2,
+      "points": 5,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros, sosteniendo una mancuerna en cada mano con las palmas hacia el cuerpo. Mantén la espalda recta y activa el core. Levanta los brazos hacia los lados, manteniendo una ligera flexión en los codos, hasta que queden paralelos al suelo. Haz una pausa por un momento en la parte superior, luego baja lentamente los brazos de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0311-AQ0mC4Y.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0311-AQ0mC4Y.gif"
+    },
+    "ex196": {
+      "name": "Elevación para deltoides posterior con barra",
+      "category": "Hombros",
+      "level": 3,
+      "points": 10,
+      "instructions": "Ponte de pie con los pies separados a la altura de los hombros y sujeta una barra con un agarre pronado, con las palmas hacia abajo. Flexiona ligeramente las rodillas e inclínate hacia adelante desde las caderas, manteniendo la espalda recta. Levanta la barra hacia los lados, manteniendo los brazos rectos, hasta que queden paralelos al suelo. Haz una pausa breve en la parte alta y luego baja lentamente la barra de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0075-Ln9iTbU.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0075-Ln9iTbU.gif"
+    },
+    "ex197": {
+      "name": "Press de hombros en máquina (vista dominante)",
+      "category": "Hombros",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ajusta la altura del asiento y el respaldo de la máquina de palanca a una posición cómoda. Siéntate en la máquina con la espalda apoyada en el respaldo y los pies planos en el suelo. Agarra las asas de la máquina con un agarre prono, un poco más separadas que la anchura de los hombros. Empuja las asas hacia arriba y hacia adelante hasta que los brazos queden completamente extendidos, pero sin bloquear los codos. Haz una pausa breve en lo alto, luego baja lentamente las asas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/2318-dNFYIU1.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/2318-dNFYIU1.gif"
+    },
+    "ex198": {
+      "name": "Press Arnold con mancuernas (vista dominante)",
+      "category": "Hombros",
+      "level": 2,
+      "points": 5,
+      "instructions": "Siéntate en un banco con respaldo y sujeta una mancuerna en cada mano a la altura del hombro, con las palmas hacia tu cuerpo y los codos flexionados. Empuja las mancuernas hacia arriba hasta que los brazos estén completamente extendidos y las palmas miren hacia adelante. Rota las muñecas mientras levantas, de modo que las palmas terminen mirando hacia adelante en la parte alta del movimiento. Haz una pausa breve en la parte alta, luego baja lentamente las mancuernas de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0287-eOrFCnx.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0287-eOrFCnx.gif"
+    },
+    "ex199": {
+      "name": "Apertura inversa en cruce de poleas",
+      "category": "Hombros",
+      "level": 3,
+      "points": 10,
+      "instructions": "Coloca una agarradera en D en cada cable de polea baja y ponte de pie en el centro de la máquina de cable cruzado. Sujeta las agarraderas con agarre prono (palmas hacia abajo) y da un paso hacia adelante, colocando los pies separados a la altura de los hombros. Flexiona ligeramente las rodillas e inclínate hacia adelante desde la cintura, manteniendo la espalda recta y el abdomen activado. Con los brazos extendidos hacia los lados y ligeramente flexionados en los codos, exhala y junta los omóplatos mientras tiras de los cables hacia atrás y hacia arriba en un movimiento de apertura inversa. Haz una pausa breve en el punto máximo de contracción, luego inhala y vuelve lentamente a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/0154-aqvSOQE.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/0154-aqvSOQE.gif"
+    },
+    "ex200": {
+      "name": "Elevación en T inclinada con mancuerna",
+      "category": "Hombros",
+      "level": 1,
+      "points": 1,
+      "instructions": "Ajusta un banco inclinado a un ángulo de 45 grados y siéntate en él con una mancuerna en cada mano, con las palmas hacia adentro. Inclínate hacia adelante y deja que los brazos cuelguen rectos hacia abajo, perpendiculares al suelo. Manteniendo los brazos rectos, levántalos hacia los lados hasta que queden paralelos al suelo, formando una 'T' con el cuerpo. Haz una pausa por un momento en la parte superior, luego baja lentamente los brazos de vuelta a la posición inicial. Repite el número de repeticiones deseado.",
+      "image": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/images/3542-jgbvVJ0.jpg",
+      "gif_url": "https://raw.githubusercontent.com/hasaneyldrm/exercises-dataset/main/videos/3542-jgbvVJ0.gif"
+    }
   }
 }

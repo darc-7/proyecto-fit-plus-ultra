@@ -64,9 +64,12 @@ export default function ExercisesPage() {
           className="p-2 border border-gray-300 rounded-md"
         >
           <option value="all">Todas las categorías</option>
-          <option value="Pecho">Pecho</option>
-          <option value="Piernas">Piernas</option>
+          <option value="Brazos">Brazos</option>
           <option value="Espalda">Espalda</option>
+          <option value="Pecho">Pecho</option>
+          <option value="Hombros">Hombros</option>
+          <option value="Piernas">Piernas</option>
+          <option value="Cardio">Cardio</option>
         </select>
 
         <select

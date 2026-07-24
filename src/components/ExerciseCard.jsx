@@ -10,6 +10,9 @@ const categoryIcons = {
   Pecho: "💪",
   Piernas: "🦵",
   Espalda: "🏋️",
+  Brazos: "💪",
+  Hombros: "🏋️",
+  Cardio: "🏃",
 };
 
 function LevelStars({ level }) {
@@ -68,10 +71,24 @@ export default function ExerciseCard({ exercise, selected: controlledSelected, d
     }
   };
 
+  const [isHovered, setIsHovered] = useState(false);
+  const [imgError, setImgError] = useState(false);
+
+  const catColor = {
+    Pecho: 'bg-blue-100 text-blue-800',
+    Piernas: 'bg-green-100 text-green-800',
+    Espalda: 'bg-purple-100 text-purple-800',
+    Brazos: 'bg-red-100 text-red-800',
+    Hombros: 'bg-orange-100 text-orange-800',
+    Cardio: 'bg-pink-100 text-pink-800',
+  };
+
   return (
     <div
       onClick={disabled ? undefined : toggleSelection}
-      className={`p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 border-2 ${
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`flex gap-4 p-3 rounded-lg shadow-md cursor-pointer transition-all duration-300 border-2 ${
         disabled ? "opacity-80 cursor-not-allowed" : ""
       } ${
         isSelected
@@ -79,29 +96,52 @@ export default function ExerciseCard({ exercise, selected: controlledSelected, d
           : "border-transparent bg-white hover:bg-gray-50"
       } ${animating ? "scale-95" : ""}`}
     >
-      <div className="flex items-center gap-3 mb-2">
-        <span className="text-3xl">{categoryIcons[exercise.category] || "🏋️"}</span>
-        <div className="flex-1">
-          <h3 className="text-xl font-bold text-gray-800">{exercise.name}</h3>
-          <div className="flex items-center gap-2 mt-1">
-            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-              exercise.category === 'Pecho' ? 'bg-blue-100 text-blue-800' :
-              exercise.category === 'Piernas' ? 'bg-green-100 text-green-800' :
-              'bg-purple-100 text-purple-800'
-            }`}>
-              {exercise.category}
-            </span>
-            <LevelStars level={exercise.level} />
+      <div className="w-[120px] h-[120px] shrink-0 rounded-lg overflow-hidden bg-gray-100">
+        {(exercise.gif_url && isHovered && !imgError) ? (
+          <img
+            src={exercise.gif_url}
+            alt={exercise.name}
+            className="w-full h-full object-contain"
+            onError={() => setImgError(true)}
+          />
+        ) : exercise.image && !imgError ? (
+          <img
+            src={exercise.image}
+            alt={exercise.name}
+            className="w-full h-full object-contain"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-4xl">
+            {categoryIcons[exercise.category] || "🏋️"}
           </div>
-        </div>
-        {isSelected && (
-          <span className="text-2xl text-blue-500 opacity-80 transition-opacity">✔</span>
         )}
       </div>
-      <p className="mt-2 text-gray-600 text-sm">{exercise.description || 'Sin descripción'}</p>
-      <div className={`mt-2 h-1 rounded-full transition-all duration-300 ${
-        isSelected ? 'bg-blue-500' : 'bg-transparent'
-      }`}></div>
+
+      <div className="flex-1 min-w-0">
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <h3 className="text-base font-bold text-gray-800 leading-tight">{exercise.name}</h3>
+            <div className="flex items-center gap-2 mt-1.5">
+              <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${catColor[exercise.category] || 'bg-gray-100 text-gray-800'}`}>
+                {exercise.category}
+              </span>
+              <LevelStars level={exercise.level} />
+            </div>
+          </div>
+          {isSelected && (
+            <span className="text-xl text-blue-500 shrink-0">✔</span>
+          )}
+        </div>
+
+        <p className="mt-2 text-gray-600 text-xs leading-relaxed line-clamp-3">
+          {exercise.instructions || 'Sin instrucciones'}
+        </p>
+
+        <div className={`mt-2 h-1 rounded-full transition-all duration-300 ${
+          isSelected ? 'bg-blue-500' : 'bg-transparent'
+        }`}></div>
+      </div>
     </div>
   );
 }

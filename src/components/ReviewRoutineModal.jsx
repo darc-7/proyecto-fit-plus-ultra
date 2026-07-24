@@ -103,7 +103,7 @@ export default function ReviewRoutineModal({ client, onClose }) {
                   &times;
                 </button>
               </div>
-              <p className="text-sm text-gray-600 mb-3">{ex.description || ""}</p>
+              <p className="text-sm text-gray-600 mb-3">{ex.instructions || ""}</p>
               <div className="flex gap-4 items-center">
                 <div className="flex items-center gap-2">
                   <label className="text-sm font-medium text-gray-700">Series:</label>

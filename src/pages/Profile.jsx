@@ -12,7 +12,7 @@ export default function Profile() {
   const [visualRewards, setVisualRewards] = useState([]);
   const [allRewards, setAllRewards] = useState([]);
   const [loadError, setLoadError] = useState(false);
-  const [muscleData, setMuscleData] = useState({ Pecho: 0, Piernas: 0, Espalda: 0 });
+  const [muscleData, setMuscleData] = useState({ Brazos: 0, Espalda: 0, Pecho: 0, Hombros: 0, Piernas: 0, Cardio: 0 });
   const [range, setRange] = useState("total");
 
   useEffect(() => {
@@ -58,7 +58,9 @@ export default function Profile() {
     try {
       const snap = await getDocs(collection(db, "users", user.uid, "workoutHistory"));
       const now = new Date();
-      const counts = { Pecho: 0, Piernas: 0, Espalda: 0 };
+      const validCats = ["Brazos", "Espalda", "Pecho", "Hombros", "Piernas", "Cardio"];
+      const counts = {};
+      validCats.forEach(c => counts[c] = 0);
 
       snap.docs.forEach((d) => {
         const w = d.data();
@@ -76,7 +78,7 @@ export default function Profile() {
 
         (w.exercises || []).forEach((ex) => {
           const cat = ex.category;
-          if (cat === "Pecho" || cat === "Piernas" || cat === "Espalda") {
+          if (validCats.includes(cat)) {
             counts[cat] = (counts[cat] || 0) + 1;
           }
         });
