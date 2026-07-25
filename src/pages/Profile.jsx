@@ -3,6 +3,8 @@ import { useAuth } from "../context/AuthContext";
 import { doc, updateDoc, onSnapshot, getDocs, collection } from "firebase/firestore";
 import { db } from "../services/firebase";
 import MuscleChart from "../components/MuscleChart";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function Profile() {
   const { user } = useAuth();
@@ -115,18 +117,17 @@ export default function Profile() {
     return (
       <div className="max-w-4xl mx-auto p-6 text-center">
         <h1 className="text-2xl font-bold mb-4">Perfil de Usuario</h1>
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 max-w-md mx-auto">
-          <p className="text-yellow-800 font-medium">No se pudieron cargar tus datos.</p>
-          <p className="text-yellow-700 text-sm mt-1">
-            Verifica tu conexion o intenta mas tarde.
-          </p>
-          <button
-            onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
-          >
-            Reintentar
-          </button>
-        </div>
+        <Card className="max-w-md mx-auto">
+          <CardContent className="p-6 text-center">
+            <p className="text-destructive font-medium">No se pudieron cargar tus datos.</p>
+            <p className="text-muted-foreground text-sm mt-1">
+              Verifica tu conexion o intenta mas tarde.
+            </p>
+            <Button onClick={() => window.location.reload()} variant="outline" className="mt-4">
+              Reintentar
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -154,114 +155,105 @@ export default function Profile() {
 
       <div className="grid md:grid-cols-2 gap-8">
         {/* ── Columna izquierda: info actual ── */}
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <div className="flex flex-col items-center mb-4 relative">
-            {avatarExclusivo && (
-              <div className="absolute w-28 h-28 rounded-full bg-blue-400 opacity-40 blur-lg -z-10" />
-            )}
-            <img
-              src={imgSrc}
-              alt="Avatar"
-              className={"w-24 h-24 rounded-full object-cover mb-2 border-4 " + (marcoActivo ? "border-yellow-400 shadow-md" : "border-transparent")}
-            />
-          </div>
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex flex-col items-center mb-4 relative">
+              {avatarExclusivo && (
+                <div className="absolute w-28 h-28 rounded-full bg-blue-400 opacity-40 blur-lg -z-10" />
+              )}
+              <img
+                src={imgSrc}
+                alt="Avatar"
+                className={"w-24 h-24 rounded-full object-cover mb-2 border-4 " + (marcoActivo ? "border-yellow-400 shadow-md" : "border-transparent")}
+              />
+            </div>
 
-          <div className="text-center mb-4">
-            {editingName ? (
-              <div className="flex flex-col items-center gap-2">
-                <input
-                  type="text"
-                  value={newName}
-                  onChange={(e) => setNewName(e.target.value)}
-                  className="border px-2 py-1 rounded-md"
-                />
-                <button
-                  onClick={handleNameSave}
-                  className="text-sm bg-blue-500 text-white px-3 py-1 rounded-md"
-                >
-                  Guardar
-                </button>
-              </div>
-            ) : (
-              <div>
-                <h2 className="text-xl font-semibold">{userData.displayName || "Usuario"}</h2>
-                <button
-                  onClick={() => setEditingName(true)}
-                  className="text-sm text-blue-600 mt-1"
-                >
-                  Editar nombre
-                </button>
-              </div>
-            )}
-          </div>
+            <div className="text-center mb-4">
+              {editingName ? (
+                <div className="flex flex-col items-center gap-2">
+                  <input
+                    type="text"
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
+                    className="border px-2 py-1 rounded-md"
+                  />
+                  <Button onClick={handleNameSave} size="sm">Guardar</Button>
+                </div>
+              ) : (
+                <div>
+                  <h2 className="text-xl font-semibold">{userData.displayName || "Usuario"}</h2>
+                  <Button variant="link" onClick={() => setEditingName(true)}>Editar nombre</Button>
+                </div>
+              )}
+            </div>
 
-          <div className="text-sm space-y-2 text-center">
-            <p><strong>Correo:</strong> {userData.email}</p>
-            <p><strong>Racha actual:</strong> {userData.streak || 0} dias</p>
-            <p><strong>Puntos totales:</strong> {userData.totalPoints || 0}</p>
-            <p><strong>Fecha de registro:</strong> {creationDate}</p>
-          </div>
+            <div className="text-sm space-y-2 text-center">
+              <p><strong>Correo:</strong> {userData.email}</p>
+              <p><strong>Racha actual:</strong> {userData.streak || 0} dias</p>
+              <p><strong>Puntos totales:</strong> {userData.totalPoints || 0}</p>
+              <p><strong>Fecha de registro:</strong> {creationDate}</p>
+            </div>
 
-          <div className="mt-6">
-            <h2 className="text-lg font-bold mb-2">Logros Desbloqueados</h2>
-            {userData.badges?.length ? (
-              <ul className="list-disc list-inside text-sm text-gray-700">
-                {userData.badges.map((b, i) => (
-                  <li key={i}>{b}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500 text-sm">Aun no has desbloqueado logros.</p>
-            )}
-          </div>
+            <div className="mt-6">
+              <h2 className="text-lg font-bold mb-2">Logros Desbloqueados</h2>
+              {userData.badges?.length ? (
+                <ul className="list-disc list-inside text-sm text-muted-foreground">
+                  {userData.badges.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-muted-foreground text-sm">Aun no has desbloqueado logros.</p>
+              )}
+            </div>
 
-          <div className="mt-6">
-            <h2 className="text-lg font-bold mb-2">Personalizacion Visual</h2>
-            {visualRewards.length > 0 ? (
-              <ul className="text-sm text-gray-700 space-y-2">
-                {visualRewards.map((r) => (
-                  <li key={r.id} className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={userData.activeVisuals?.includes(r.id)}
-                      onChange={() => toggleVisual(r.id)}
-                    />
-                    <label>{r.name}</label>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500 text-sm">No has desbloqueado recompensas visuales aun.</p>
-            )}
-          </div>
-        </div>
+            <div className="mt-6">
+              <h2 className="text-lg font-bold mb-2">Personalizacion Visual</h2>
+              {visualRewards.length > 0 ? (
+                <ul className="text-sm text-muted-foreground space-y-2">
+                  {visualRewards.map((r) => (
+                    <li key={r.id} className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={userData.activeVisuals?.includes(r.id)}
+                        onChange={() => toggleVisual(r.id)}
+                      />
+                      <label>{r.name}</label>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-muted-foreground text-sm">No has desbloqueado recompensas visuales aun.</p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* ── Columna derecha: estadisticas ── */}
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h2 className="text-lg font-bold mb-4">Estadisticas por Grupo Muscular</h2>
+        <Card>
+          <CardContent className="p-6">
+            <h2 className="text-lg font-bold mb-4">Estadisticas por Grupo Muscular</h2>
 
-          <div className="flex gap-2 mb-6">
-            {Object.entries(RANGE_LABELS).map(([key, label]) => (
-              <button
-                key={key}
-                onClick={() => setRange(key)}
-                className={`px-3 py-1.5 text-sm rounded-lg font-medium transition-colors ${
-                  range === key
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+            <div className="flex gap-2 mb-6">
+              {Object.entries(RANGE_LABELS).map(([key, label]) => (
+                <Button
+                  key={key}
+                  onClick={() => setRange(key)}
+                  variant={range === key ? "default" : "outline"}
+                  size="sm"
+                >
+                  {label}
+                </Button>
+              ))}
+            </div>
 
-          <MuscleChart data={muscleData} />
+            <MuscleChart data={muscleData} />
 
-          <div className="mt-6 text-xs text-gray-400 text-center">
-            Basado en los ejercicios registrados en tu historial de rutinas.
-          </div>
-        </div>
+            <div className="mt-6 text-xs text-muted-foreground text-center">
+              Basado en los ejercicios registrados en tu historial de rutinas.
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { GoogleSignIn } from "../components/GoogleSignIn";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 function HelpSection({ items, defaultOpen = false }) {
   return (
@@ -9,14 +11,14 @@ function HelpSection({ items, defaultOpen = false }) {
         <details
           key={i}
           open={defaultOpen && i === 0}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden group"
+          className="bg-card rounded-xl shadow-sm border overflow-hidden group"
         >
-          <summary className="px-5 py-4 cursor-pointer font-semibold text-gray-800 hover:bg-gray-50 transition-colors list-none flex items-center gap-3">
+          <summary className="px-5 py-4 cursor-pointer font-semibold text-foreground hover:bg-muted/50 transition-colors list-none flex items-center gap-3">
             <span className="text-xl">{item.icon}</span>
             <span className="flex-1">{item.title}</span>
-            <span className="text-gray-400 group-open:rotate-180 transition-transform text-sm">▼</span>
+            <span className="text-muted-foreground group-open:rotate-180 transition-transform text-sm">▼</span>
           </summary>
-          <div className="px-5 pb-5 text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
+          <div className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed border-t pt-3">
             {typeof item.content === "string" ? (
               <p>{item.content}</p>
             ) : (
@@ -31,7 +33,7 @@ function HelpSection({ items, defaultOpen = false }) {
 
 function HelpHeading({ children }) {
   return (
-    <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+    <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
       <span>📖</span> {children}
     </h2>
   );
@@ -42,7 +44,7 @@ export default function Home() {
   const hasTrainer = !!userData?.trainerId;
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-muted/30 flex flex-col">
 
       {/* ============================================================ */}
       {/* VISTA INVITADO                                                */}
@@ -67,24 +69,30 @@ export default function Home() {
           </div>
 
           <div className="py-12 px-6 max-w-5xl mx-auto grid md:grid-cols-3 gap-8 text-center">
-            <div className="p-6 bg-white rounded-xl shadow-md">
-              <h3 className="text-2xl font-bold mb-2">🎯 Gamificación</h3>
-              <p className="text-gray-600">
-                Gana puntos y logros cada vez que completas tu rutina.
-              </p>
-            </div>
-            <div className="p-6 bg-white rounded-xl shadow-md">
-              <h3 className="text-2xl font-bold mb-2">🔥 Rachas</h3>
-              <p className="text-gray-600">
-                Mantén tu constancia diaria y supera tus límites.
-              </p>
-            </div>
-            <div className="p-6 bg-white rounded-xl shadow-md">
-              <h3 className="text-2xl font-bold mb-2">🏆 Recompensas</h3>
-              <p className="text-gray-600">
-                Canjea premios físicos y personaliza tu experiencia visual.
-              </p>
-            </div>
+            <Card className="text-center">
+              <CardContent className="p-6">
+                <h3 className="text-2xl font-bold mb-2">🎯 Gamificación</h3>
+                <p className="text-muted-foreground">
+                  Gana puntos y logros cada vez que completas tu rutina.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardContent className="p-6">
+                <h3 className="text-2xl font-bold mb-2">🔥 Rachas</h3>
+                <p className="text-muted-foreground">
+                  Mantén tu constancia diaria y supera tus límites.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardContent className="p-6">
+                <h3 className="text-2xl font-bold mb-2">🏆 Recompensas</h3>
+                <p className="text-muted-foreground">
+                  Canjea premios físicos y personaliza tu experiencia visual.
+                </p>
+              </CardContent>
+            </Card>
           </div>
 
           <div className="pb-16 px-6">
@@ -150,51 +158,58 @@ export default function Home() {
 
           <div className="py-10 px-6 max-w-3xl mx-auto w-full">
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="p-6 bg-white rounded-xl shadow-md text-center">
-                <h3 className="text-xl font-semibold">Rutinas completadas</h3>
-                <p className="text-3xl font-bold text-blue-600">
-                  {userData.completedRoutines || 0}
-                </p>
-              </div>
-              <div className="p-6 bg-white rounded-xl shadow-md text-center">
-                <h3 className="text-xl font-semibold">Puntos totales</h3>
-                <p className="text-3xl font-bold text-yellow-500">
-                  {userData.totalPoints || 0}
-                </p>
-              </div>
-              <div className="p-6 bg-white rounded-xl shadow-md text-center">
-                <h3 className="text-xl font-semibold">Racha actual</h3>
-                <p className="text-3xl font-bold text-red-500">
-                  {userData.streak || 0} 🔥
-                </p>
-              </div>
-              <div className="p-6 bg-white rounded-xl shadow-md text-center">
-                <h3 className="text-xl font-semibold">Días registrado</h3>
-                <p className="text-3xl font-bold text-green-600">
-                  {(() => {
-                    const raw = userData.createdAt;
-                    const date = raw?.toDate ? raw.toDate() : raw ? new Date(raw) : null;
-                    return date ? Math.floor((new Date() - date) / (1000 * 60 * 60 * 24)) : 0;
-                  })()}
-                </p>
-              </div>
+              <Card className="text-center">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold">Rutinas completadas</h3>
+                  <p className="text-3xl font-bold text-blue-600">
+                    {userData.completedRoutines || 0}
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="text-center">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold">Puntos totales</h3>
+                  <p className="text-3xl font-bold text-yellow-500">
+                    {userData.totalPoints || 0}
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="text-center">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold">Racha actual</h3>
+                  <p className="text-3xl font-bold text-red-500">
+                    {userData.streak || 0} 🔥
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="text-center">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold">Días registrado</h3>
+                  <p className="text-3xl font-bold text-green-600">
+                    {(() => {
+                      const raw = userData.createdAt;
+                      const date = raw?.toDate ? raw.toDate() : raw ? new Date(raw) : null;
+                      return date ? Math.floor((new Date() - date) / (1000 * 60 * 60 * 24)) : 0;
+                    })()}
+                  </p>
+                </CardContent>
+              </Card>
             </div>
 
             <div className="mt-8 text-center">
               {hasTrainer ? (
-                <Link
-                  to="/routine"
-                  className="inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
-                >
-                  Ir a mi rutina 💪
-                </Link>
+                <Button asChild size="lg">
+                  <Link to="/routine">Ir a mi rutina 💪</Link>
+                </Button>
               ) : (
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 max-w-sm mx-auto">
-                  <p className="text-yellow-800 font-medium">🔒 Sin entrenador asignado</p>
-                  <p className="text-yellow-700 text-sm mt-1">
-                    Comunícate con la dirección del gimnasio para que te asignen un entrenador.
-                  </p>
-                </div>
+                <Card className="max-w-sm mx-auto border-yellow-200 bg-yellow-50">
+                  <CardContent className="p-4 text-center">
+                    <p className="text-yellow-800 font-medium">🔒 Sin entrenador asignado</p>
+                    <p className="text-yellow-700 text-sm mt-1">
+                      Comunícate con la dirección del gimnasio para que te asignen un entrenador.
+                    </p>
+                  </CardContent>
+                </Card>
               )}
             </div>
           </div>
@@ -286,7 +301,7 @@ export default function Home() {
 
       {user && role === "cliente" && !userData && (
         <div className="py-12 text-center">
-          <p className="text-gray-500 animate-pulse font-medium">
+          <p className="text-muted-foreground animate-pulse font-medium">
             Cargando tu información...
           </p>
         </div>
@@ -309,26 +324,27 @@ export default function Home() {
 
           <div className="py-12 px-6 max-w-4xl mx-auto w-full">
             <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="p-6 bg-white rounded-xl shadow-md text-center">
-                <h3 className="text-2xl font-bold mb-2">📋 Mis Clientes</h3>
-                <p className="text-gray-600 mb-4">
-                  Visualiza y administra la cartera de clientes asignados a tu cuenta.
-                  Revisa sus rutinas, rachas y progreso general.
-                </p>
-                <Link
-                  to="/clients"
-                  className="inline-block px-5 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                >
-                  Ir a Mis Alumnos
-                </Link>
-              </div>
-              <div className="p-6 bg-white rounded-xl shadow-md text-center">
-                <h3 className="text-2xl font-bold mb-2">📊 Progreso</h3>
-                <p className="text-gray-600 mb-4">
-                  Monitorea el rendimiento de tus alumnos en tiempo real.
-                  Revisa estadísticas de rutinas completadas, puntos acumulados y rachas activas.
-                </p>
-              </div>
+              <Card className="text-center">
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold mb-2">📋 Mis Clientes</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Visualiza y administra la cartera de clientes asignados a tu cuenta.
+                    Revisa sus rutinas, rachas y progreso general.
+                  </p>
+                  <Button asChild>
+                    <Link to="/clients">Ir a Mis Alumnos</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+              <Card className="text-center">
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold mb-2">📊 Progreso</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Monitorea el rendimiento de tus alumnos en tiempo real.
+                    Revisa estadísticas de rutinas completadas, puntos acumulados y rachas activas.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
 
             <HelpHeading>Guía para entrenadores</HelpHeading>
@@ -410,26 +426,27 @@ export default function Home() {
 
           <div className="py-12 px-6 max-w-4xl mx-auto w-full">
             <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="p-6 bg-white rounded-xl shadow-md text-center">
-                <h3 className="text-2xl font-bold mb-2">👥 Usuarios</h3>
-                <p className="text-gray-600 mb-4">
-                  Gestiona todos los usuarios de la plataforma: crea, edita y elimina cuentas.
-                  Asigna roles, vincula clientes a entrenadores.
-                </p>
-                <Link
-                  to="/admin/usuarios"
-                  className="inline-block px-5 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                >
-                  Ir a Usuarios
-                </Link>
-              </div>
-              <div className="p-6 bg-white rounded-xl shadow-md text-center">
-                <h3 className="text-2xl font-bold mb-2">⚙️ Configuración</h3>
-                <p className="text-gray-600 mb-4">
-                  Supervisa la base de datos, los ejercicios disponibles y las recompensas
-                  del sistema. Mantén la plataforma actualizada.
-                </p>
-              </div>
+              <Card className="text-center">
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold mb-2">👥 Usuarios</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Gestiona todos los usuarios de la plataforma: crea, edita y elimina cuentas.
+                    Asigna roles, vincula clientes a entrenadores.
+                  </p>
+                  <Button asChild>
+                    <Link to="/admin/usuarios">Ir a Usuarios</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+              <Card className="text-center">
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold mb-2">⚙️ Configuración</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Supervisa la base de datos, los ejercicios disponibles y las recompensas
+                    del sistema. Mantén la plataforma actualizada.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
 
             <HelpHeading>Guía de administración</HelpHeading>
@@ -498,7 +515,7 @@ export default function Home() {
       {/* Fallback */}
       {user && !role && (
         <div className="py-12 text-center">
-          <p className="text-gray-500 animate-pulse font-medium">
+          <p className="text-muted-foreground animate-pulse font-medium">
             Cargando tu perfil...
           </p>
         </div>

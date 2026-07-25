@@ -6,6 +6,7 @@ import { flushSync } from "react-dom";
 import { toast } from "react-hot-toast";
 import AdminUserForm from "../components/AdminUserForm";
 import AssignTrainerModal from "../components/AssignTrainerModal";
+import { Button } from "@/components/ui/button";
 
 export default function AdminDashboard() {
   const { users, loading } = useAllUsers();
@@ -78,8 +79,8 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <p className="text-gray-500 animate-pulse font-medium">Cargando base de datos del sistema...</p>
+      <div className="min-h-screen flex items-center justify-center bg-muted/30">
+        <p className="text-muted-foreground animate-pulse font-medium">Cargando base de datos del sistema...</p>
       </div>
     );
   }
@@ -90,9 +91,6 @@ export default function AdminDashboard() {
     )) return;
 
     try {
-      // 1. Borrar el documento de Firestore
-      //    → Esto dispara automáticamente la Cloud Function
-      //      que elimina la cuenta de Firebase Auth
       await deleteDoc(doc(db, "users", user.id));
       toast.success(
         `${user.displayName || "Usuario"} eliminado. La cuenta de acceso se ha dado de baja automáticamente.`,
@@ -104,25 +102,22 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-10">
+    <div className="min-h-screen bg-muted/30 p-6 md:p-10">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-3xl font-extrabold text-gray-900 mb-1">Panel de Control</h1>
-            <p className="text-gray-600">Gestión global de Entrenadores y Clientes</p>
+            <h1 className="text-3xl font-extrabold text-foreground mb-1">Panel de Control</h1>
+            <p className="text-muted-foreground">Gestión global de Entrenadores y Clientes</p>
           </div>
-          <button
-            onClick={() => handleOpenModal(null)}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-xl transition-colors shadow-sm"
-          >
+          <Button onClick={() => handleOpenModal(null)}>
             + Nuevo Usuario
-          </button>
+          </Button>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-card rounded-2xl shadow-sm border overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-gray-600">
-              <thead className="bg-gray-50 text-gray-700 uppercase font-semibold border-b border-gray-100">
+            <table className="w-full text-left text-sm text-muted-foreground">
+              <thead className="bg-muted/50 text-foreground uppercase font-semibold border-b">
                 <tr>
                   <th className="px-6 py-4">Nombre / Correo</th>
                   <th className="px-6 py-4">Rol</th>
@@ -130,12 +125,12 @@ export default function AdminDashboard() {
                   <th className="px-6 py-4 text-right">Acciones</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y">
                 {users.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50 transition-colors">
+                  <tr key={user.id} className="hover:bg-muted/50 transition-colors">
                     <td className="px-6 py-4">
-                      <div className="font-bold text-gray-900">{user.displayName || "Sin nombre asignado"}</div>
-                      <div className="text-gray-500">{user.email}</div>
+                      <div className="font-bold text-foreground">{user.displayName || "Sin nombre asignado"}</div>
+                      <div className="text-muted-foreground">{user.email}</div>
                     </td>
                     <td className="px-6 py-4">
                       <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide
@@ -148,21 +143,21 @@ export default function AdminDashboard() {
                     </td>
                     <td className="px-6 py-4">
                       {user.role === 'cliente' ? (
-                        user.trainerId ? getTrainerName(user.trainerId) : <span className="text-gray-400 italic">No asignado</span>
+                        user.trainerId ? getTrainerName(user.trainerId) : <span className="text-muted-foreground italic">No asignado</span>
                       ) : '-'}
                     </td>
-                    <td className="px-6 py-4 text-right">
-                      <button onClick={() => handleOpenModal(user)} className="text-blue-600 hover:text-blue-800 font-medium mr-4 transition-colors">
+                    <td className="px-6 py-4 text-right space-x-2">
+                      <Button variant="link" onClick={() => handleOpenModal(user)}>
                         Editar
-                      </button>
+                      </Button>
                       {user.role === 'cliente' && (
-                        <button onClick={() => handleOpenAssign(user)} className="text-emerald-600 hover:text-emerald-800 font-medium mr-4 transition-colors">
+                        <Button variant="link" className="text-emerald-600" onClick={() => handleOpenAssign(user)}>
                           {user.trainerId ? "Gestionar" : "Asignar"}
-                        </button>
+                        </Button>
                       )}
-                      <button onClick={() => handleDelete(user)} className="text-red-500 hover:text-red-700 font-medium transition-colors">
+                      <Button variant="link" className="text-destructive" onClick={() => handleDelete(user)}>
                         Eliminar
-                      </button>
+                      </Button>
                     </td>
                   </tr>
                 ))}

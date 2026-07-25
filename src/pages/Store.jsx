@@ -3,6 +3,8 @@ import { collection, getDocs, doc, getDoc, updateDoc, deleteField } from "fireba
 import { db } from "../services/firebase";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function Store() {
   const { user } = useAuth();
@@ -145,18 +147,17 @@ export default function Store() {
     return (
       <div className="max-w-4xl mx-auto p-6 text-center">
         <h1 className="text-3xl font-bold mb-4">Tienda de Recompensas</h1>
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 max-w-md mx-auto">
-          <p className="text-yellow-800 font-medium">No se pudieron cargar tus datos.</p>
-          <p className="text-yellow-700 text-sm mt-1">
-            Verifica tu conexion o intenta mas tarde.
-          </p>
-          <button
-            onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
-          >
-            Reintentar
-          </button>
-        </div>
+        <Card className="max-w-md mx-auto">
+          <CardContent className="p-6 text-center">
+            <p className="text-destructive font-medium">No se pudieron cargar tus datos.</p>
+            <p className="text-muted-foreground text-sm mt-1">
+              Verifica tu conexion o intenta mas tarde.
+            </p>
+            <Button onClick={() => window.location.reload()} variant="outline" className="mt-4">
+              Reintentar
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -170,7 +171,7 @@ export default function Store() {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-8">Tienda de Recompensas</h1>
-      <p className="text-center text-gray-600 mb-4">
+      <p className="text-center text-muted-foreground mb-4">
         Tienes <span className="font-bold text-yellow-600">{userData.totalPoints}</span> puntos disponibles
       </p>
 
@@ -178,57 +179,63 @@ export default function Store() {
         <h2 className="text-xl font-semibold mb-4">Recompensas Visuales</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {visuales.map((reward) => (
-            <div key={reward.id} className="border p-4 rounded-lg shadow-md">
-              <h3 className="text-lg font-bold">{reward.name}</h3>
-              <p className="text-sm text-gray-600 mb-2">{reward.description}</p>
-              <p className="text-yellow-600 font-bold">Costo: {reward.cost} puntos</p>
-              <button
-                onClick={() => canjearRecompensaVisual(reward)}
-                disabled={userData.unlockedRewards?.includes(reward.id)}
-                className="mt-2 px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-400"
-              >
-                {userData.unlockedRewards?.includes(reward.id) ? "Canjeado" : "Canjear"}
-              </button>
-            </div>
+            <Card key={reward.id}>
+              <CardContent className="p-4">
+                <h3 className="text-lg font-bold">{reward.name}</h3>
+                <p className="text-sm text-muted-foreground mb-2">{reward.description}</p>
+                <p className="text-yellow-600 font-bold">Costo: {reward.cost} puntos</p>
+                <Button
+                  onClick={() => canjearRecompensaVisual(reward)}
+                  disabled={userData.unlockedRewards?.includes(reward.id)}
+                  className="mt-2"
+                >
+                  {userData.unlockedRewards?.includes(reward.id) ? "Canjeado" : "Canjear"}
+                </Button>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
 
-      {userData.streak === 0 && (
-        <div className="mb-10">
-          <h2 className="text-xl font-semibold mb-4">🔄 Recuperación de Racha</h2>
-          <div className="border border-red-200 rounded-lg p-4 shadow-md bg-red-50 max-w-sm">
-            <h3 className="text-lg font-bold text-red-800">Recuperador de Racha</h3>
-            <p className="text-sm text-red-600 mb-2">Recupera tu racha al valor anterior si la compras dentro del mismo día.</p>
+      <div className="mb-10">
+        <h2 className="text-xl font-semibold mb-4">🔄 Recuperación de Racha</h2>
+        <Card className="border-destructive/20 bg-destructive/5 max-w-sm">
+          <CardContent className="p-4">
+            <h3 className="text-lg font-bold text-destructive">Recuperador de Racha</h3>
+            <p className="text-sm text-destructive/70 mb-2">Recupera tu racha al valor anterior si la compras dentro del mismo día.</p>
             <p className="text-yellow-600 font-bold">Costo: 200 puntos</p>
-            <button
+            <Button
               onClick={recuperarRacha}
-              className="mt-2 px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded transition-colors"
+              disabled={userData.streak > 0 || userData.totalPoints < 200}
+              variant={userData.streak > 0 || userData.totalPoints < 200 ? "outline" : "destructive"}
+              className="mt-2"
             >
-              Recuperar racha
-            </button>
-          </div>
-        </div>
-      )}
+              {userData.streak > 0 ? 'Racha activa' : userData.totalPoints < 200 ? 'Puntos insuficientes' : 'Recuperar racha'}
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
 
       <div>
         <h2 className="text-xl font-semibold mb-4">Recompensas Fisicas</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {fisicas.map((reward) => (
-            <div key={reward.id} className="border p-4 rounded-lg shadow-md">
-              <h3 className="text-lg font-bold">{reward.name}</h3>
-              <p className="text-sm text-gray-600 mb-2">{reward.description}</p>
-              <p className="text-yellow-600 font-bold">Costo: {reward.cost} puntos</p>
-              <button
-                onClick={() => canjearRecompensaFisica(reward)}
-                disabled={userData.claimedPhysicalRewards?.[reward.id] === today}
-                className="mt-2 px-3 py-1 bg-green-500 text-white rounded disabled:bg-gray-400"
-              >
-                {userData.claimedPhysicalRewards?.[reward.id] === today
-                  ? "Ya canjeada hoy"
-                  : "Canjear"}
-              </button>
-            </div>
+            <Card key={reward.id}>
+              <CardContent className="p-4">
+                <h3 className="text-lg font-bold">{reward.name}</h3>
+                <p className="text-sm text-muted-foreground mb-2">{reward.description}</p>
+                <p className="text-yellow-600 font-bold">Costo: {reward.cost} puntos</p>
+                <Button
+                  onClick={() => canjearRecompensaFisica(reward)}
+                  disabled={userData.claimedPhysicalRewards?.[reward.id] === today}
+                  className="mt-2 bg-green-600 hover:bg-green-700"
+                >
+                  {userData.claimedPhysicalRewards?.[reward.id] === today
+                    ? "Ya canjeada hoy"
+                    : "Canjear"}
+                </Button>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

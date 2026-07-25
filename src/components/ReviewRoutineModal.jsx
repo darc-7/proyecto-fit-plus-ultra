@@ -2,6 +2,14 @@ import { useState } from "react";
 import { doc, updateDoc, deleteField } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { toast } from "react-hot-toast";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 export default function ReviewRoutineModal({ client, onClose }) {
   const [exercises, setExercises] = useState(
@@ -68,63 +76,56 @@ export default function ReviewRoutineModal({ client, onClose }) {
   if (!client) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-gray-900">Revisar Rutina</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors text-xl leading-none"
-          >
-            &times;
-          </button>
-        </div>
+    <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Revisar Rutina</DialogTitle>
+        </DialogHeader>
 
-        <div className="mb-4 pb-4 border-b border-gray-100">
-          <p className="font-semibold text-gray-900">{client.displayName || "Sin nombre"}</p>
-          <p className="text-sm text-gray-500">{client.email}</p>
+        <div className="mb-4 pb-4 border-b">
+          <p className="font-semibold text-foreground">{client.displayName || "Sin nombre"}</p>
+          <p className="text-sm text-muted-foreground">{client.email}</p>
         </div>
 
         <div className="space-y-4 mb-6">
           {exercises.map((ex, i) => (
-            <div key={ex.id || i} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+            <div key={ex.id || i} className="bg-muted/50 rounded-lg p-4 border">
               <div className="flex items-start justify-between mb-2">
                 <div>
-                  <h3 className="font-bold text-gray-800">{ex.name}</h3>
-                  <p className="text-xs text-gray-500">
+                  <h3 className="font-bold text-foreground">{ex.name}</h3>
+                  <p className="text-xs text-muted-foreground">
                     {ex.category} · Nivel {ex.level} · {ex.points} pts
                   </p>
                 </div>
                 <button
                   onClick={() => handleRemove(i)}
-                  className="text-red-400 hover:text-red-600 text-lg leading-none transition-colors"
+                  className="text-destructive/60 hover:text-destructive text-lg leading-none transition-colors"
                   title="Eliminar ejercicio"
                 >
                   &times;
                 </button>
               </div>
-              <p className="text-sm text-gray-600 mb-3">{ex.instructions || ""}</p>
-              <div className="flex gap-4 items-center">
+              <div className="flex gap-4 items-center mt-2">
                 <div className="flex items-center gap-2">
-                  <label className="text-sm font-medium text-gray-700">Series:</label>
+                  <label className="text-sm font-medium text-foreground">Series:</label>
                   <input
                     type="number"
                     min="1"
                     max="5"
                     value={ex.sets}
                     onChange={(e) => handleSet(i, "sets", Math.min(5, Math.max(1, Number(e.target.value))))}
-                    className="w-16 px-2 py-1 border border-gray-300 rounded-md text-center"
+                    className="w-16 px-2 py-1 border border-input rounded-md text-center text-sm"
                   />
                 </div>
                 <div className="flex items-center gap-2">
-                  <label className="text-sm font-medium text-gray-700">Reps:</label>
+                  <label className="text-sm font-medium text-foreground">Reps:</label>
                   <input
                     type="number"
                     min="1"
                     max="20"
                     value={ex.reps}
                     onChange={(e) => handleSet(i, "reps", Math.min(20, Math.max(1, Number(e.target.value))))}
-                    className="w-16 px-2 py-1 border border-gray-300 rounded-md text-center"
+                    className="w-16 px-2 py-1 border border-input rounded-md text-center text-sm"
                   />
                 </div>
               </div>
@@ -132,27 +133,19 @@ export default function ReviewRoutineModal({ client, onClose }) {
           ))}
         </div>
 
-        <div className="text-sm text-gray-600 mb-4">
+        <div className="text-sm text-muted-foreground mb-4">
           Total estimado: <span className="font-bold text-yellow-600">{totalPoints} pts</span>
         </div>
 
         <div className="flex justify-end gap-3">
-          <button
-            onClick={handleReject}
-            disabled={saving}
-            className="px-4 py-2 text-red-600 bg-red-50 hover:bg-red-100 rounded-lg font-medium transition-colors disabled:opacity-50"
-          >
+          <Button variant="destructive" onClick={handleReject} disabled={saving}>
             Rechazar
-          </button>
-          <button
-            onClick={handleApprove}
-            disabled={saving}
-            className="px-5 py-2 text-white bg-green-600 hover:bg-green-700 rounded-lg font-medium transition-colors disabled:opacity-50"
-          >
+          </Button>
+          <Button onClick={handleApprove} disabled={saving}>
             {saving ? "..." : "Aceptar rutina"}
-          </button>
+          </Button>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

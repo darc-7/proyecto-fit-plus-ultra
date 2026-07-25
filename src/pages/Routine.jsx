@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
-import ExerciseCard from "../components/ExerciseCard";
 import toast from "react-hot-toast";
 import { useTimer } from "../context/TimerContext";
 
@@ -144,6 +143,8 @@ const Routine = () => {
           level: e.level,
           points: e.points || 0,
           instructions: e.instructions,
+          gif_url: e.gif_url,
+          image: e.image,
           sets: routineConfig[e.id]?.sets || 3,
           reps: routineConfig[e.id]?.reps || 10,
         })),
@@ -245,7 +246,7 @@ const Routine = () => {
   const approvedExercises = isConsistencyApproved ? pv.exercises : [];
 
   return (
-    <div className="p-4 max-w-2xl mx-auto">
+    <div className="p-4 max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold text-center mb-2">Tu rutina</h1>
 
       {!hasTrainer && (
@@ -354,38 +355,67 @@ const Routine = () => {
 
       {hasTrainer && isConsistencyApproved && !routineFinished && (
         <>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-sm text-blue-800">
+          <div className="max-w-md mx-auto bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-sm text-blue-800">
             💡 Completa cada ejercicio uno por uno. Al completar todos, la rutina se enviará a tu entrenador para verificación final.
           </div>
 
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-medium text-gray-600">
-              Ejercicio {Math.min(currentStep + 1, approvedExercises.length)} de {approvedExercises.length}
-            </span>
-            <span className="text-sm font-semibold text-blue-600">
-              {completedSteps.length}/{approvedExercises.length} completados
-            </span>
+          <div className="hidden xl:block fixed left-4 top-24 w-72 z-10">
+            <div className="bg-white rounded-xl shadow-md border border-gray-200 p-4">
+              <h3 className="font-bold text-gray-800 text-sm mb-2 flex items-center gap-1.5">
+                <span>📖</span> Cómo ejecutar el ejercicio
+              </h3>
+              <p className="text-xs text-gray-600 leading-relaxed whitespace-pre-line">
+                {approvedExercises[currentStep]?.instructions || 'No hay instrucciones disponibles.'}
+              </p>
+            </div>
           </div>
 
-          <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-            <div
-              className="bg-blue-500 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${(completedSteps.length / approvedExercises.length) * 100}%` }}
-            />
-          </div>
+          {currentStep < approvedExercises.length && (
+            <div>
+                <div className="max-w-md mx-auto flex items-center justify-between mb-3">
+                  <span className="text-sm font-medium text-gray-600">
+                    Ejercicio {Math.min(currentStep + 1, approvedExercises.length)} de {approvedExercises.length}
+                  </span>
+                  <span className="text-sm font-semibold text-blue-600">
+                    {completedSteps.length}/{approvedExercises.length} completados
+                  </span>
+                </div>
 
-          <div>
-            {currentStep < approvedExercises.length && (
-              <div className="mb-4">
-                <ExerciseCard
-                  key={approvedExercises[currentStep].id}
-                  exercise={approvedExercises[currentStep]}
-                  selected
-                  disabled
-                />
+                <div className="max-w-md mx-auto w-full bg-gray-200 rounded-full h-2 mb-4">
+                  <div
+                    className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${(completedSteps.length / approvedExercises.length) * 100}%` }}
+                  />
+                </div>
 
-                <div className="mt-2 text-center text-sm font-medium text-gray-600">
-                  {approvedExercises[currentStep].sets} × {approvedExercises[currentStep].reps} repeticiones
+                <div className="max-w-md mx-auto bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+                  {approvedExercises[currentStep]?.gif_url && (
+                    <div className="w-full bg-gray-100 flex items-center justify-center">
+                      <img
+                        src={approvedExercises[currentStep].gif_url}
+                        alt={approvedExercises[currentStep].name}
+                        className="w-full max-h-72 object-contain"
+                      />
+                    </div>
+                  )}
+
+                  <div className="p-4 text-center">
+                    <h3 className="text-lg font-bold text-gray-800">{approvedExercises[currentStep].name}</h3>
+                    <div className="flex items-center justify-center gap-2 mt-1">
+                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        {approvedExercises[currentStep].category}
+                      </span>
+                      <span className="text-yellow-400 text-sm">
+                        {Array.from({ length: 3 }, (_, i) => (
+                          <span key={i}>{i < (approvedExercises[currentStep].level || 1) ? "⭐" : "☆"}</span>
+                        ))}
+                      </span>
+                    </div>
+
+                    <div className="mt-3 text-sm font-medium text-gray-600">
+                      {approvedExercises[currentStep].sets} × {approvedExercises[currentStep].reps} repeticiones
+                    </div>
+                  </div>
                 </div>
 
                 {!active && (
@@ -397,7 +427,7 @@ const Routine = () => {
                 <button
                   onClick={completeCurrentExercise}
                   disabled={resting || !active}
-                  className={`mt-3 w-full py-3 font-bold rounded-lg transition-colors ${
+                  className={`mt-3 w-full max-w-md mx-auto block py-3 font-bold rounded-lg transition-colors ${
                     resting || !active
                       ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                       : 'bg-green-500 hover:bg-green-600 text-white'
@@ -405,9 +435,8 @@ const Routine = () => {
                 >
                   ✅ Completar ejercicio
                 </button>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
 
           <div className="hidden md:block fixed right-4 top-24 w-52 z-10">
             <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 shadow-md">
@@ -455,7 +484,7 @@ const Routine = () => {
               <button
                 onClick={completeRoutine}
                 disabled={!active}
-                className={`px-8 py-3 font-bold rounded-lg transition-colors ${
+                className={`w-full max-w-md mx-auto block px-8 py-3 font-bold rounded-lg transition-colors ${
                   !active
                     ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                     : 'bg-green-600 hover:bg-green-700 text-white'
@@ -466,7 +495,7 @@ const Routine = () => {
             </div>
           )}
 
-          <div className="flex flex-col items-center gap-4 mt-6 border-t pt-4">
+          <div className="max-w-md mx-auto flex flex-col items-center gap-4 mt-6 border-t pt-4">
             <div className="text-2xl font-mono">{formattedTime}</div>
             <div className="flex gap-4">
               {!active ? (

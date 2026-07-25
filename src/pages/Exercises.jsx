@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import ExerciseCard from '../components/ExerciseCard';
 import { useExercises } from '../hooks/useExercises';
+import { Card, CardContent } from "@/components/ui/card";
 
 const getTodayDate = () => new Date().toLocaleDateString("sv-SE");
 
@@ -61,7 +62,7 @@ export default function ExercisesPage() {
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="p-2 border border-gray-300 rounded-md"
+          className="p-2 border border-input rounded-md bg-background"
         >
           <option value="all">Todas las categorías</option>
           <option value="Brazos">Brazos</option>
@@ -75,7 +76,7 @@ export default function ExercisesPage() {
         <select
           value={selectedLevel}
           onChange={(e) => setSelectedLevel(e.target.value)}
-          className="p-2 border border-gray-300 rounded-md"
+          className="p-2 border border-input rounded-md bg-background"
         >
           <option value="all">Todos los niveles</option>
           <option value="1">Nivel 1</option>
@@ -86,19 +87,19 @@ export default function ExercisesPage() {
         {hasActiveFilters && (
           <button
             onClick={clearFilters}
-            className="px-3 py-2 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+            className="px-3 py-2 text-sm text-muted-foreground bg-muted hover:bg-muted/80 rounded-md transition-colors"
           >
             Limpiar filtros ✕
           </button>
         )}
 
-        <span className="ml-auto text-sm text-gray-500 font-medium">
+        <span className="ml-auto text-sm text-muted-foreground font-medium">
           {selectedCount}/7 ejercicios seleccionados
         </span>
       </div>
 
       {filteredExercises.length === 0 && !loading ? (
-        <p className="text-center text-gray-500 py-8">
+        <p className="text-center text-muted-foreground py-8">
           No hay ejercicios que coincidan con los filtros seleccionados.
         </p>
       ) : (
@@ -115,36 +116,42 @@ export default function ExercisesPage() {
       )}
 
       {!hasTrainer && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/60 backdrop-blur-[1px] z-10">
-          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 max-w-sm text-center shadow-lg">
-            <p className="text-yellow-800 font-bold text-lg mb-2">🔒 Sin entrenador asignado</p>
-            <p className="text-yellow-700 text-sm">
-              No puedes acceder a esta sección hasta que tengas un entrenador.
-              Comunícate con la dirección del gimnasio para que te asignen uno.
-            </p>
-          </div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/60 backdrop-blur-[1px] z-10">
+          <Card className="max-w-sm text-center shadow-lg border-yellow-200 bg-yellow-50">
+            <CardContent className="p-6">
+              <p className="text-yellow-800 font-bold text-lg mb-2">🔒 Sin entrenador asignado</p>
+              <p className="text-yellow-700 text-sm">
+                No puedes acceder a esta sección hasta que tengas un entrenador.
+                Comunícate con la dirección del gimnasio para que te asignen uno.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       )}
 
       {hasTrainer && routineCompletedToday && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/60 backdrop-blur-[1px] z-10">
-          <div className="bg-green-50 border border-green-200 rounded-xl p-6 max-w-sm text-center shadow-lg">
-            <p className="text-green-800 font-bold text-lg mb-2">✅ Rutina completada</p>
-            <p className="text-green-700 text-sm">
-              Ya completaste tu rutina de hoy. Vuelve mañana para entrenar de nuevo.
-            </p>
-          </div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/60 backdrop-blur-[1px] z-10">
+          <Card className="max-w-sm text-center shadow-lg border-green-200 bg-green-50">
+            <CardContent className="p-6">
+              <p className="text-green-800 font-bold text-lg mb-2">✅ Rutina completada</p>
+              <p className="text-green-700 text-sm">
+                Ya completaste tu rutina de hoy. Vuelve mañana para entrenar de nuevo.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       )}
 
       {hasTrainer && isExecutionPending && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/60 backdrop-blur-[1px] z-10">
-          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 max-w-sm text-center shadow-lg">
-            <p className="text-yellow-800 font-bold text-lg mb-2">⏳ Esperando verificación</p>
-            <p className="text-yellow-700 text-sm">
-              Ya completaste tu rutina de hoy. Espera a que tu entrenador verifique la ejecución.
-            </p>
-          </div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/60 backdrop-blur-[1px] z-10">
+          <Card className="max-w-sm text-center shadow-lg border-yellow-200 bg-yellow-50">
+            <CardContent className="p-6">
+              <p className="text-yellow-800 font-bold text-lg mb-2">⏳ Esperando verificación</p>
+              <p className="text-yellow-700 text-sm">
+                Ya completaste tu rutina de hoy. Espera a que tu entrenador verifique la ejecución.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       )}
     </div>

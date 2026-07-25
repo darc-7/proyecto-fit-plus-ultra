@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useAuth } from "../context/AuthContext";
+import { Card, CardContent } from "@/components/ui/card";
 
 const formatTime = (s) => {
   if (!s && s !== 0) return "-";
@@ -32,7 +33,6 @@ export default function History() {
   useEffect(() => {
     if (!user) return;
 
-    // Sin orderBy — ordenamos en JS para evitar dependencias de índices
     const q = collection(db, "users", user.uid, "workoutHistory");
 
     const unsub = onSnapshot(q, (snapshot) => {
@@ -51,7 +51,7 @@ export default function History() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <p className="text-gray-500 animate-pulse font-medium">Cargando historial...</p>
+        <p className="text-muted-foreground animate-pulse font-medium">Cargando historial...</p>
       </div>
     );
   }
@@ -64,7 +64,7 @@ export default function History() {
 
       {workouts.length === 0 && (
         <div className="text-center py-10">
-          <p className="text-gray-500">Aún no has completado ninguna rutina.</p>
+          <p className="text-muted-foreground">Aún no has completado ninguna rutina.</p>
         </div>
       )}
 
@@ -73,19 +73,19 @@ export default function History() {
         const label = `${MONTHS[m - 1]} ${y}`;
         return (
           <div key={monthKey} className="mb-8">
-            <h2 className="text-lg font-bold text-gray-800 mb-3 border-b pb-1">{label}</h2>
+            <h2 className="text-lg font-bold text-foreground mb-3 border-b pb-1">{label}</h2>
             <div className="space-y-3">
               {items.map((w) => {
                 const isOpen = expanded === w.id;
                 return (
-                  <div key={w.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                  <Card key={w.id}>
                     <button
                       onClick={() => setExpanded(isOpen ? null : w.id)}
-                      className="w-full text-left p-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+                      className="w-full text-left p-4 flex items-center justify-between hover:bg-muted/50 transition-colors"
                     >
                       <div>
-                        <p className="font-semibold text-gray-900">{w.date}</p>
-                        <p className="text-sm text-gray-500">
+                        <p className="font-semibold text-foreground">{w.date}</p>
+                        <p className="text-sm text-muted-foreground">
                           {w.totalPoints} pts · {formatTime(w.elapsed)} · {w.exercises?.length || 0} ejercicios
                         </p>
                       </div>
@@ -93,31 +93,31 @@ export default function History() {
                         {w.approvedByTrainer && (
                           <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">Verificado</span>
                         )}
-                        <span className="text-gray-400">{isOpen ? "▲" : "▼"}</span>
+                        <span className="text-muted-foreground">{isOpen ? "▲" : "▼"}</span>
                       </div>
                     </button>
                     {isOpen && (
-                      <div className="px-4 pb-4 border-t border-gray-100">
+                      <div className="px-4 pb-4 border-t">
                         <div className="grid grid-cols-2 gap-2 mt-3 text-sm">
-                          <div><span className="text-gray-500">Series totales:</span> <span className="font-medium">{w.exercises?.reduce((s, e) => s + (e.sets || 0), 0) || 0}</span></div>
-                          <div><span className="text-gray-500">Reps totales:</span> <span className="font-medium">{w.exercises?.reduce((s, e) => s + ((e.sets || 0) * (e.reps || 0)), 0) || 0}</span></div>
-                          <div><span className="text-gray-500">Ejercicios completados:</span> <span className="font-medium">{w.completedSteps || w.exercises?.length || 0}</span></div>
-                          <div><span className="text-gray-500">Tiempo:</span> <span className="font-medium">{formatTime(w.elapsed)}</span></div>
+                          <div><span className="text-muted-foreground">Series totales:</span> <span className="font-medium">{w.exercises?.reduce((s, e) => s + (e.sets || 0), 0) || 0}</span></div>
+                          <div><span className="text-muted-foreground">Reps totales:</span> <span className="font-medium">{w.exercises?.reduce((s, e) => s + ((e.sets || 0) * (e.reps || 0)), 0) || 0}</span></div>
+                          <div><span className="text-muted-foreground">Ejercicios completados:</span> <span className="font-medium">{w.completedSteps || w.exercises?.length || 0}</span></div>
+                          <div><span className="text-muted-foreground">Tiempo:</span> <span className="font-medium">{formatTime(w.elapsed)}</span></div>
                         </div>
                         <div className="mt-3 space-y-1">
-                          <p className="text-xs font-semibold text-gray-500 uppercase">Ejercicios</p>
-                          <ul className="divide-y divide-gray-100">
+                          <p className="text-xs font-semibold text-muted-foreground uppercase">Ejercicios</p>
+                          <ul className="divide-y">
                             {w.exercises?.map((e, i) => (
                               <li key={e.id || i} className="flex items-center justify-between py-1.5 text-sm">
-                                <span className="text-gray-800">{e.name}</span>
-                                <span className="text-gray-500">{e.sets}×{e.reps}</span>
+                                <span className="text-foreground">{e.name}</span>
+                                <span className="text-muted-foreground">{e.sets}×{e.reps}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
                       </div>
                     )}
-                  </div>
+                  </Card>
                 );
               })}
             </div>

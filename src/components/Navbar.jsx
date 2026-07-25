@@ -2,18 +2,19 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import { LoginButton } from "./LoginButton";
+import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   const { user, role, userData, logout, motivationalQuote } = useContext(AuthContext);
   const hasTrainer = userData?.trainerId;
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-gray-100">
+    <nav className="flex items-center justify-between p-4 bg-muted">
       <div className="flex gap-4">
         <Link to="/" className="hover:text-blue-500" viewTransition>Inicio</Link>
         {user && role === "cliente" && (
           <>
-            <Link to="/profile" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Perfil</Link>
+            <Link to="/profile" className="text-foreground/70 hover:text-blue-600 font-medium transition-colors" viewTransition>Perfil</Link>
             {hasTrainer && (
               <>
                 <Link to="/exercises" className="hover:text-blue-500" viewTransition>Ejercicios</Link>
@@ -25,27 +26,24 @@ export default function Navbar() {
           </>
         )}
         {user && role === "administrador" && (
-          <Link to="/admin/usuarios" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Usuarios</Link>
+          <Link to="/admin/usuarios" className="text-foreground/70 hover:text-blue-600 font-medium transition-colors" viewTransition>Usuarios</Link>
         )}
         {user && role === "entrenador" && (
-          <Link to="/clients" className="text-gray-700 hover:text-blue-600 font-medium transition-colors" viewTransition>Clientes</Link>
+          <Link to="/clients" className="text-foreground/70 hover:text-blue-600 font-medium transition-colors" viewTransition>Clientes</Link>
         )}
       </div>
 
       <div className="flex items-center gap-4">
         {motivationalQuote && (
-          <span className="hidden md:inline italic text-gray-600 max-w-md">
+          <span className="hidden md:inline italic text-muted-foreground max-w-md">
             {motivationalQuote}
           </span>
         )}
 
         {user ? (
-          <button
-            onClick={logout}
-            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-          >
+          <Button variant="destructive" onClick={logout}>
             Cerrar Sesión
-          </button>
+          </Button>
         ): (
           <LoginButton />
         )}

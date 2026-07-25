@@ -4,6 +4,13 @@ import { db } from "../services/firebase";
 import { upStreak } from "../utils/streakUtils";
 import { checkAchieve } from "../utils/achievements";
 import { toast } from "react-hot-toast";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export default function VerifyExecutionModal({ client, onClose }) {
   const [saving, setSaving] = useState(false);
@@ -111,47 +118,41 @@ export default function VerifyExecutionModal({ client, onClose }) {
   if (!client) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-gray-900">Verificar Ejecución</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors text-xl leading-none"
-          >
-            &times;
-          </button>
-        </div>
+    <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Verificar Ejecución</DialogTitle>
+        </DialogHeader>
 
-        <div className="mb-4 pb-4 border-b border-gray-100">
-          <p className="font-semibold text-gray-900">{client.displayName || "Sin nombre"}</p>
-          <p className="text-sm text-gray-500">{client.email}</p>
+        <div className="mb-4 pb-4 border-b">
+          <p className="font-semibold text-foreground">{client.displayName || "Sin nombre"}</p>
+          <p className="text-sm text-muted-foreground">{client.email}</p>
         </div>
 
         <div className="grid grid-cols-3 gap-3 mb-6">
-          <div className="bg-gray-50 rounded-lg p-3 text-center">
-            <p className="text-xs text-gray-500 uppercase font-semibold">Tiempo</p>
-            <p className="text-lg font-bold text-gray-800">{formatTime(pv.elapsed)}</p>
+          <div className="bg-muted/50 rounded-lg p-3 text-center">
+            <p className="text-xs text-muted-foreground uppercase font-semibold">Tiempo</p>
+            <p className="text-lg font-bold text-foreground">{formatTime(pv.elapsed)}</p>
           </div>
-          <div className="bg-gray-50 rounded-lg p-3 text-center">
-            <p className="text-xs text-gray-500 uppercase font-semibold">Ejercicios</p>
-            <p className="text-lg font-bold text-gray-800">{pv.completedSteps || exList.length}/{exList.length}</p>
+          <div className="bg-muted/50 rounded-lg p-3 text-center">
+            <p className="text-xs text-muted-foreground uppercase font-semibold">Ejercicios</p>
+            <p className="text-lg font-bold text-foreground">{pv.completedSteps || exList.length}/{exList.length}</p>
           </div>
-          <div className="bg-gray-50 rounded-lg p-3 text-center">
-            <p className="text-xs text-gray-500 uppercase font-semibold">Puntos base</p>
+          <div className="bg-muted/50 rounded-lg p-3 text-center">
+            <p className="text-xs text-muted-foreground uppercase font-semibold">Puntos base</p>
             <p className="text-lg font-bold text-yellow-600">{sumPoints}</p>
           </div>
         </div>
 
         <div className="space-y-3 mb-6">
           {exList.map((ex, i) => (
-            <div key={ex.id || i} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+            <div key={ex.id || i} className="bg-muted/50 rounded-lg p-3 border">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-semibold text-gray-800">{ex.name}</h3>
-                  <p className="text-xs text-gray-500">{ex.category} · {ex.points} pts</p>
+                  <h3 className="font-semibold text-foreground">{ex.name}</h3>
+                  <p className="text-xs text-muted-foreground">{ex.category} · {ex.points} pts</p>
                 </div>
-                <span className="text-sm font-medium text-gray-700">{ex.sets}×{ex.reps}</span>
+                <span className="text-sm font-medium text-muted-foreground">{ex.sets}×{ex.reps}</span>
               </div>
             </div>
           ))}
@@ -159,36 +160,28 @@ export default function VerifyExecutionModal({ client, onClose }) {
 
         <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-6">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-700">Suma de ejercicios:</span>
+            <span className="text-foreground">Suma de ejercicios:</span>
             <span className="font-medium">{sumPoints} pts</span>
           </div>
           <div className="flex justify-between text-sm mt-1">
-            <span className="text-gray-700">Bono por rutina completa:</span>
+            <span className="text-foreground">Bono por rutina completa:</span>
             <span className="font-medium text-green-600">+{bonusPoints} pts</span>
           </div>
           <div className="flex justify-between font-bold text-base mt-2 pt-2 border-t border-blue-200">
-            <span className="text-gray-900">Total a otorgar:</span>
+            <span className="text-foreground">Total a otorgar:</span>
             <span className="text-yellow-600">{totalPoints} pts</span>
           </div>
         </div>
 
         <div className="flex justify-end gap-3">
-          <button
-            onClick={handleReject}
-            disabled={saving}
-            className="px-4 py-2 text-red-600 bg-red-50 hover:bg-red-100 rounded-lg font-medium transition-colors disabled:opacity-50"
-          >
+          <Button variant="destructive" onClick={handleReject} disabled={saving}>
             Rechazar
-          </button>
-          <button
-            onClick={handleApprove}
-            disabled={saving}
-            className="px-5 py-2 text-white bg-green-600 hover:bg-green-700 rounded-lg font-medium transition-colors disabled:opacity-50"
-          >
+          </Button>
+          <Button onClick={handleApprove} disabled={saving} className="bg-green-600 hover:bg-green-700">
             {saving ? "..." : "Aprobar ejecución"}
-          </button>
+          </Button>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }
