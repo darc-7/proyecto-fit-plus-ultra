@@ -51,7 +51,7 @@ export default function Home() {
       {/* ============================================================ */}
       {!user && (
         <>
-          <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 px-6 text-center">
+          <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground py-16 px-6 text-center">
             <h1 className="text-4xl font-bold mb-4">Fit Plus Ultra</h1>
             <p className="text-lg max-w-2xl mx-auto">
               Convierte tu entrenamiento en una experiencia divertida y motivadora.
@@ -60,9 +60,9 @@ export default function Home() {
             <div className="mt-6 flex justify-center">
               <GoogleSignIn />
             </div>
-            <p className="mt-4 text-sm text-white/80">
+            <p className="mt-4 text-sm text-primary-foreground/80">
               ¿Ya tienes cuenta?{" "}
-              <Link to="/auth" className="text-white font-semibold underline">
+              <Link to="/auth" className="text-primary-foreground font-semibold underline">
                 Inicia sesión aquí
               </Link>
             </p>
@@ -147,7 +147,7 @@ export default function Home() {
       {/* ============================================================ */}
       {user && role === "cliente" && userData && (
         <>
-          <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-10 px-6 text-center">
+          <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground py-10 px-6 text-center">
             <h1 className="text-3xl font-bold mb-1">
               👋 ¡Bienvenido, {userData.displayName || "Usuario"}!
             </h1>
@@ -312,7 +312,7 @@ export default function Home() {
       {/* ============================================================ */}
       {user && role === "entrenador" && (
         <>
-          <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 px-6 text-center">
+          <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground py-16 px-6 text-center">
             <h1 className="text-4xl font-bold mb-4">
               👋 Panel de Entrenador
             </h1>
@@ -414,7 +414,7 @@ export default function Home() {
       {/* ============================================================ */}
       {user && role === "administrador" && (
         <>
-          <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 px-6 text-center">
+          <div className="bg-gradient-to-r from-primary to-secondary text-primary-foreground py-16 px-6 text-center">
             <h1 className="text-4xl font-bold mb-4">
               👋 Panel de Administración
             </h1>

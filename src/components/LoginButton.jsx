@@ -1,21 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext"; 
+import { AuthContext } from "../context/AuthContext";
+import { Button } from "@/components/ui/button";
 
 export function LoginButton() {
   const navigate = useNavigate();
-  
-  // Consumimos el usuario directamente desde tu contexto existente
   const { user } = useContext(AuthContext);
 
-  // Si el usuario ya está autenticado, el botón se oculta automáticamente
   if (user) return null;
 
   return (
-    <button
-      onClick={() => navigate("/auth", { viewTransition: true })}
-      className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2.5 rounded-xl shadow-sm transition-all duration-200 active:scale-95 cursor-pointer text-sm"
-    >
+    <Button onClick={() => navigate("/auth", { viewTransition: true })} className="bg-white text-primary hover:bg-white/90">
       <svg
         className="w-4 h-4 mr-2"
         fill="none"
@@ -31,6 +26,6 @@ export function LoginButton() {
         />
       </svg>
       Iniciar Sesión
-    </button>
+    </Button>
   );
 }
