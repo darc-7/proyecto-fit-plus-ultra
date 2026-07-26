@@ -1,17 +1,17 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./components/Navbar"; // Opcional
+import Navbar from "./components/Navbar";
 import FloatingTimer from "./components/FloatingTimer";
 import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
 
 export default function App() {
   return (
-    <div className="app min-h-screen flex flex-col">
+    <div className="app min-h-screen flex flex-col bg-background">
       <Toaster position="bottom-center" />
       <FloatingTimer />
-      <main className="flex-1">
-        <Navbar />
-        <Outlet /> {/* ¡Aquí se renderizarán Auth, Exercises, etc.! */}
+      <Navbar />
+      <main className="flex-1 pt-16">
+        <Outlet />
       </main>
       <Footer />
     </div>
