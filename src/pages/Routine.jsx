@@ -4,6 +4,15 @@ import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import toast from "react-hot-toast";
 import { useTimer } from "../context/TimerContext";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { CircleHelp } from "lucide-react";
 
 const getTodayDate = () => new Date().toLocaleDateString("sv-SE");
 
@@ -24,6 +33,7 @@ const Routine = () => {
   const [resting, setResting] = useState(false);
   const [routineConfig, setRoutineConfig] = useState({});
   const [sentForExecution, setSentForExecution] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
   const { elapsed, active, start, reset } = useTimer();
 
   const hasTrainer = !!userData?.trainerId;
@@ -244,6 +254,11 @@ const Routine = () => {
   const formattedTime = `${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, "0")}`;
 
   const approvedExercises = isConsistencyApproved ? pv.exercises : [];
+  const currentExercise = approvedExercises[currentStep];
+
+  useEffect(() => {
+    setHelpOpen(false);
+  }, [currentStep, isConsistencyApproved]);
 
   return (
     <div className="p-4 max-w-6xl mx-auto">
@@ -310,9 +325,9 @@ const Routine = () => {
                     <span className="text-2xl">
                       {exercise.category === 'Piernas' ? '🦵' : exercise.category === 'Cardio' ? '🏃' : '💪'}
                     </span>
-                    <div>
+                    <div className="min-w-0">
                       <h3 className="font-bold text-gray-800">{exercise.name}</h3>
-                      <p className="text-sm text-gray-500">{exercise.instructions || ''}</p>
+                      <p className="text-xs text-gray-500">{exercise.category} · Nivel {exercise.level || 1} · {exercise.points || 0} pts</p>
                     </div>
                   </div>
                   <div className="flex gap-4 items-center">
@@ -365,7 +380,7 @@ const Routine = () => {
                 <span>📖</span> Cómo ejecutar el ejercicio
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed whitespace-pre-line">
-                {approvedExercises[currentStep]?.instructions || 'No hay instrucciones disponibles.'}
+                {currentExercise?.instructions || 'No hay instrucciones disponibles.'}
               </p>
             </div>
           </div>
@@ -389,34 +404,84 @@ const Routine = () => {
                 </div>
 
                 <div className="max-w-md mx-auto bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
-                  {approvedExercises[currentStep]?.gif_url && (
+                  {currentExercise?.gif_url && (
                     <div className="w-full bg-gray-100 flex items-center justify-center">
                       <img
-                        src={approvedExercises[currentStep].gif_url}
-                        alt={approvedExercises[currentStep].name}
+                        src={currentExercise.gif_url}
+                        alt={currentExercise.name}
                         className="w-full max-h-72 object-contain"
                       />
                     </div>
                   )}
 
                   <div className="p-4 text-center">
-                    <h3 className="text-lg font-bold text-gray-800">{approvedExercises[currentStep].name}</h3>
+                    <div className="flex items-center justify-center gap-2">
+                      <h3 className="text-lg font-bold text-gray-800">{currentExercise?.name}</h3>
+                      <Button
+                        variant="outline"
+                        size="icon-sm"
+                        className="rounded-full text-primary border-primary/30 hover:bg-primary/10 hover:text-primary shrink-0"
+                        onClick={() => setHelpOpen(true)}
+                        aria-label={`Ver instrucciones de ${currentExercise?.name || "el ejercicio"}`}
+                        title="Ver instrucciones"
+                      >
+                        <CircleHelp className="size-4" />
+                      </Button>
+                    </div>
                     <div className="flex items-center justify-center gap-2 mt-1">
                       <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        {approvedExercises[currentStep].category}
+                        {currentExercise?.category}
                       </span>
                       <span className="text-yellow-400 text-sm">
                         {Array.from({ length: 3 }, (_, i) => (
-                          <span key={i}>{i < (approvedExercises[currentStep].level || 1) ? "⭐" : "☆"}</span>
+                          <span key={i}>{i < (currentExercise?.level || 1) ? "⭐" : "☆"}</span>
                         ))}
                       </span>
                     </div>
 
                     <div className="mt-3 text-sm font-medium text-gray-600">
-                      {approvedExercises[currentStep].sets} × {approvedExercises[currentStep].reps} repeticiones
+                      {currentExercise?.sets} × {currentExercise?.reps} repeticiones
                     </div>
+
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="mt-3 text-primary xl:hidden"
+                      onClick={() => setHelpOpen(true)}
+                    >
+                      <CircleHelp />
+                      ¿Cómo ejecutarlo?
+                    </Button>
                   </div>
                 </div>
+
+                <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
+                  <DialogContent className="sm:max-w-md max-h-[85vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="text-base">
+                        Cómo ejecutar {currentExercise?.name}
+                      </DialogTitle>
+                      <DialogDescription>
+                        Sigue estos pasos para realizar el ejercicio correctamente.
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    {currentExercise?.gif_url && (
+                      <div className="w-full rounded-lg bg-muted/50 flex items-center justify-center">
+                        <img
+                          src={currentExercise.gif_url}
+                          alt={currentExercise.name}
+                          className="w-full max-h-56 object-contain"
+                        />
+                      </div>
+                    )}
+
+                    <p className="text-sm text-foreground/90 leading-relaxed whitespace-pre-line">
+                      {currentExercise?.instructions ||
+                        "No hay instrucciones disponibles para este ejercicio."}
+                    </p>
+                  </DialogContent>
+                </Dialog>
 
                 {!active && (
                   <p className="text-sm text-gray-400 text-center mt-2">
