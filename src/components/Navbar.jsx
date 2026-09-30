@@ -148,17 +148,16 @@ export default function Navbar() {
           )}
 
           {user ? (
-            isClient ? (
-              <Button
-                variant="destructive"
-                size="icon-lg"
-                className="md:hidden"
-                onClick={logout}
-                aria-label="Cerrar Sesión"
-              >
-                <LogOut />
-              </Button>
-            ) : null
+            <Button
+              variant="destructive"
+              size="icon-lg"
+              className="md:hidden"
+              onClick={logout}
+              aria-label="Cerrar Sesión"
+              title="Cerrar Sesión"
+            >
+              <LogOut />
+            </Button>
           ) : (
             <LoginButton />
           )}
