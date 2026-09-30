@@ -26,6 +26,10 @@ export function upStreak(userData, today) {
     return { lastRoutineCompleted: today };
   }
 
+  if (streak === 0) {
+    return { lastRoutineCompleted: today, streak: 1 };
+  }
+
   if (todayDay === 0) {
     return { lastRoutineCompleted: today };
   }

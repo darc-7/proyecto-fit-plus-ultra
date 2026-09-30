@@ -235,6 +235,7 @@ const Routine = () => {
         bonusPoints,
         elapsed,
         completedSteps: completedSteps.length,
+        routineDate: getTodayDate(),
         timestamp: new Date().toISOString(),
         stage: "execution",
         status: "pending",

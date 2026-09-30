@@ -33,11 +33,12 @@ export default function VerifyExecutionModal({ client, onClose }) {
     setSaving(true);
     try {
       const today = new Date().toLocaleDateString("sv-SE");
+      const routineDate = pv.routineDate || today;
       const userRef = doc(db, "users", client.id);
       const userSnap = await getDoc(userRef);
       const data = userSnap.data();
 
-      const updatedStreakData = upStreak(data, today);
+      const updatedStreakData = upStreak(data, routineDate);
       const updatedTotalPoints = (data.totalPoints || 0) + totalPoints;
       const updatedCompleted = (data.completedRoutines || 0) + 1;
 
@@ -51,7 +52,7 @@ export default function VerifyExecutionModal({ client, onClose }) {
       });
 
       await updateDoc(userRef, {
-        lastRoutineCompleted: today,
+        lastRoutineCompleted: updatedStreakData.lastRoutineCompleted || routineDate,
         pendingVerification: deleteField(),
         currentRoutine: [],
         ...(updatedStreakData.streak !== undefined && { streak: updatedStreakData.streak }),
@@ -73,7 +74,7 @@ export default function VerifyExecutionModal({ client, onClose }) {
       }));
 
       await addDoc(collection(db, "users", client.id, "workoutHistory"), {
-        date: today,
+        date: routineDate,
         exercises: historyExercises,
         totalPoints,
         elapsed: pv.elapsed || 0,
